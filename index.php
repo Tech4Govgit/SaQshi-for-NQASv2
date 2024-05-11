@@ -9,15 +9,15 @@ include('h.php');
 ?>
 <main id="main" class="main">
     <div class="pagetitle">
-       
+
     </div><!-- End Page Title -->
     <!-- ----working area ----->
     <section class="section">
         <div class="row">
-            <div class="col-lg-3">
-                <div class="card text-bg-warning" style="width: 6rem;">
+            <div class="col-sm-3">
+                <div class="card text-bg-warning" style="width:6rem;">
                     <div class="card-body">
-                    
+
                         <?php
                         $dept_id = $_SESSION['dept_id1'];
 
@@ -35,7 +35,7 @@ include('h.php');
                             //====
                             if ($obtained != null) {
                                 $percentage = round((($obtained / $total) * 100), 2);
-                                if ($percentage > 50) {
+                                if ($percentage > 80) {
                         ?>
                                     <button type="button" class="btn btn-success"><i class="bi bi-check-circle"></i>
                                         <h1><?php echo $percentage; ?>% </h1>Score
@@ -43,31 +43,31 @@ include('h.php');
                                 <?php } else {
                                 ?>
                                     <button type="button" class="btn btn-danger"><i class="bi bi-exclamation-octagon"></i>
-                                        <h1><?php echo $percentage; ?>% </h1>Score
+                                <br> <h1><?php echo $percentage; ?>% </h1>Score
                                     </button>
-                        <?php
+                                <?php
                                 }
                             } else {
                                 $percentage = 0;
                                 ?>
                                 <button type="button" class="btn btn-danger"><i class="bi bi-exclamation-octagon"></i>
-                                        <h1><?php echo $percentage; ?>0%</h1>Score
-                                    </button>
-                                <?php
+                                    <h1><?php echo $percentage; ?>0%</h1>Score
+                                </button>
+                        <?php
                             }
                         }
                         mysqli_free_result($q22);
                         $con->next_result();
                         ?>
-                        
-                        
+
+
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <div class="card text-bg-secondary " style="width: 5rem;">
+            <div class="col-sm-3">
+                <div class="card text-bg-secondary " style="width: 6rem;">
                     <div class="card-body">
-                    <?php
+                        <?php
                         $call_q1 = "call count_zero($Fa,$dept_id,$p,$fat)";
                         $q56 = mysqli_query($con, $call_q1);
                         while ($row = mysqli_fetch_array($q56)) {
@@ -75,51 +75,65 @@ include('h.php');
                             $total = $row['total1'];
                             if ($obtained != null) {
                                 $percentage = round((($obtained / $total) * 100), 2);
-                                if ($percentage > 80) {
+                                if ($percentage > 70) {
                         ?>
-                    <button type="button" class="btn btn-success"><i class="bi bi-check-circle"></i>
+                                    <button type="button" class="btn btn-success"><i class="bi bi-check-circle"></i>
                                         <h1><?php echo $obtained; ?>/<?php echo $total; ?></h1>Indicators
                                     </button>
                                 <?php } else {
                                 ?>
                                     <button type="button" class="btn btn-danger"><i class="bi bi-exclamation-octagon"></i>
-                                    <h1><?php echo $obtained; ?>/<?php echo $total; ?></h1>Indicators
+                                        <h1><?php echo $obtained; ?>/<?php echo $total; ?></h1>Indicators
                                     </button>
-                                    <?php
+                                <?php
                                 }
                             } else {
                                 $percentage = 0;
                                 ?>
                                 <button type="button" class="btn btn-danger"><i class="bi bi-exclamation-octagon"></i>
-                                        <h1><?php echo $percentage; ?>0%</h1>Indicators
-                                    </button>
-                                <?php
-                            }
-                       
-                        ?>
-
-                    
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="card text-bg-info" style="width: 5rem;">
-                    <div class="card-body">
-                            <button type="button" class="btn btn-warning">
-                              Non compliance:<?php echo  $row['z']; ?>
-                              Partialy compliance: <?php echo  $row['o']; ?>
-                              Fully compliance:<?php echo  $row['t']; ?>
-                            </button>
+                                    <h1><?php echo $percentage; ?>0%</h1>Indicators
+                                </button>
                             <?php
+                            }
 
-                     }
-                    mysqli_free_result($q56);
-                        $con->next_result();
+                            ?>
 
-                    ?>
+
                     </div>
                 </div>
             </div>
+            <div class="col-sm-2">
+                <div class="card text-bg-info" style="width: 6rem;">
+                    <div class="card-body">
+                        <button type="button" class="btn btn-danger">
+                          <h2> <?php echo  $row['z']; ?></h2>Non compliance Indicators
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="card text-bg-success" style="width: 6rem;">
+                    <div class="card-body">
+                    <button type="button" class="btn btn-primary">
+                    <h2><?php echo  $row['o']; ?></h1>Partialy compliance Indicators
+                    </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="card text-bg-info" style="width: 6rem;">
+                    <div class="card-body">
+                    <button type="button" class="btn btn-success">
+                    <h2><?php echo  $row['t']; ?></h1>Fully compliance Indicators
+                    </button>
+                    </div> 
+                </div>
+            </div>
+            <?php
+
+                        }
+                        mysqli_free_result($q56);
+                        $con->next_result();?>
         </div>
         <div class="row">
 
@@ -128,7 +142,7 @@ include('h.php');
 
                     <div class="card-body">
                         <h2 class="card-title">Score % </h2>
-                        <?php                     
+                        <?php
 
                         $tablequery1 = "call Area_of_concern_NQAS($fat,$Fa,$dept_id,$p)";
                         $q2 = mysqli_query($con, $tablequery1);
@@ -194,14 +208,14 @@ include('h.php');
 
                         ?>
                             <button type="button" class="btn btn-warning mb-2">
-                              Non compliance indicators(0): <span class="badge bg-white text-warning"><?php echo  $row['z']; ?></span>
+                                Non compliance indicators(0): <span class="badge bg-white text-warning"><?php echo  $row['z']; ?></span>
                             </button>
                             <button type="button" class="btn btn-info mb-2">
-                              Partialy compliance indicators(1): <span class="badge bg-white text-info"><?php echo  $row['o']; ?></span>
+                                Partialy compliance indicators(1): <span class="badge bg-white text-info"><?php echo  $row['o']; ?></span>
                             </button>
 
                             <button type="button" class="btn btn-success mb-2">
-                               Fully compliance indicators(2): <span class="badge bg-white text-success"><?php echo  $row['t']; ?></span>
+                                Fully compliance indicators(2): <span class="badge bg-white text-success"><?php echo  $row['t']; ?></span>
                             </button>
                             <button type="button" class="btn btn-primary mb-2">
                                 Number of indicators completed : <span class="badge bg-white text-primary"><?php echo  $row['total']; ?></span>
