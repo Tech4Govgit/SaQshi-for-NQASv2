@@ -23,6 +23,7 @@ include('h.php');
                         $Fa = $_SESSION['u_facilityid'];
                         $fat = $_SESSION['f_type_id'];
                         $p =  $_SESSION['assperiod'];
+                        
                         ?>
                         <h2 class="card-title">Areas of Concern wise Score % </h2>
                         <?php
