@@ -19,12 +19,14 @@ include('h.php');
                 <div class="card">
 
                     <div class="card-body">
-                        <h2 class="card-title">Areas of Concern wise Score % </h2>
-                        <?php
-                        $dept_id = $_SESSION['dept_id1'];;
+                        <?php $dept_id = $_SESSION['dept_id1'];
                         $Fa = $_SESSION['u_facilityid'];
                         $fat = $_SESSION['f_type_id'];
                         $p =  $_SESSION['assperiod'];
+                        ?>
+                        <h2 class="card-title">Areas of Concern wise Score % </h2>
+                        <?php
+                       
                         $tablequery1 = "call Area_of_concern_NQAS($fat,$Fa,$dept_id,$p)";
                         $q2 = mysqli_query($con, $tablequery1);
                         while ($row = mysqli_fetch_array($q2)) {

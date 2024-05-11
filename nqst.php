@@ -1,7 +1,6 @@
 <?php
 include('session.php');
 include_once("db.php");
-
 $dept_id = $_SESSION['dept_id1'];
 $_SESSION['Cn'] = 0;
 $f_type_id = $_SESSION['f_type_id'];
@@ -132,81 +131,80 @@ include('h.php');
           $_SESSION['Assessment_Method'] = $_POST['Assessment_Method'];
           $ASSm = $_SESSION['Assessment_Method'];
           if ($Co == 0 or $ca == "") {
-                      ?>
-                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                          Kindly Select Area of Concern/Standard from drop down.
-                                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
+        ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              Kindly Select Area of Concern/Standard from drop down.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
 
-                                      <?php //exit;
-                                    }
+          <?php //exit;
+          }
 
           $_SESSION['q1'] = "CALL get_assessment($fid,$Fa,$Co,$ca,$p,$F,'$ASSm','$M','$C','$Means')";
           $query = $con->query($_SESSION['q1']);
-          while ($row = mysqli_fetch_array($query))
-           {
+          while ($row = mysqli_fetch_array($query)) {
 
-                    ?>
-                      <br>
-                      <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
-                        <tbody>
-                          <tr>
-                            <th colspan="2">
-                              <center>Check List details for Compliance </center>
-                            </th>
+          ?>
+            <br>
+            <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
+              <tbody>
+                <tr>
+                  <th colspan="2">
+                    <center>Check List details for Compliance </center>
+                  </th>
 
-                          </tr>
-                          <tr>
-                            <th data-column-id="c_subtype_id_fk">Standard</th>
-                            <td><?php echo $row['c_subtype_Reference_No_fk']; ?></td>
-                          </tr>
-                          <tr>
-                            <th data-column-id="c_subtype_id_fk">Ref.No</th>
-                            <td><?php echo $row['csqa_reference_id']; ?></td>
-                          </tr>
-                          <tr>
-                            <th data-column-id="Measurable_Element">MeasurableElement</th>
-                            <td><?php echo $row['M']; ?></td>
-                          </tr>
-                          <tr>
-                            <th data-column-id="Checkpoint">Checkpoint</th>
-                            <td><?php echo $row['C']; ?></td>
-                          </tr>
-                          <tr>
-                            <th data-column-id="Assessment_Method">Ass.Method</th>
-                            <td><?php echo $row['Assessment_Method']; ?></td>
-                          </tr>
-                          <tr>
-                            <th data-column-id="Means_of_Verification">Means of Verification</th>
-                            <td><?php echo $row['Means']; ?></td>
-                          </tr>
-                          <form method="POST" action="#">
-                            <tr>
-                              <th data-column-id="Compliance">Compliance</th>
-                              <td>
-                                <select class="form-control" id="f1" name="f">
-                                  <option value="">-Select-</option>
-                                  <option value="0">0</option>
-                                  <option value="1">1</option>
-                                  <option value="2">2</option>
-                                </select>
+                </tr>
+                <tr>
+                  <th data-column-id="c_subtype_id_fk">Standard</th>
+                  <td><?php echo $row['c_subtype_Reference_No_fk']; ?></td>
+                </tr>
+                <tr>
+                  <th data-column-id="c_subtype_id_fk">Ref.No</th>
+                  <td><?php echo $row['csqa_reference_id']; ?></td>
+                </tr>
+                <tr>
+                  <th data-column-id="Measurable_Element">MeasurableElement</th>
+                  <td><?php echo $row['M']; ?></td>
+                </tr>
+                <tr>
+                  <th data-column-id="Checkpoint">Checkpoint</th>
+                  <td><?php echo $row['C']; ?></td>
+                </tr>
+                <tr>
+                  <th data-column-id="Assessment_Method">Ass.Method</th>
+                  <td><?php echo $row['Assessment_Method']; ?></td>
+                </tr>
+                <tr>
+                  <th data-column-id="Means_of_Verification">Means of Verification</th>
+                  <td><?php echo $row['Means']; ?></td>
+                </tr>
+                <form method="POST" action="#">
+                  <tr>
+                    <th data-column-id="Compliance">Compliance</th>
+                    <td>
+                      <select class="form-control" id="f1" name="f">
+                        <option value="">-Select-</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                      </select>
 
-                                <input type="hidden" id="csqa_id1" name="csqa_id1" value="<?php echo  $_SESSION['q1']; ?>">
-                                <input type="hidden" id="csqa_id" name="csqa_id" value="<?php echo $row['csqa_id']; ?>">
-                                <input type="hidden" id="csqa_id2" name="csqa_id2" value="<?php echo $row['c_subtype_id_fk']; ?>">
-                              </td>
-                            </tr>
-                            <tr>
-                              <th>Action</th>
-                              <td>
-                                <button type="submit" name="postsubmit1" class="btn btn-primary btn-sm">Save & Next </button>
-                              </td>
-                            </tr>
-                          </form>
-
+                      <input type="hidden" id="csqa_id1" name="csqa_id1" value="<?php echo  $_SESSION['q1']; ?>">
+                      <input type="hidden" id="csqa_id" name="csqa_id" value="<?php echo $row['csqa_id']; ?>">
+                      <input type="hidden" id="csqa_id2" name="csqa_id2" value="<?php echo $row['c_subtype_id_fk']; ?>">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Action</th>
+                    <td>
+                      <button type="submit" id="postsubmit1" name="postsubmit1" class="btn btn-primary btn-sm">Save & Next </button>
+                    </td>
+                  </tr>
+                </form>
 
 
-                    <?php 
+
+              <?php
             }
             mysqli_free_result($query);
             $con->next_result();
@@ -271,7 +269,10 @@ include('h.php');
                       if ($insertresult) {
 
             ?>
-              <button type="button" class="btn btn-success"><?php echo "Compliance Added ..!"; ?><i class="bi bi-check-circle"></i></button>
+            </br>
+              <p>
+                <button addEventListener="function()"  type="button" class="btn btn-success"><?php echo "Compliance Added ..!"; ?><i class="bi bi-check-circle"></i></button>
+              </p>
             <?php
                         //mysqli_free_result($insertresult);
                         //$con->next_result();
@@ -335,7 +336,7 @@ include('h.php');
                       </th>
                       <td>
 
-                        <button type="submit" name="postsubmit1" class="btn btn-primary btn-sm">Save & Next</button>
+                        <button type="submit" id="postsubmit1" name="postsubmit1" class="btn btn-primary btn-sm">Save & Next</button>
 
                       </td>
                     </tr>
@@ -417,7 +418,12 @@ include('h.php');
 
             });
         </script>
-       
+<script type="text/JavaScript">
+$(document).ready(function(){   
+    $("p").show().delay(3000).fadeOut();
+     });
+</script>
+
 <!-- Template Main JS File -->
 <?php
 include('f.php');
