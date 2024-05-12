@@ -197,7 +197,7 @@ include('h.php');
                   <tr>
                     <th>Action</th>
                     <td>
-                      <button type="submit" id="postsubmit1" name="postsubmit1" class="btn btn-primary btn-sm">Save & Next</button>
+                      <button type="submit" id="postsubmit1" name="postsubmit1" class="btn btn-primary btn-sm">Save & Next <?php echo $row['csqa_id']; ?></button>
                     </td>
                   </tr>
                 </form>
@@ -239,7 +239,8 @@ include('h.php');
             <?php }
                     mysqli_free_result($queryb);
                     $con->next_result();
-                  } elseif (isset($_POST['postsubmit1'])) {
+                  } elseif (isset($_POST['postsubmit1'])) 
+                  {
                     $ass_compliance = $_POST['f'];
                     if ($ass_compliance == 0 or  $ass_compliance == 1 or  $ass_compliance == 2) {
 
@@ -332,13 +333,13 @@ include('h.php');
                     </tr>
                     <tr>
                       <th>
-                        <button type="submit" id="edit" name="edit" class="btn btn-warning btn-sm" value="<?php echo ($row['csqa_id'] - 1); ?>">Back & Update </button>
+                        <button type="submit" id="edit" name="edit" class="btn btn-warning btn-sm">Back & Update <?php echo ($row['csqa_id'] - 1); ?></button>
                       </th>
 
                       <td>
 
 
-                        <button type="submit" id="postsubmit1" name="postsubmit1" class="btn btn-primary btn-sm">Save & Next</button>
+                        <button type="submit" id="postsubmit1" name="postsubmit1" class="btn btn-primary btn-sm">Save & Next<?php echo $row['csqa_id']; ?></button>
                       </td>
 
                     </tr>
@@ -385,235 +386,11 @@ include('h.php');
               Kindly Select Compliance(0 or 1 or 2) from drop down.
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-          <?php }
-                  } elseif (isset($_POST['edit'])) {
-                    $csqid = $_POST['edit'];
-                    $editQ = "SELECT * FROM sarbsoft_nqa.concern_subtype_chklist where csqa_id=$csqid";
-                    $editQ1 = $con->query($editQ);
-                    echo $csqid;
-                    while ($row = mysqli_fetch_array($editQ1)) {
-          ?>
-            <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
-              <tbody>
-                <tr>
-                  <th colspan="2">
-                    <center>Check List details for Compliance </center>
-                  </th>
-
-                </tr>
-                <tr>
-                  <th data-column-id="c_subtype_id_fk">Standard</th>
-                  <td><?php echo $row['c_subtype_Reference_No_fk']; ?></td>
-                </tr>
-                <tr>
-                  <th data-column-id="c_subtype_id_fk">Ref.No</th>
-                  <td><?php echo $row['csqa_reference_id']; ?></td>
-                </tr>
-                <tr>
-                  <th data-column-id="Measurable_Element">MeasurableElement</th>
-                  <td><?php echo $row['Measurable_Element']; ?></td>
-                </tr>
-                <tr>
-                  <th data-column-id="Checkpoint">Checkpoint</th>
-                  <td><?php echo $row['Checkpoint']; ?></td>
-                </tr>
-                <tr>
-                  <th data-column-id="Assessment_Method">Ass.Method</th>
-                  <td><?php echo $row['Assessment_Method']; ?></td>
-                </tr>
-                <tr>
-                  <th data-column-id="Means_of_Verification">Means of Verification</th>
-                  <td><?php echo $row['Means_of_Verification']; ?></td>
-                </tr>
-                <form method="POST" action="#">
-                  <tr>
-                    <th data-column-id="Compliance">Compliance</th>
-                    <td>
-                      <select class="form-control" id="f" name="f">
-                        <option value="">-Select-</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                      </select>
-                      <input type="hidden" id="csqa_id1" name="csqa_id1" value="<?php echo  $_SESSION['q1']; ?>">
-                      <input type="hidden" id="csqa_id_u" name="csqa_id_u" value="<?php echo $row['csqa_id']; ?>">
-
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      Action
-                    </th>
-
-                    <td>
-                      <button type="submit" id="update" name="update" class="btn btn-primary btn-sm">Update & Next</button>
-                    </td>
-
-                  </tr>
-
-                </form>
-
-              <?php }
-                    mysqli_free_result($editQ1);
-                    $con->next_result();
-              ?>
-
-
-
-              <tr>
-                <td colspan="2"> <button type="button" class="btn btn-outline-success">
-                    <?php
-                    $queryc = $con->query($_SESSION['getcount']);
-                    while ($row = mysqli_fetch_assoc($queryc)) {
-                      $p =  $row['id1'];
-                      $p1 = $row['id2'];
-                      $pb1 = $row['c'];
-                      $p2 =  $row['id3'];
-                      $p12 = $row['id4'];
-                      $pb12 = $row['c2'];
-                    ?>
-                      <?php echo 'Area of Concern:-';
-                      echo $pb1; ?> <span class="badge bg-warning"><?php echo $p; ?></span>/<span class="badge bg-warning"><?php echo $p1; ?></span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="4"><button type="button" class="btn btn-outline-success">
-                    <?php echo 'Standard:-';
-                      echo $pb12; ?> <span class="badge bg-warning"><?php echo $p2; ?></span>/ <span class="badge bg-warning"><?php echo $p12; ?></span>
-                </td></button>
-              </tr>
-              </tbody>
-            </table>
-          <?php
-                    }
-                  } elseif (isset($_POST['update'])) {
-                    $showdata = $_POST['csqa_id1'];
-                    // echo  $showdata;
-                    $facid = $_SESSION['u_facilityid'];
-                    $uid = $_SESSION['userid'];
-                    $assperiod = $_SESSION['assperiod'];
-                    $csqid = $_POST['csqa_id_u'];
-                    $compl = $_POST['f'];
-                    $update_data = "update chk_list_assessment set ass_compliance=$compl where 
-                    csqa_id_fk=$csqid and fac_id_fk=$facid and 
-                    fac_dept_id_fk=$dept_id and ass_period_id=$assperiod and user_id=$uid";
-                    $updateresult = $con->query($update_data);
-
-                    if ($updateresult) {
-          ?>
-            </br>
-            <p>
-              <button addEventListener="function()" type="button" class="btn btn-success"><?php echo "Compliance Updated ..!"; ?><i class="bi bi-check-circle"></i></button>
-            </p>
-          <?php
-
-                    } ?>
-          </tbody>
-          </table>
-          <?php
-                    $query111 = $con->query($showdata);
-                    while ($row = mysqli_fetch_array($query111)) {
-          ?>
-            <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
-              <tbody>
-                <tr>
-                  <th colspan="2">
-                    <center>Check List details for Compliance </center>
-                  </th>
-
-                </tr>
-                <tr>
-                  <th data-column-id="c_subtype_id_fk">Standard</th>
-                  <td><?php echo $row['c_subtype_Reference_No_fk']; ?></td>
-                </tr>
-                <tr>
-                  <th data-column-id="c_subtype_id_fk">Ref.No</th>
-                  <td><?php echo $row['csqa_reference_id']; ?></td>
-                </tr>
-                <tr>
-                  <th data-column-id="Measurable_Element">MeasurableElement</th>
-                  <td><?php echo $row['M']; ?></td>
-                </tr>
-                <tr>
-                  <th data-column-id="Checkpoint">Checkpoint</th>
-                  <td><?php echo $row['C']; ?></td>
-                </tr>
-                <tr>
-                  <th data-column-id="Assessment_Method">Ass.Method</th>
-                  <td><?php echo $row['Assessment_Method']; ?></td>
-                </tr>
-                <tr>
-                  <th data-column-id="Means_of_Verification">Means of Verification</th>
-                  <td><?php echo $row['Means']; ?></td>
-                </tr>
-                <form method="POST" action="#">
-                  <tr>
-                    <th data-column-id="Compliance">Compliance</th>
-                    <td>
-                      <select class="form-control" id="f" name="f">
-                        <option value="">-Select-</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                      </select>
-                      <input type="hidden" id="csqa_id1" name="csqa_id1" value="<?php echo  $_SESSION['q1']; ?>">
-                      <input type="hidden" id="csqa_id" name="csqa_id" value="<?php echo $row['csqa_id']; ?>">
-                      <input type="hidden" id="csqa_id2" name="csqa_id2" value="<?php echo $row['c_subtype_id_fk']; ?>">
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      Action
-                    </th>
-
-                    <td>
-
-
-                      <button type="submit" id="postsubmit1" name="postsubmit1" class="btn btn-primary btn-sm">Save & Next</button>
-                    </td>
-
-                  </tr>
-
-                </form>
-
-              <?php }
-                    mysqli_free_result($query111);
-                    $con->next_result();
-              ?>
-
-
-
-              <tr>
-                <td colspan="2"> <button type="button" class="btn btn-outline-success">
-                    <?php
-                    $queryc = $con->query($_SESSION['getcount']);
-                    while ($row = mysqli_fetch_assoc($queryc)) {
-                      $p =  $row['id1'];
-                      $p1 = $row['id2'];
-                      $pb1 = $row['c'];
-                      $p2 =  $row['id3'];
-                      $p12 = $row['id4'];
-                      $pb12 = $row['c2'];
-                    ?>
-                      <?php echo 'Area of Concern:-';
-                      echo $pb1; ?> <span class="badge bg-warning"><?php echo $p; ?></span>/<span class="badge bg-warning"><?php echo $p1; ?></span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="4"><button type="button" class="btn btn-outline-success">
-                    <?php echo 'Standard:-';
-                      echo $pb12; ?> <span class="badge bg-warning"><?php echo $p2; ?></span>/ <span class="badge bg-warning"><?php echo $p12; ?></span>
-                </td></button>
-              </tr>
-              </tbody>
-            </table>
-        <?php
-                    }
+        <?php }
                   }
         ?>
-
+        </tbody>
+        </table>
 
         <!-----data end------->
       </div>
