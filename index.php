@@ -13,20 +13,21 @@ include('h.php');
     </div><!-- End Page Title -->
     <!-- ----working area ----->
     <section class="section">
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="card text-bg-warning" style="width:6rem;">
-                    <div class="card-body">
 
+        <div class="row">
+            <div class="col-lg-6 col-xl-4">
+                <div class="card mb-3 widget-content">
+                    <div class="widget-content-wrapper">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Score</div>
+                            <div class="widget-subheading"> <a href="export_deprt_score_card.php">Export Data</a></div>
+                        </div>
+                        <div class="widget-content-right">
                         <?php
                         $dept_id = $_SESSION['dept_id1'];
-
                         $Fa = $_SESSION['u_facilityid'];
-
                         $fat = $_SESSION['f_type_id'];
-
                         $p =  $_SESSION['assperiod'];
-
                         $call_q = "call overall_dept_percentage($dept_id,$Fa,$p,$fat)";
                         $q22 = mysqli_query($con, $call_q);
                         while ($row = mysqli_fetch_array($q22)) {
@@ -35,38 +36,41 @@ include('h.php');
                             //====
                             if ($obtained != null) {
                                 $percentage = round((($obtained / $total) * 100), 2);
-                                if ($percentage > 80) {
-                        ?>
-                                    <button type="button" class="btn btn-success"><i class="bi bi-check-circle"></i>
-                                        <h1><?php echo $percentage; ?>% </h1>Score
-                                    </button>
-                                <?php } else {
-                                ?>
-                                    <button type="button" class="btn btn-danger"><i class="bi bi-exclamation-octagon"></i>
-                                <br> <h1><?php echo $percentage; ?>% </h1>Score
-                                    </button>
-                                <?php
+                                if ($percentage > 70) {
+                                    ?>
+                                          <div class="widget-numbers text-success"><span><?php echo $percentage; ?>%</span></div>
+                                        <?php } 
+                                       elseif($percentage>65 and $percentage<70) {
+                                      
+                                        ?>
+                                        <div class="widget-numbers text-warning"><span><?php echo $percentage; ?>%</span></div>
+                                    <?php
+                                      }elseif($percentage<65) {
+                                        ?>                                    
+                                   <div class="widget-numbers text-danger"><span><?php echo $percentage; ?>%</span></div>
+                                   <?php    
+                                }}else{
+                                    $percentage=0;
+                                    ?>
+                                    <div class="widget-numbers text-danger"><span><?php echo $percentage; ?>%</span></div>
+                                    <?php
                                 }
-                            } else {
-                                $percentage = 0;
-                                ?>
-                                <button type="button" class="btn btn-danger"><i class="bi bi-exclamation-octagon"></i>
-                                    <h1><?php echo $percentage; ?>0%</h1>Score
-                                </button>
-                        <?php
-                            }
-                        }
-                        mysqli_free_result($q22);
-                        $con->next_result();
-                        ?>
-
-
+                                    }
+                                    mysqli_free_result($q22);
+                                    $con->next_result();
+                                    ?>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
-                <div class="card text-bg-secondary " style="width: 6rem;">
-                    <div class="card-body">
+            <div class="col-lg-6 col-xl-4">
+                <div class="card mb-3 widget-content">
+                    <div class="widget-content-wrapper">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Indicators</div>
+                            <div class="widget-subheading"></div>
+                        </div>
+                        <div class="widget-content-right">
                         <?php
                         $call_q1 = "call count_zero($Fa,$dept_id,$p,$fat)";
                         $q56 = mysqli_query($con, $call_q1);
@@ -76,65 +80,85 @@ include('h.php');
                             if ($obtained != null) {
                                 $percentage = round((($obtained / $total) * 100), 2);
                                 if ($percentage > 70) {
-                        ?>
-                                    <button type="button" class="btn btn-success"><i class="bi bi-check-circle"></i>
-                                        <h1><?php echo $obtained; ?>/<?php echo $total; ?></h1>Indicators
-                                    </button>
-                                <?php } else {
-                                ?>
-                                    <button type="button" class="btn btn-danger"><i class="bi bi-exclamation-octagon"></i>
-                                        <h1><?php echo $obtained; ?>/<?php echo $total; ?></h1>Indicators
-                                    </button>
-                                <?php
-                                }
-                            } else {
-                                $percentage = 0;
-                                ?>
-                                <button type="button" class="btn btn-danger"><i class="bi bi-exclamation-octagon"></i>
-                                    <h1><?php echo $percentage; ?>0%</h1>Indicators
-                                </button>
-                            <?php
-                            }
-
-                            ?>
-
-
+                                    ?>
+                                          <div class="widget-numbers text-success"><span><?php echo $obtained; ?>/<?php echo $total; ?></div>
+                                        <?php } else { ?>
+                                          <div class="widget-numbers text-danger"><span><?php echo $obtained; ?>/<?php echo $total; ?></span></div>
+                                        <?php
+                                        }
+                                      } else {
+                                        $percentage = 0;
+                                        ?>
+                                        <div class="widget-numbers text-danger"><span><?php echo $obtained; ?>/<?php echo $total; ?></span></div>
+                                    <?php
+                                      }
+                                    ?>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-2">
-                <div class="card text-bg-info" style="width: 6rem;">
-                    <div class="card-body">
-                        <button type="button" class="btn btn-danger">
-                          <h2> <?php echo  $row['z']; ?></h2>Non compliance Indicators
-                        </button>
+            <div class="col-lg-6 col-xl-4">
+                <div class="card mb-3 widget-content">
+                    <div class="widget-content-wrapper">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Assassment No.</div>
+                            <div class="widget-subheading"></div>
+                        </div>
+                        <div class="widget-content-right">
+                            
+                            <div class="widget-numbers text-warning"><span>1</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-2">
-                <div class="card text-bg-success" style="width: 6rem;">
-                    <div class="card-body">
-                    <button type="button" class="btn btn-primary">
-                    <h2><?php echo  $row['o']; ?></h1>Partialy compliance Indicators
-                    </button>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-xl-4">
+                <div class="card mb-3 widget-content">
+                    <div class="widget-content-wrapper">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Non</div>
+                            <div class="widget-subheading">Compliance</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-danger"><span> <?php echo  $row['z']; ?></span></div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-2">
-                <div class="card text-bg-info" style="width: 6rem;">
-                    <div class="card-body">
-                    <button type="button" class="btn btn-success">
-                    <h2><?php echo  $row['t']; ?></h1>Fully compliance Indicators
-                    </button>
-                    </div> 
+            <div class="col-lg-6 col-xl-4">
+                <div class="card mb-3 widget-content">
+                    <div class="widget-content-wrapper">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Partially</div>
+                            <div class="widget-subheading">Compliance</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-warning"><span><?php echo  $row['o']; ?></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-4">
+                <div class="card mb-3 widget-content">
+                    <div class="widget-content-wrapper">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Fully</div>
+                            <div class="widget-subheading">Compliance</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-success"><span><?php echo  $row['t']; ?></span></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <?php
-
-                        }
-                        mysqli_free_result($q56);
-                        $con->next_result();?>
+        }
+                                    mysqli_free_result($q56);
+                                    $con->next_result();
+                                    ?>
         </div>
+        
         <div class="row">
 
             <div class="col-lg-6">
@@ -146,15 +170,41 @@ include('h.php');
 
                         $tablequery1 = "call Area_of_concern_NQAS($fat,$Fa,$dept_id,$p)";
                         $q2 = mysqli_query($con, $tablequery1);
-                        while ($row = mysqli_fetch_array($q2)) {
-                        ?>
+                        while ($row = mysqli_fetch_array($q2))  {
+                            $obtained = $row['Obtained'];
+                            $total = $row['total'];
+                            if ($obtained != null) {
+                                $percentage = round((($obtained / $total) * 100), 2);
+                                if ($percentage > 70) {
+                                    ?>
                             <!-- Progress Bars with labels-->
                             <label><?php echo  $row['concern_name']; ?></label>
                             <div class="progress">
-
                                 <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: <?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%" aria-valuenow="<?php echo $row['Obtained']; ?>" aria-valuemin="0" aria-valuemax="<?php echo $row['total']; ?>"><?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%</div>
                             </div>
-                        <?php }
+                            <?php }elseif($percentage>65 and $percentage<70) {
+                                      
+                                        ?>
+                                        <label><?php echo  $row['concern_name']; ?></label>
+                                        <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar" style="width: <?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%" aria-valuenow="<?php echo $row['Obtained']; ?>" aria-valuemin="0" aria-valuemax="<?php echo $row['total']; ?>"><?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%</div>
+                            </div>
+                            <?php
+                                      }elseif($percentage<65) {
+                                        ?> 
+                                        <label><?php echo  $row['concern_name']; ?></label>
+                                        <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: <?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%" aria-valuenow="<?php echo $row['Obtained']; ?>" aria-valuemin="0" aria-valuemax="<?php echo $row['total']; ?>"><?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%</div>
+                            </div>
+                            <?php
+                        }}else{
+                                    $percentage=0;
+                                    ?>
+                                    <label><?php echo  $row['concern_name']; ?></label>
+                                    <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: <?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%" aria-valuenow="<?php echo $row['Obtained']; ?>" aria-valuemin="0" aria-valuemax="<?php echo $row['total']; ?>"><?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%</div>
+                            </div>
+                        <?php }}
                         mysqli_free_result($q2);
                         $con->next_result();
                         ?>
@@ -177,10 +227,14 @@ include('h.php');
                         $q2 = mysqli_query($con, $tablequery1);
                         while ($row = mysqli_fetch_array($q2)) {
                         ?>
-                            <td colspan="4"><button type="button" class="btn btn-outline-success">
-                                    <?php echo  $row['concern_name']; ?>
-                                    <span class="badge bg-primary rounded-pill"> <?php echo  $row['Obtained']; ?></span>/<span class="badge bg-primary rounded-pill"><?php echo  $row['total']; ?></span>
-                            </td></button>
+                            
+                            <label><?php echo  $row['concern_name']; ?></label>
+                            <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: <?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%" aria-valuenow="<?php echo $row['Obtained']; ?>" aria-valuemin="0" aria-valuemax="<?php echo $row['total']; ?>"><?php echo  $row['Obtained']; ?>/<?php echo  $row['total']; ?></div>
+
+</div>
+                  
+                           
                         <?php }
                         mysqli_free_result($q2);
                         $con->next_result();
@@ -207,21 +261,24 @@ include('h.php');
                         while ($row = mysqli_fetch_array($q5)) {
 
                         ?>
-                            <button type="button" class="btn btn-warning mb-2">
-                                Non compliance indicators(0): <span class="badge bg-white text-warning"><?php echo  $row['z']; ?></span>
-                            </button>
-                            <button type="button" class="btn btn-info mb-2">
-                                Partialy compliance indicators(1): <span class="badge bg-white text-info"><?php echo  $row['o']; ?></span>
-                            </button>
+                            <label> Non compliance indicators(0):</label>
+                             <span class="badge bg-white text-warning"><h4><?php echo  $row['z']; ?></h4></span> <br>
+                            
+                             <label>
+                                Partialy compliance indicators(1):</label>
+                                 <span class="badge bg-white text-info"><h5><?php echo  $row['o']; ?></h5></span><br>
+                           
 
-                            <button type="button" class="btn btn-success mb-2">
-                                Fully compliance indicators(2): <span class="badge bg-white text-success"><?php echo  $row['t']; ?></span>
-                            </button>
-                            <button type="button" class="btn btn-primary mb-2">
-                                Number of indicators completed : <span class="badge bg-white text-primary"><?php echo  $row['total']; ?></span>
-                            </button>
-                            <button type="button" class="btn btn-secondary mb-2">
-                                Total Indicators: <span class="badge bg-white text-secondary"><?php echo  $row['total1']; ?></span>
+                            <label>
+                                Fully compliance indicators(2): </label>
+                                 <span class="badge bg-white text-success"><h4><?php echo  $row['t']; ?></h4></span><br>
+                           
+                                 <label>
+                                Number of indicators completed :  </label>
+                                    <span class="badge bg-white text-primary"><h5><?php echo  $row['total']; ?></h5></span><br>
+                                    <label>
+                                Total Indicators:  </label>
+                                <span class="badge bg-white text-secondary"><h4><?php echo  $row['total1']; ?></h4></span><br>
                             </button>
                         <?php }
                         mysqli_free_result($q5);
@@ -280,18 +337,7 @@ include('h.php');
                                                             label: 'Total',
                                                             formatter: function(w) {
                                                                 // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-                                                                return <?php
-                                                                        mysqli_free_result($result);
-                                                                        $con->next_result();
-                                                                        $query = "CALL comp_t_g($did,$fty)";
-                                                                        $result = $con->query($query);
-                                                                        if ($result->num_rows > 0) {
-                                                                            while ($row = mysqli_fetch_assoc($result)) {
-                                                                                $values = $row['total'];
-                                                                                echo $values;
-                                                                            }
-                                                                        }
-                                                                        ?>
+                                                                return 100
                                                             }
                                                         }
                                                     }

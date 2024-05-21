@@ -182,12 +182,13 @@ include('h.php');
                   <tr>
                     <th data-column-id="Compliance">Compliance</th>
                     <td>
-                    <select class="form-control" id="f1" name="f">
+                      <select class="form-control" id="f1" name="f">
                         <option value="">-Select-</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                       </select>
+
                       <input type="hidden" id="csqa_id1" name="csqa_id1" value="<?php echo  $_SESSION['q1']; ?>">
                       <input type="hidden" id="csqa_id" name="csqa_id" value="<?php echo $row['csqa_id']; ?>">
                       <input type="hidden" id="csqa_id2" name="csqa_id2" value="<?php echo $row['c_subtype_id_fk']; ?>">

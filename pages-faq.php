@@ -139,7 +139,7 @@ include('h.php');
                                                 <a href="assets/doc/PHC.xlsx">PHC</a>
                                             </li>
                                             <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>
-                                                <a href="assets/doc/UPHC.xlsx">UPCHC</a>
+                                                <a href="assets/doc/UPHC.xlsx">UPHC</a>
                                             </li>
                                         </strong>
                                     </div>
