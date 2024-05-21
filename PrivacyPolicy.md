@@ -4,9 +4,9 @@ This privacy policy has been compiled to better serve those who are concerned wi
 
 **What personal information do we collect from the people that use our app?**
 
-Sakhi 2.0 is a work application that you will use to service your community members or customers (customers from there on). We do not collect any personal information about you. We get and keep the information that you manually provide to us about whom you service. We only store the fact that you provided that information. We get and keep location information if you or your employer has enabled that configuration.
+SaQshi is a work application that you will use to service your community members or customers (customers from there on). We do not collect any personal information about you. We get and keep the information that you manually provide to us about whom you service. We only store the fact that you provided that information. We get and keep location information if you or your employer has enabled that configuration.
 
-Implementers that choose to collect PII data, can setup Sakhi 2.0 to be compliant with domestic and other applicable international laws such as Information Technology Act, 2000 and corresponding IT Rules 2021, Digital Personal Data Protection (DPDP) Act, 2023.
+Implementers that choose to collect PII data, can setup SaQshi to be compliant with domestic and other applicable international laws such as Information Technology Act, 2000 and corresponding IT Rules 2021, Digital Personal Data Protection (DPDP) Act, 2023.
 
 **When do we collect information?**
 
@@ -14,7 +14,7 @@ When you synchronise the data with the server manually.
 
 **How do we use your information?**
 
-The information provided to us by you about your customers is used for research purpose by the organisation for whom you work for. Sakhi 2.0 doesn't use this information.   
+The information provided to us by you about your customers is used for research purpose by the organisation for whom you work for. SaQshi doesn't use this information.   
 The information collected about you is used by your organisation members to understand your work load. 
 
 **How do we protect your information?**
@@ -48,7 +48,7 @@ This application is a work application provided by organisations to their staff.
 
 If there are any questions regarding this privacy policy, you may contact us using the information below.
 
-Sakhi 2.0
+SaQshi
 tech4gov@piramalswasthya.org
 
 Last Edited on 2024-05-25
