@@ -41,8 +41,7 @@ We do not specifically market to children under the age of 13 years old.
 **CAN SPAM Act**
 The application is not meant to be used in USA.
 
-**Technical Note**
-This application is a work application provided by organisations to their staff. Our current android version doesn't require READ_PHONE_STATE version but Play Store doesn't understand this logic and is asking for this because older version of apk had that permission requirement.
+
 
 **Contacting Us**
 
