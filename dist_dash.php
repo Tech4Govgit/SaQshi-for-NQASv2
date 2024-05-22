@@ -104,11 +104,7 @@ include('h2.php');
                   <h1 class="font-light text-right"><?php echo $UPHCcomp; ?>/<?php echo $UPHC; ?></h1>
                 </div>
               </div>
-
-
-
             </div>
-
           <?php }
           mysqli_free_result($q22);
           $con->next_result();
