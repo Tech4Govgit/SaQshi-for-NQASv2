@@ -20,7 +20,7 @@ include('h.php');
                     <div class="widget-content-wrapper">
                         <div class="widget-content-left">
                             <div class="widget-heading">Score</div>
-                            <div class="widget-subheading"> <a href="export_deprt_score_card.php">Export Data</a></div>
+                            <div class="widget-subheading"> <i class="bi bi-arrow-down-circle-fill"></i> <a href="export_deprt_score_card.php">Download Data</a></div>
                         </div>
                         <div class="widget-content-right">
                         <?php
@@ -68,7 +68,7 @@ include('h.php');
                     <div class="widget-content-wrapper">
                         <div class="widget-content-left">
                             <div class="widget-heading">Indicators</div>
-                            <div class="widget-subheading"></div>
+                            <div class="widget-subheading"><i class="bi bi-arrow-down-circle-fill"></i> <a href="export_deprt_indicators.php">Download Data</a></div>
                         </div>
                         <div class="widget-content-right">
                         <?php

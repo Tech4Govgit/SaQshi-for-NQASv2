@@ -14,24 +14,22 @@ $result = mysqli_query($con, $query);
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 $faciltyname = $row['fac_name'];
 // Excel file name for download 
-$fileName = $faciltyname."_Department_Score_Card_" . date('Y-m-d') . ".xlsx"; 
+$fileName =$faciltyname."_Department_Indicators_" . date('Y-m-d') . ".xlsx"; 
  
+
 // Define column names 
-$excelData[] = array('Areas of Concern', 'Obtained Score ', 'Total Score', 'Score Percentage'); 
+$excelData[] = array('Reference No', 'Sub Reference No ', 'Measurable Element', 'Checkpoint','AssMethod','Means of Verification','Compliance'); 
+
+
 
 // Fetch records from database and store in an array 
-$tablequery1 = "call Area_of_concern_NQAS($fat,$Fa,$dept_id,$p)";
+$tablequery1 = "call department_indicator_dash($Fa,$p,$dept_id)";
                         $q2 = mysqli_query($con, $tablequery1);
                         while ($row = mysqli_fetch_array($q2))  {
-                            $obtained = $row['Obtained'];
-                            $total = $row['total'];
-                            if ($obtained != null) {
-                                $percentage = round((($obtained / $total) * 100), 2);
-
-        $lineData = array($row['concern_name'], $row['Obtained'],  $total = $row['total'],  $percentage);  
+        $lineData = array($row['c_subtype_Reference_No_fk'], $row['csqa_reference_id'],$row['Measurable_Element'],$row['Checkpoint'],$row['Assessment_Method'],$row['Means_of_Verification'],$row['ass_compliance']);  
         $excelData[] = $lineData; 
     } 
-} 
+
  
 // Export data to excel and download as xlsx file 
 $xlsx = CodexWorld\PhpXlsxGenerator::fromArray( $excelData ); 
