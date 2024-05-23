@@ -23,7 +23,7 @@ include('h.php');
                     <div class="form-group row">
                         <div class="col-auto">
                             <label for="complainant">Select Department</label>
-                            <select class="form-control" id="Facility_Department" name="Facility_Department" onchange="getText(this)">
+                            <select class="form-control-sm form-control" id="Facility_Department" name="Facility_Department" onchange="getText(this)">
                                 <option value="0">--Select--</option>
                                 <?php
                                 $fsid = $_SESSION['u_facilityid'];
@@ -45,7 +45,7 @@ include('h.php');
                         </div>
                         <div class="col-auto">
                             <label for="complainant">Select Assessment </label>
-                            <select class="form-control" id="Period" name="Period">
+                            <select class="form-control-sm form-control" id="Period" name="Period">
                                 <option value="0">---Select--</option>
                                 <?php
                                 $fsid = $_SESSION['u_facilityid'];
@@ -65,7 +65,7 @@ include('h.php');
                         </div>
                         <div class="col-auto">
                             <label for="complainant">Select Reports type </label>
-                            <select class="form-control" id="rt" name="rt">
+                            <select class="form-control-sm form-control" id="rt" name="rt">
                                 <option value="0">---Select--</option>
                                 <option value="1">Area of concern and standard NQAS</option>
                                 <option value="2">Area of concern NQAS</option>

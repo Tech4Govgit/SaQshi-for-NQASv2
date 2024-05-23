@@ -12,7 +12,8 @@ include('h.php');
 
     </div><!-- End Page Title -->
     <!-- ----working area ----->
-    <section class="section">
+   
+    <section class="section" >
 
         <div class="row">
             <div class="col-lg-6 col-xl-4">

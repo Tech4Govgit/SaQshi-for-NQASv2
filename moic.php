@@ -22,7 +22,7 @@ include('h.php');
                     <div class="form-group row">
                         <div class="col-auto">
                             <label for="complainant">Select Assessment Period</label>
-                            <select class="form-select" id="Period1" name="Period" aria-label="size 8 select example">
+                            <select class="form-control-sm form-control" id="Period1" name="Period" aria-label="size 8 select example">
                                 <option value="0">Select Assessment Period</option>
                                 <?php
                                 $fsid = $_SESSION['u_facilityid'];
@@ -43,7 +43,7 @@ include('h.php');
                         </div>
                         <div class="col-auto">
                             <label for="ibank">Select Area Of Concern</label>
-                            <select class="form-select" id="Concern1" name="Concern">
+                            <select class="form-control-sm form-control" id="Concern1" name="Concern">
                                 <option value="0">-Select-</option>
                             </select>
                         </div>

@@ -60,7 +60,8 @@ include('h.php');
           <div class="form-group row">
             <div class="col-auto">
               <label for="ibank">Select Area Of Concern</label>
-              <select class="form-select" id="Concern" name="Concern">
+              <select class="form-control-sm form-control" id="Concern" name="Concern">
+              
                 <option value="0">-Select-</option>
                 <?php
                 $urole = $_SESSION['urole'];
@@ -88,13 +89,13 @@ include('h.php');
 
             <div class="col-auto">
               <label for="ibank">Select Standard</label>
-              <select class="form-select" id="category" name="category">
+              <select class="form-control-sm form-control" id="category" name="category">
                 <option value="0">-Select-</option>
               </select>
             </div>
             <div class="col-auto">
               <label for="dep">Select Assessment Method</label>
-              <select class="form-select" id="Assessment_Method" name="Assessment_Method">
+              <select class="form-control-sm form-control" id="Assessment_Method" name="Assessment_Method">
                 <option value="">-Select-</option>
                 <option value="SI">SI</option>
                 <option value="OB">OB</option>
@@ -105,7 +106,7 @@ include('h.php');
             </div>
             <div class="col-auto">
               </br>
-              <button type="submit" value="Submit" name="postsubmit" class="btn btn-outline-primary btn-sm">Show Checklist</button>
+              <button type="submit" value="Submit" name="postsubmit" class="mb-2 mr-2 btn btn-primary">Show Checklist</button>
             </div>
           </div>
         </form>
