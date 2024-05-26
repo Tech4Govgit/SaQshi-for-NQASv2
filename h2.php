@@ -23,13 +23,14 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
+    
 </head>
 
 <body>
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index1.php" class="logo d-flex align-items-center">
+            <a href="dist_dash_test.php" class="logo d-flex align-items-center">
             <span class="d-none d-lg-block"> <img src="assets/img/Logo_SaQshi.png" alt=""></span>
            
             </a>
@@ -59,7 +60,7 @@
                        
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="fpages-faq.php">
+                            <a class="dropdown-item d-flex align-items-center" href="dpages-faq.php">
                                 <i class="bi bi-question-circle"></i>
                                 <span>Need Help?</span>
                             </a>
@@ -70,7 +71,7 @@
                        
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="fusers-profile.php">
+                            <a class="dropdown-item d-flex align-items-center" href="dusers-profile.php">
                                 <i class="bi bi-gear"></i>
                                 <span>Change Password</span>
                             </a>
@@ -99,7 +100,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="dist_dash.php">
+                <a class="nav-link collapsed" href="dist_dash_test.php">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -121,14 +122,14 @@
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="fpages-faq.php">
+                <a class="nav-link collapsed" href="dpages-faq.php">
                 <i class="bi bi-book"></i>
                     <span>Resources</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="fpages-contact.php">
+                <a class="nav-link collapsed" href="dpages-contact.php">
                     <i class="bi bi-envelope"></i>
                     <span>Contact</span>
                 </a>

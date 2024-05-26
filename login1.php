@@ -162,7 +162,7 @@ session_start();
                        
                         
                         // Welcome message   
-                        header("location:dist_dash.php");
+                        header("location:dist_dash_test.php");
                       } elseif ($userrole == 5) {
                         $_SESSION['urole'] = $userrole;
                         $_SESSION['userid'] = $userid;

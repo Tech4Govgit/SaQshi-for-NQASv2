@@ -8,691 +8,815 @@ include_once("db.php");
 include('h2.php');
 ?>
 <main id="main" class="main">
-    <div class="app-main__outer">
-        <div class="app-main__inner">
-            <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
-                <li class="nav-item">
-                    <a role="tab" class="nav-link active" id="tab-0" data-toggle="tab" href="#tab-content-0">
-                        <span></span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a role="tab" class="nav-link" id="tab-1" data-toggle="tab" href="#tab-content-1">
-                        <span>More detail*</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a role="tab" class="nav-link" id="tab-2" data-toggle="tab" href="#tab-content-2">
-                        <span>Custom Controls</span>
-                    </a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane tabs-animation fade show active" id="tab-content-1" role="tabpanel">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a role="tab" class="nav-link " data-toggle="tab" href="#tab-content-0">
+                <span>Summary</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a role="tab" class="nav-link " data-toggle="tab" href="#tab-content-1">
+                <span>DrillDown*</span>
+            </a>
+        </li>
+        
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane" id="tab-content-0">
+            <div class="card">
+                <div class="card-body">
                     <div class="row">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
+                        <?php
+                        $dist_id = $_SESSION['dist'];
+                        $call_q1 = "call Dist_dash_count($dist_id)";
+                        $q22 = mysqli_query($con, $call_q1);
+                        while ($row = mysqli_fetch_array($q22)) {
+                            $CHC = $row['CHC'];
+                            $PHC = $row['PHC'];
+                            $DH = $row['DH'];
+                            $HWC = $row['HWC'];
+                            $UPHC = $row['UPHC'];
+                            $CHCcomp = $row['CHCcomp'];
+                            $PHCcomp = $row['PHCcomp'];
+                            $DHcomp = $row['DHCcomp'];
+                            $HWCcomp = $row['HWCcomp'];
+                            $UPHCcomp = $row['UPHCcomp'];
+                            //====
+                        ?>
+                            <div class="col">
 
+                                <div class="d-flex no-block align-items-center">
+                                    <div>
+                                        <i class="mdi mdi-image font-20  text-muted"></i>
+                                        <p class="font-16 m-b-5">CHC</p>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <h1 class="font-light text-right"><?php echo $CHCcomp; ?>/<?php echo $CHC; ?></h1>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col">
+
+                                <div class="d-flex no-block align-items-center">
+                                    <div>
+                                        <i class="mdi mdi-image font-20  text-muted"></i>
+                                        <p class="font-16 m-b-5">PHC</p>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <h1 class="font-light text-right"><?php echo $PHCcomp; ?>/<?php echo $PHC; ?></h1>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col">
+
+
+                                <div class="d-flex no-block align-items-center">
+                                    <div>
+                                        <i class="mdi mdi-image font-20  text-muted"></i>
+                                        <p class="font-16 m-b-5">DH</p>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <h1 class="font-light text-right"><?php echo $DHcomp; ?>/<?php echo $DH; ?></h1>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <div class="col">
+
+
+
+                                <div class="d-flex no-block align-items-center">
+                                    <div>
+                                        <i class="mdi mdi-image font-20  text-muted"></i>
+                                        <p class="font-16 m-b-5">HWC</p>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <h1 class="font-light text-right"><?php echo $HWCcomp; ?>/<?php echo $HWC; ?></h1>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+                            <div class="col">
+
+                                <div class="d-flex no-block align-items-center">
+                                    <div>
+                                        <i class="mdi mdi-image font-20  text-muted"></i>
+                                        <p class="font-16 m-b-5">UPHC</p>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <h1 class="font-light text-right"><?php echo $UPHCcomp; ?>/<?php echo $UPHC; ?></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php }
+                        mysqli_free_result($q22);
+                        $con->next_result();
+                        ?>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="export_dist_score_card.php">
+                                <h4 class="card-title">Compliance Summary <i class="bi bi-arrow-down-circle-fill"></i></h4>
+                            </a>
+                            </br>
+                            <div class="table-responsive">
+                                <table class="table  small  table-bordered  table-condensed" id="tbl_exporttable_to_xls">
+                                    <thead>
+                                        <tr class="table-info">
+                                            <th colspan="4">Facility</th>
+                                            <th colspan="5">Compliance Status</th>
+                                            <th colspan="3">Score Card</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tr class="table-primary">
+                                        <th scope="col">District</th>
+                                        <th scope="col">Block</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Non</th>
+                                        <th scope="col">Partially</th>
+                                        <th scope="col">Fully</th>
+                                        <th scope="col">Indicators</th>
+                                        <th scope="col">%</th>
+                                        <th scope="col">Obtained</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">%</th>
+                                    </tr>
                                     <?php
                                     $dist_id = $_SESSION['dist'];
-                                    $call_q1 = "call Dist_dash_count($dist_id)";
+                                    $userid = $_SESSION['userid'];
+                                    $call_count = "call DQA_count_zero_o_t_dash($dist_id,$userid)";
+                                    $count = mysqli_query($con, $call_count);
+                                    while ($row = mysqli_fetch_array($count)) {
+                                        $obtained = $row['p'];
+                                        if ($obtained != null) {
+                                            $percentage = $row['p'];
+                                            $m = $row['marks'];
+                                            $f = $row['f'];
+                                    ?>
+
+
+                                            <?php
+                                            $p1 = round((($m / $f) * 100), 2);
+                                            if ($percentage > 70) {
+                                            ?>
+                                                <tbody>
+                                                    <tr>
+
+                                                        <td class="table-primary"><?php echo  $row['Dist_Name']; ?></td>
+                                                        <td class="table-primary"><?php echo  $row['Block_Name']; ?></td>
+                                                        <td class="table-primary"><?php echo  $row['facilities_type']; ?></td>
+                                                        <td class="table-primary"><?php echo  $row['fac_name']; ?></td>
+                                                        <td class="table-success"><?php echo  $row['zero']; ?></td>
+                                                        <td class="table-success"><?php echo  $row['one']; ?></td>
+                                                        <td class="table-success"><?php echo  $row['two']; ?></td>
+                                                        <td class="table-success"><?php echo  $row['tot']; ?></td>
+                                                        <td class="table-success"><?php echo  $row['p']; ?>%</td>
+                                                        <?php
+                                                        if ($p1 > 70) {
+                                                        ?>
+                                                            <td class="table-success"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-success"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-success"><?php echo  $p1; ?>%</td>
+                                                        <?php } elseif ($p1 > 65 and $p1 < 70) {
+                                                        ?>
+                                                            <td class="table-warning"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-warning"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-warning"><?php echo  $p1; ?>%</td>
+                                                        <?php } elseif ($p1 < 65) {
+                                                        ?>
+                                                            <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                        <?php } else { ?>
+                                                            <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                        <?php } ?>
+                                                    </tr>
+                                                </tbody>
+
+                                            <?php } elseif ($percentage > 65 and $percentage < 70) {
+
+                                            ?>
+                                                <tbody>
+                                                    <tr>
+
+                                                        <td class="table-primary"><?php echo  $row['Dist_Name']; ?></td>
+                                                        <td class="table-primary"><?php echo  $row['Block_Name']; ?></td>
+                                                        <td class="table-primary"><?php echo  $row['facilities_type']; ?></td>
+                                                        <td class="table-primary"><?php echo  $row['fac_name']; ?></td>
+                                                        <td class="table-warning"><?php echo  $row['zero']; ?></td>
+                                                        <td class="table-warning"><?php echo  $row['one']; ?></td>
+                                                        <td class="table-warning"><?php echo  $row['two']; ?></td>
+                                                        <td class="table-warning"><?php echo  $row['tot']; ?></td>
+                                                        <td class="table-warning"><?php echo  $row['p']; ?>%</td>
+                                                        <?php
+                                                        if ($p1 > 70) {
+                                                        ?>
+                                                            <td class="table-success"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-success"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-success"><?php echo  $p1; ?>%</td>
+                                                        <?php } elseif ($p1 > 65 and $p1 < 70) {
+                                                        ?>
+                                                            <td class="table-warning"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-warning"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-warning"><?php echo  $p1; ?>%</td>
+                                                        <?php } elseif ($p1 < 65) {
+                                                        ?>
+                                                            <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                        <?php } else { ?>
+                                                            <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                        <?php } ?>
+                                                    </tr>
+                                                </tbody>
+                                            <?php
+                                            } elseif ($percentage < 65) {
+                                            ?>
+                                                <tbody>
+                                                    <tr>
+
+                                                        <td class="table-primary"><?php echo  $row['Dist_Name']; ?></td>
+                                                        <td class="table-primary"><?php echo  $row['Block_Name']; ?></td>
+                                                        <td class="table-primary"><?php echo  $row['facilities_type']; ?></td>
+                                                        <td class="table-primary"><?php echo  $row['fac_name']; ?></td>
+                                                        <td class="table-danger"><?php echo  $row['zero']; ?></td>
+                                                        <td class="table-danger"><?php echo  $row['one']; ?></td>
+                                                        <td class="table-danger"><?php echo  $row['two']; ?></td>
+                                                        <td class="table-danger"><?php echo  $row['tot']; ?></td>
+                                                        <td class="table-danger"><?php echo  $row['p']; ?>%</td>
+                                                        <?php
+                                                        if ($p1 > 70) {
+                                                        ?>
+                                                            <td class="table-success"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-success"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-success"><?php echo  $p1; ?>%</td>
+                                                        <?php } elseif ($p1 > 65 and $p1 < 70) {
+                                                        ?>
+                                                            <td class="table-warning"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-warning"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-warning"><?php echo  $p1; ?>%</td>
+                                                        <?php } elseif ($p1 < 65) {
+                                                        ?>
+                                                            <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                        <?php } else { ?>
+                                                            <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                        <?php } ?>
+                                                    </tr>
+                                                </tbody>
+                                            <?php
+                                            }
+                                        } else {
+                                            $percentage = 0;
+                                            ?>
+                                            <tbody>
+                                                <tr>
+
+                                                    <td class="table-primary"><?php echo  $row['Dist_Name']; ?></td>
+                                                    <td class="table-primary"><?php echo  $row['Block_Name']; ?></td>
+                                                    <td class="table-primary"><?php echo  $row['facilities_type']; ?></td>
+                                                    <td class="table-primary"><?php echo  $row['fac_name']; ?></td>
+                                                    <td class="table-danger"><?php echo  $row['zero']; ?></td>
+                                                    <td class="table-danger"><?php echo  $row['one']; ?></td>
+                                                    <td class="table-danger"><?php echo  $row['two']; ?></td>
+                                                    <td class="table-danger"><?php echo  $row['tot']; ?></td>
+                                                    <td class="table-danger"><?php echo  $row['p']; ?>%</td>
+                                                    <?php
+                                                        if ($p1 > 70) {
+                                                        ?>
+                                                            <td class="table-success"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-success"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-success"><?php echo  $p1; ?>%</td>
+                                                        <?php } elseif ($p1 > 65 and $p1 < 70) {
+                                                        ?>
+                                                            <td class="table-warning"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-warning"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-warning"><?php echo  $p1; ?>%</td>
+                                                        <?php } elseif ($p1 < 65) {
+                                                        ?>
+                                                            <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                        <?php } else { ?>
+                                                            <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                        <?php } ?>
+                                                </tr>
+                                            </tbody>
+                                    <?php
+                                        }
+                                    }
+                                    mysqli_free_result($count);
+                                    $con->next_result();
+                                    ?>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <!---------------tab2--------------------->
+
+        <div class="tab-pane show active" id="tab-content-1">
+            <div class="card">
+                <div class="card-body">
+                    <form enctype="multipart/form-data" method="post" action="#">
+                        <div class="form-group row">
+
+                            <div class="col-sm-3">
+                                </br>
+                                <label>Block</label>
+                                <select class="form-control-sm form-control" id="District" name="District">
+                                    <?php
+                                    $dist_id = $_SESSION['dist'];
+                                    $call_q1 = "SELECT distinct(block_id) ,Block_Name FROM sarbsoft_nqa.facilities where dist_id=$dist_id";
                                     $q22 = mysqli_query($con, $call_q1);
                                     while ($row = mysqli_fetch_array($q22)) {
-                                        $CHC = $row['CHC'];
-                                        $PHC = $row['PHC'];
-                                        $DH = $row['DH'];
-                                        $HWC = $row['HWC'];
-                                        $UPHC = $row['UPHC'];
-                                        $CHCcomp = $row['CHCcomp'];
-                                        $PHCcomp = $row['PHCcomp'];
-                                        $DHcomp = $row['DHCcomp'];
-                                        $HWCcomp = $row['HWCcomp'];
-                                        $UPHCcomp = $row['UPHCcomp'];
-                                        //====
                                     ?>
-                                        <div class="col">
+                                        <option value="<?php $_SESSION['bid'] = $row['block_id'];
+                                                        echo $row['block_id']; ?>"><?php echo $row['Block_Name']; ?></option>
+                                    <?php }
+                                    mysqli_free_result($q22);
+                                    $con->next_result();
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                </br>
+                                <label>Ins. Type</label>
+                                <select class="form-control-sm form-control" id="Block" name="Block">
+                                    <?php
+                                    $dist_id = $_SESSION['dist'];
+                                    $call_q1 = "SELECT fac_type_id,facilities_type FROM sarbsoft_nqa.facilities_type";
+                                    $q22 = mysqli_query($con, $call_q1);
+                                    while ($row = mysqli_fetch_array($q22)) {
+                                    ?>
+                                        <option value="<?php echo $row['fac_type_id']; ?>"><?php echo $row['facilities_type']; ?></option>
+                                    <?php }
+                                    mysqli_free_result($q22);
+                                    $con->next_result();
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                </br>
+                                <label>Institute </label>
+                                <select class="form-control-sm form-control" id="Village" name="Village">
+                                    <option value=" ">Institute</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                </br>
+                                <label>Ass. Period </label>
+                                <select class="form-control-sm form-control" id="Period" name="Period">
+                                    <option value=" ">Period</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-1">
+                                </br>
 
-                                            <div class="d-flex no-block align-items-center">
-                                                <div>
-                                                    <i class="mdi mdi-image font-20  text-muted"></i>
-                                                    <p class="font-16 m-b-5">CHC</p>
-                                                </div>
-                                                <div class="ml-auto">
-                                                    <h1 class="font-light text-right"><?php echo $CHCcomp; ?>/<?php echo $CHC; ?></h1>
-                                                </div>
-                                            </div>
 
+                                <label></label>
+                                </br>
+                                <button type="submit" value="Submit" name="postsubmit" class="mb-2 mr-2 btn btn-primary">View</button>
+                            </div>
+                    </form>
+                    </br>
+                    <hr class="dropdown-divider">
+                    <hr class="dropdown-divider">
+
+
+
+
+
+                    <?php
+                    if (isset($_POST['postsubmit'])) {
+                        $u_facilityid = $_POST['Block'];
+                        $u_ass = $_POST['Period'];
+                        $u_fid = $_POST['Village'];
+                    ?>
+                        <!------------------------------------->
+                        <div class="row">
+                            <div class="col-lg-6 col-xl-4">
+                                <div class="card mb-3 widget-content">
+                                    <div class="widget-content-wrapper">
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Departments</div>
+                                            <div class="widget-subheading"> </div>
                                         </div>
-                                        <div class="col">
+                                        <?php
 
-                                            <div class="d-flex no-block align-items-center">
-                                                <div>
-                                                    <i class="mdi mdi-image font-20  text-muted"></i>
-                                                    <p class="font-16 m-b-5">PHC</p>
-                                                </div>
-                                                <div class="ml-auto">
-                                                    <h1 class="font-light text-right"><?php echo $PHCcomp; ?>/<?php echo $PHC; ?></h1>
-                                                </div>
-                                            </div>
+                                        $fid = $u_fid;
 
+
+                                        $call_q1 = "SELECT count(fac_dept_id) FROM sarbsoft_nqa.fac_dept_map where fac_id=$fid";
+                                        $q22 = mysqli_query($con, $call_q1);
+                                        while ($row = mysqli_fetch_array($q22)) {
+                                            $obtained = $row['count(fac_dept_id)'];
+
+                                            //====
+                                            if ($obtained != null) {
+                                        ?>
+                                                <div class="widget-content-right">
+                                                    <div class="widget-numbers text-primary"><span><?php echo $obtained; ?></span></div>
+                                            <?php
+                                            }
+                                        }
+                                        mysqli_free_result($q22);
+                                        $con->next_result();
+                                            ?>
+                                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-4">
+                                <div class="card mb-3 widget-content">
+                                    <div class="widget-content-wrapper">
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Score</div>
+                                            <div class="widget-subheading"> </div>
                                         </div>
-                                        <div class="col">
+                                        <div class="widget-content-right">
+                                            <?php
+                                            $f_ty_id = $u_facilityid;
+                                            $fid = $u_fid;
+                                            $assid = $u_ass;
 
-
-                                            <div class="d-flex no-block align-items-center">
-                                                <div>
-                                                    <i class="mdi mdi-image font-20  text-muted"></i>
-                                                    <p class="font-16 m-b-5">DH</p>
-                                                </div>
-                                                <div class="ml-auto">
-                                                    <h1 class="font-light text-right"><?php echo $DHcomp; ?>/<?php echo $DH; ?></h1>
-                                                </div>
-                                            </div>
-
-
-
-                                        </div>
-                                        <div class="col">
-
-
-
-                                            <div class="d-flex no-block align-items-center">
-                                                <div>
-                                                    <i class="mdi mdi-image font-20  text-muted"></i>
-                                                    <p class="font-16 m-b-5">HWC</p>
-                                                </div>
-                                                <div class="ml-auto">
-                                                    <h1 class="font-light text-right"><?php echo $HWCcomp; ?>/<?php echo $HWC; ?></h1>
-                                                </div>
-                                            </div>
-
-
-
-
-                                        </div>
-                                        <div class="col">
-
-                                            <div class="d-flex no-block align-items-center">
-                                                <div>
-                                                    <i class="mdi mdi-image font-20  text-muted"></i>
-                                                    <p class="font-16 m-b-5">UPHC</p>
-                                                </div>
-                                                <div class="ml-auto">
-                                                    <h1 class="font-light text-right"><?php echo $UPHCcomp; ?>/<?php echo $UPHC; ?></h1>
-                                                </div>
-                                            </div>
-                                       
-                                            <?php }
+                                            $call_q1 = "call facility_dash_dh_perc($f_ty_id, $fid, $assid)";
+                                            $q22 = mysqli_query($con, $call_q1);
+                                            while ($row = mysqli_fetch_array($q22)) {
+                                                $obtained = $row['Obtained'];
+                                                $total = $row['total'];
+                                                //====
+                                                if ($obtained != null) {
+                                                    $percentage = round((($obtained / $total) * 100), 2);
+                                                    if ($percentage > 70) {
+                                            ?>
+                                                        <div class="widget-numbers text-success"><span><?php echo $percentage; ?>%</span></div>
+                                                    <?php } else { ?>
+                                                        <div class="widget-numbers text-danger"><span><?php echo $percentage; ?>%</span></div>
+                                                    <?php
+                                                    }
+                                                } else {
+                                                    $percentage = 0;
+                                                    ?>
+                                                    <div class="widget-numbers text-danger"><span><?php echo $percentage; ?>%</span></div>
+                                            <?php
+                                                }
+                                            }
                                             mysqli_free_result($q22);
                                             $con->next_result();
                                             ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane tabs-animation fade" id="tab-content-0" role="tabpanel">
-                    <div class="row">
-                        <div class="card">
-                            <div class="card-body">
-                                <form enctype="multipart/form-data" method="post" action="#">
-                                    <div class="row mb-3">
-
-                                        <div class="col-sm-2">
-                                            <label>Block</label>
-                                            <select class="form-select" id="District" name="District">
-                                                <?php
-                                                $dist_id = $_SESSION['dist'];
-                                                $call_q1 = "SELECT distinct(block_id) ,Block_Name FROM sarbsoft_nqa.facilities where dist_id=$dist_id";
-                                                $q22 = mysqli_query($con, $call_q1);
-                                                while ($row = mysqli_fetch_array($q22)) {
-                                                ?>
-                                                    <option value="<?php $_SESSION['bid'] = $row['block_id'];
-                                                                    echo $row['block_id']; ?>"><?php echo $row['Block_Name']; ?></option>
-                                                <?php }
-                                                mysqli_free_result($q22);
-                                                $con->next_result();
-                                                ?>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label>Ins. Type</label>
-                                            <select class="form-select" id="Block" name="Block">
-                                                <?php
-                                                $dist_id = $_SESSION['dist'];
-                                                $call_q1 = "SELECT fac_type_id,facilities_type FROM sarbsoft_nqa.facilities_type";
-                                                $q22 = mysqli_query($con, $call_q1);
-                                                while ($row = mysqli_fetch_array($q22)) {
-                                                ?>
-                                                    <option value="<?php echo $row['fac_type_id']; ?>"><?php echo $row['facilities_type']; ?></option>
-                                                <?php }
-                                                mysqli_free_result($q22);
-                                                $con->next_result();
-                                                ?>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <label>Institute </label>
-                                            <select class="form-select" id="Village" name="Village">
-                                                <option value=" ">Institute</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <label>Ass. Period </label>
-                                            <select class="form-select" id="Period" name="Period">
-                                                <option value=" ">Period</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label></label></br>
-                                            <button type="submit" value="Submit" name="postsubmit" class="btn btn-secondary">View</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
-                        </div>
-
-                        <?php
-                        if (isset($_POST['postsubmit'])) {
-                            $u_facilityid = $_POST['Block'];
-                            $u_ass = $_POST['Period'];
-                            $u_fid = $_POST['Village'];
-
-                        ?>
-
-                            <! -------------------------------------------->
-                                <div class="row">
-                                    <div class="col-lg-6 col-xl-4">
-                                        <div class="card mb-3 widget-content">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left">
-                                                    <div class="widget-heading">Departments</div>
-                                                    <div class="widget-subheading"> </div>
-                                                </div>
-                                                <?php
-
-                                                $fid = $u_fid;
-
-
-                                                $call_q1 = "SELECT count(fac_dept_id) FROM sarbsoft_nqa.fac_dept_map where fac_id=$fid";
-                                                $q22 = mysqli_query($con, $call_q1);
-                                                while ($row = mysqli_fetch_array($q22)) {
-                                                    $obtained = $row['count(fac_dept_id)'];
-
-                                                    //====
-                                                    if ($obtained != null) {
-                                                ?>
-                                                        <div class="widget-content-right">
-                                                            <div class="widget-numbers text-primary"><span><?php echo $obtained; ?></span></div>
-                                                    <?php
-                                                    }
-                                                }
-                                                mysqli_free_result($q22);
-                                                $con->next_result();
-                                                    ?>
-                                                        </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-xl-4">
-                                        <div class="card mb-3 widget-content">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left">
-                                                    <div class="widget-heading">Score</div>
-                                                    <div class="widget-subheading"> </div>
-                                                </div>
-                                                <div class="widget-content-right">
-                                                    <?php
-                                                    $f_ty_id = $u_facilityid;
-                                                    $fid = $u_fid;
-                                                    $assid = $u_ass;
-
-                                                    $call_q1 = "call facility_dash_dh_perc($f_ty_id, $fid, $assid)";
-                                                    $q22 = mysqli_query($con, $call_q1);
-                                                    while ($row = mysqli_fetch_array($q22)) {
-                                                        $obtained = $row['Obtained'];
-                                                        $total = $row['total'];
-                                                        //====
-                                                        if ($obtained != null) {
-                                                            $percentage = round((($obtained / $total) * 100), 2);
-                                                            if ($percentage > 70) {
-                                                    ?>
-                                                                <div class="widget-numbers text-success"><span><?php echo $percentage; ?>%</span></div>
-                                                            <?php } else { ?>
-                                                                <div class="widget-numbers text-danger"><span><?php echo $percentage; ?>%</span></div>
-                                                            <?php
-                                                            }
-                                                        } else {
-                                                            $percentage = 0;
-                                                            ?>
-                                                            <div class="widget-numbers text-danger"><span><?php echo $percentage; ?>%</span></div>
-                                                    <?php
-                                                        }
-                                                    }
-                                                    mysqli_free_result($q22);
-                                                    $con->next_result();
-                                                    ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-xl-4">
-                                        <div class="card mb-3 widget-content">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left">
-                                                    <div class="widget-heading">Indicators</div>
-                                                    <div class="widget-subheading"> </div>
-                                                </div>
-                                                <div class="widget-content-right">
-                                                    <?php
-                                                    $call_q2 = "call facility_dash_dh_perc($f_ty_id, $fid, $assid)";
-                                                    $call_q2 = mysqli_query($con, $call_q2);
-                                                    while ($row = mysqli_fetch_array($call_q2)) {
-                                                        $obtained = $row['assessed_checklist'];
-                                                        $total = $row['total_checklist'];
-                                                        if ($obtained != null) {
-                                                            $percentage = round((($obtained / $total) * 100), 2);
-                                                            if ($percentage > 70) {
-                                                    ?>
-                                                                <div class="widget-numbers text-success"><span><?php echo $obtained; ?>/<?php echo $total; ?></span></div>
-                                                            <?php } else { ?>
-                                                                <div class="widget-numbers text-danger"><span><?php echo $obtained; ?>/<?php echo $total; ?></span></div>
-                                                            <?php
-                                                            }
-                                                        } else {
-                                                            $percentage = 0;
-                                                            ?>
-                                                            <div class="widget-numbers text-danger"><span><?php echo $obtained; ?>/<?php echo $total; ?></span></div>
-                                                        <?php
-                                                        } ?>
-
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <! -------------------------------------------->
-                                    <div class="row">
-                                        <div class="col-lg-6 col-xl-4">
-                                            <div class="card mb-3 widget-content">
-                                                <div class="widget-content-wrapper">
-                                                    <div class="widget-content-left">
-                                                        <div class="widget-heading">Non Compliance</div>
-                                                        <div class="widget-subheading"></div>
-                                                    </div>
-                                                    <div class="widget-content-right">
-                                                        <div class="widget-numbers text-danger"><span><?php echo  $row['z']; ?></span></div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-4">
+                                <div class="card mb-3 widget-content">
+                                    <div class="widget-content-wrapper">
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Indicators</div>
+                                            <div class="widget-subheading"> </div>
                                         </div>
-
-                                        <div class="col-lg-6 col-xl-4">
-                                            <div class="card mb-3 widget-content">
-                                                <div class="widget-content-wrapper">
-                                                    <div class="widget-content-left">
-                                                        <div class="widget-heading">Partially Compliance</div>
-                                                        <div class="widget-subheading"></div>
-                                                    </div>
-                                                    <div class="widget-content-right">
-                                                        <div class="widget-numbers text-warning"><span><?php echo  $row['o']; ?></span></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-xl-4">
-                                            <div class="card mb-3 widget-content">
-                                                <div class="widget-content-wrapper">
-                                                    <div class="widget-content-left">
-                                                        <div class="widget-heading">Fully Compliance</div>
-                                                        <div class="widget-subheading"></div>
-                                                    </div>
-                                                    <div class="widget-content-right">
-                                                        <div class="widget-numbers text-success"><span><?php echo  $row['t']; ?></span></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php
+                                        <div class="widget-content-right">
+                                            <?php
+                                            $call_q2 = "call facility_dash_dh_perc($f_ty_id, $fid, $assid)";
+                                            $call_q2 = mysqli_query($con, $call_q2);
+                                            while ($row = mysqli_fetch_array($call_q2)) {
+                                                $obtained = $row['assessed_checklist'];
+                                                $total = $row['total_checklist'];
+                                                if ($obtained != null) {
+                                                    $percentage = round((($obtained / $total) * 100), 2);
+                                                    if ($percentage > 70) {
+                                            ?>
+                                                        <div class="widget-numbers text-success"><span><?php echo $obtained; ?>/<?php echo $total; ?></span></div>
+                                                    <?php } else { ?>
+                                                        <div class="widget-numbers text-danger"><span><?php echo $obtained; ?>/<?php echo $total; ?></span></div>
+                                                    <?php
                                                     }
-                                                    mysqli_free_result($call_q2);
-                                                    $con->next_result();
-                                    ?>
+                                                } else {
+                                                    $percentage = 0;
+                                                    ?>
+                                                    <div class="widget-numbers text-danger"><span><?php echo $obtained; ?>/<?php echo $total; ?></span></div>
+                                                <?php
+                                                } ?>
+
+                                        </div>
                                     </div>
-                                    <! -------------------------------------------->
-                                        <! -------------------------------------------->
-
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h6 class="card-title">Departments Score(%) Card </h6>
-                                                            <?php
-                                                            $f_ty_id = $u_facilityid;
-                                                            $fid = $u_fid;
-                                                            $assid = $u_ass;
-                                                            $tablequery = "CALL depart_dash_dh($f_ty_id, $fid, $assid)";
-                                                            $q = mysqli_query($con, $tablequery);
-                                                            while ($row = mysqli_fetch_array($q)) {
-                                                                $perce = round(($row['Obtained'] / $row['total']) * 100, 2);
-                                                                if ($perce > 70) {
-                                                            ?>
-                                                                    <span class="badge bg-primary"><i class="bi bi-check-circle me-1"></i> <?php echo  $row['dept_name']; ?></span>
-                                                                    <span class="badge bg-success"> <?php echo  $perce; ?>%</span><br>
-
-                                                                <?php } elseif ($perce > 65 and $perce < 70) {
-                                                                ?>
-                                                                    <span class="badge bg-primary"><i class="bi bi-check-circle me-1"></i> <?php echo  $row['dept_name']; ?></span>
-                                                                    <span class="badge bg-warning"> <?php echo  $perce; ?>%</span><br>
-                                                                <?php
-                                                                } elseif ($perce < 65) {
-
-                                                                ?>
-                                                                    <span class="badge bg-primary"><i class="bi bi-check-circle me-1"></i> <?php echo  $row['dept_name']; ?></span>
-                                                                    <span class="badge bg-danger"> <?php echo  $perce; ?>%</span><br>
-                                                                <?php
-                                                                } else {
-                                                                    $perce = 0;
-                                                                ?>
-                                                                    <span class="badge bg-primary"><i class="bi bi-check-circle me-1"></i> <?php echo  $row['dept_name']; ?></span>
-                                                                    <span class="badge bg-danger"> <?php echo  $perce; ?>%</span><br>
-                                                            <?php }
-                                                            }
-
-                                                            mysqli_free_result($q);
-                                                            $con->next_result();
-                                                            ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="col-sm-6">
-                                                    <div class="card">
-
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">Checkpoint assessed </h4>
-                                                            <?php
-
-                                                            $f_ty_id = $u_facilityid;
-                                                            $fid = $u_fid;
-                                                            $assid = $u_ass;
-                                                            $tablequery = "CALL depart_dash_indicator_count_dh($f_ty_id, $fid, $assid)";
-                                                            $q = mysqli_query($con, $tablequery);
-                                                            while ($row = mysqli_fetch_array($q)) {
-                                                                $perce = round(($row['Obtained'] / $row['total']) * 100, 2);
-                                                                if ($perce > 70) {
-                                                            ?>
-                                                                    <span class="badge bg-primary"><i class="bi bi-check-circle me-1"></i> <?php echo  $row['dept_name']; ?></span>
-                                                                    <span class="badge bg-success"> <?php echo  $row['Obtained']; ?></span>/<span class="badge bg-secondary rounded-pill"><?php echo  $row['total']; ?></span><br>
-
-                                                                <?php } else {
-                                                                ?>
-                                                                    <span class="badge bg-primary"><i class="bi bi-check-circle me-1"></i> <?php echo  $row['dept_name']; ?></span>
-                                                                    <span class="badge bg-danger"> <?php echo  $row['Obtained']; ?></span>/<span class="badge bg-secondary rounded-pill"><?php echo  $row['total']; ?></span><br>
-                                                            <?php }
-                                                            }
-
-                                                            mysqli_free_result($q);
-                                                            $con->next_result();
-                                                            ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!------>
-                                            </div>
-
-                                            <div class=row>
-                                                <div class="col-lg-6">
-                                                    <div class="card">
-
-                                                        <div class="card-body">
-                                                            <h5 class="card-title">Areas of Concern wise Facility Score(%) Card </h5>
-                                                            <?php
-                                                            $f_ty_id = $u_facilityid;
-                                                            $fid = $u_fid;
-                                                            $assid = $u_ass;
-                                                            $tablequery = "CALL admin_dash($f_ty_id, $fid, $assid)";
-                                                            $q = mysqli_query($con, $tablequery);
-                                                            while ($row = mysqli_fetch_array($q)) {
-                                                                $conc = $row['concern_name'];
-                                                                $perce = round(($row['Obtained'] / $row['total']) * 100, 2);
-
-                                                                if ($perce > 70) {
-                                                            ?>
-                                                                    <!-- Progress Bars with labels-->
-                                                                    <label><?php echo  $conc; ?></label>
-                                                                    <div class="progress">
-                                                                        <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: <?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%" aria-valuenow="<?php echo $row['Obtained']; ?>" aria-valuemin="0" aria-valuemax="<?php echo $row['total']; ?>"><?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%</div>
-                                                                    </div>
-                                                                <?php } elseif ($perce > 65 and $perce < 70) {
-
-                                                                ?>
-                                                                    <label><?php echo  $conc; ?></label>
-                                                                    <div class="progress">
-                                                                        <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar" style="width: <?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%" aria-valuenow="<?php echo $row['Obtained']; ?>" aria-valuemin="0" aria-valuemax="<?php echo $row['total']; ?>"><?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%</div>
-                                                                    </div>
-                                                                <?php
-                                                                } elseif ($perce < 65) {
-                                                                ?>
-                                                                    <label><?php echo $conc; ?></label>
-                                                                    <div class="progress">
-                                                                        <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: <?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%" aria-valuenow="<?php echo $row['Obtained']; ?>" aria-valuemin="0" aria-valuemax="<?php echo $row['total']; ?>"><?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%</div>
-                                                                    </div>
-                                                                <?php
-                                                                } else {
-                                                                    $perce = 0;
-                                                                ?>
-                                                                    <label><?php echo  $conc; ?></label>
-                                                                    <div class="progress">
-                                                                        <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: <?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%" aria-valuenow="<?php echo $row['Obtained']; ?>" aria-valuemin="0" aria-valuemax="<?php echo $row['total']; ?>"><?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%</div>
-                                                                    </div>
-                                                            <?php }
-                                                            }
-                                                            mysqli_free_result($q);
-                                                            $con->next_result();
-                                                            ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title">Department Wise Compliance Status</h5>
-
-                                                            <!-- Column Chart -->
-                                                            <div id="columnChart">
-                                                                <?php
-
-                                                                $fid = $u_fid;
-                                                                $assid = $u_ass;
-                                                                $query = "CALL facility_dept_caht($fid,$assid)";
-                                                                $result = $con->query($query);
-                                                                if ($result->num_rows > 0) {
-                                                                    while ($row = mysqli_fetch_assoc($result)) {
-                                                                        $values[] = $row['dept_name'];
-                                                                        $values1[] = "'" . $row['o'] . "'";
-                                                                        $values0[] = "'" . $row['z'] . "'";
-                                                                        $values2[] = "'" . $row['t'] . "'";
-                                                                    }
-                                                                    $h = "'" . implode("','", $values) . "'";
-                                                                    $h0 = implode(",", $values0);
-                                                                    $h1 = implode(",", $values1);
-                                                                    $h2 = implode(",", $values2);
-                                                                ?>
-                                                                    <script>
-                                                                        document.addEventListener("DOMContentLoaded", () => {
-                                                                            new ApexCharts(document.querySelector("#columnChart"), {
-                                                                                series: [{
-                                                                                    name: 'Non compliance',
-                                                                                    data: [<?php echo $h0; ?>]
-                                                                                }, {
-                                                                                    name: 'Partially  Compliance',
-                                                                                    data: [<?php echo $h1; ?>]
-                                                                                }, {
-                                                                                    name: 'Fully compliance',
-                                                                                    data: [<?php echo $h2; ?>]
-                                                                                }],
-                                                                                chart: {
-                                                                                    type: 'bar',
-                                                                                    height: 350
-                                                                                },
-                                                                                plotOptions: {
-                                                                                    bar: {
-                                                                                        horizontal: false,
-                                                                                        columnWidth: '25%',
-                                                                                        endingShape: 'rounded'
-                                                                                    },
-                                                                                },
-                                                                                dataLabels: {
-                                                                                    enabled: false
-                                                                                },
-                                                                                stroke: {
-                                                                                    show: true,
-                                                                                    width: 2,
-                                                                                    colors: ['transparent']
-                                                                                },
-                                                                                xaxis: {
-                                                                                    categories: [<?php echo $h; ?>],
-                                                                                },
-                                                                                yaxis: {
-                                                                                    title: {
-                                                                                        text: 'No of Indicators'
-                                                                                    }
-                                                                                },
-                                                                                fill: {
-                                                                                    opacity: 1
-                                                                                },
-                                                                                tooltip: {
-                                                                                    y: {
-                                                                                        formatter: function(val) {
-                                                                                            return val + " " + "indicators"
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                            }).render();
-                                                                        });
-                                                                    </script>
-                                                                <?php } ?>
-                                                                <!-- End Column Chart -->
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        <?php } ?>
-                    </div>
-                </div>
-                <div class="tab-pane tabs-animation fade" id="tab-content-2" role="tabpanel">
-                    <form class>
+                                </div>
+                            </div>
+                        </div>
+                        <!------------------------------------->
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="main-card mb-3 card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Checkboxes</h5>
-                                        <div class="position-relative form-group">
-                                            <div>
-                                                <div class="custom-checkbox custom-control"><input type="checkbox" id="exampleCustomCheckbox" class="custom-control-input"><label class="custom-control-label" for="exampleCustomCheckbox">Check this
-                                                        custom checkbox</label></div>
-                                                <div class="custom-checkbox custom-control"><input type="checkbox" id="exampleCustomCheckbox2" class="custom-control-input"><label class="custom-control-label" for="exampleCustomCheckbox2">Or this
-                                                        one</label></div>
-                                                <div class="custom-checkbox custom-control"><input type="checkbox" id="exampleCustomCheckbox3" disabled class="custom-control-input"><label class="custom-control-label" for="exampleCustomCheckbox3">But
-                                                        not this disabled one</label></div>
-                                            </div>
+                            <div class="col-lg-6 col-xl-4">
+                                <div class="card mb-3 widget-content">
+                                    <div class="widget-content-wrapper">
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Non Compliance</div>
+                                            <div class="widget-subheading"></div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="main-card mb-3 card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Inline</h5>
-                                        <div class="position-relative form-group">
-                                            <div>
-                                                <div class="custom-checkbox custom-control custom-control-inline">
-                                                    <input type="checkbox" id="exampleCustomInline" class="custom-control-input"><label class="custom-control-label" for="exampleCustomInline">An inline custom
-                                                        input</label>
-                                                </div>
-                                                <div class="custom-checkbox custom-control custom-control-inline">
-                                                    <input type="checkbox" id="exampleCustomInline2" class="custom-control-input"><label class="custom-control-label" for="exampleCustomInline2">and another one</label>
-                                                </div>
-                                            </div>
+                                        <div class="widget-content-right">
+                                            <div class="widget-numbers text-danger"><span><?php echo  $row['z']; ?></span></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="main-card mb-3 card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Radios</h5>
-                                        <div class="position-relative form-group">
-                                            <div>
-                                                <div class="custom-radio custom-control"><input type="radio" id="exampleCustomRadio" name="customRadio" class="custom-control-input"><label class="custom-control-label" for="exampleCustomRadio">Select
-                                                        this custom radio</label></div>
-                                                <div class="custom-radio custom-control"><input type="radio" id="exampleCustomRadio2" name="customRadio" class="custom-control-input"><label class="custom-control-label" for="exampleCustomRadio2">Or
-                                                        this one</label></div>
-                                                <div class="custom-radio custom-control"><input type="radio" id="exampleCustomRadio3" disabled class="custom-control-input"><label class="custom-control-label" for="exampleCustomRadio3">But not this
-                                                        disabled one</label></div>
-                                            </div>
+
+                            <div class="col-lg-6 col-xl-4">
+                                <div class="card mb-3 widget-content">
+                                    <div class="widget-content-wrapper">
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Partially Compliance</div>
+                                            <div class="widget-subheading"></div>
+                                        </div>
+                                        <div class="widget-content-right">
+                                            <div class="widget-numbers text-warning"><span><?php echo  $row['o']; ?></span></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="main-card mb-3 card">
+                            </div>
+                            <div class="col-lg-6 col-xl-4">
+                                <div class="card mb-3 widget-content">
+                                    <div class="widget-content-wrapper">
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Fully Compliance</div>
+                                            <div class="widget-subheading"></div>
+                                        </div>
+                                        <div class="widget-content-right">
+                                            <div class="widget-numbers text-success"><span><?php echo  $row['t']; ?></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                                            }
+                                            mysqli_free_result($call_q2);
+                                            $con->next_result();
+                        ?>
+                        </div>
+                        <!------------------------------------->
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">Form Select</h5>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="position-relative form-group"><label for="exampleCustomSelect" class>Custom
-                                                        Select</label><select type="select" id="exampleCustomSelect" name="customSelect" class="custom-select">
-                                                        <option value>Select</option>
-                                                        <option>Value 1</option>
-                                                        <option>Value 2</option>
-                                                        <option>Value 3</option>
-                                                        <option>Value 4</option>
-                                                        <option>Value 5</option>
-                                                    </select></div>
-                                                <div class="position-relative form-group"><label for="exampleCustomMutlipleSelect" class>Custom Multiple
-                                                        Select</label><select multiple type="select" id="exampleCustomMutlipleSelect" name="customSelect" class="custom-select">
-                                                        <option value>Select</option>
-                                                        <option>Value 1</option>
-                                                        <option>Value 2</option>
-                                                        <option>Value 3</option>
-                                                        <option>Value 4</option>
-                                                        <option>Value 5</option>
-                                                    </select></div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="position-relative form-group"><label for="exampleCustomSelectDisabled" class>Custom Select
-                                                        Disabled</label><select type="select" id="exampleCustomSelectDisabled" name="customSelect" disabled class="custom-select">
-                                                        <option value>Select</option>
-                                                        <option>Value 1</option>
-                                                        <option>Value 2</option>
-                                                        <option>Value 3</option>
-                                                        <option>Value 4</option>
-                                                        <option>Value 5</option>
-                                                    </select></div>
-                                                <div class="position-relative form-group"><label for="exampleCustomMutlipleSelectDisabled" class>Custom
-                                                        Multiple Select Disabled</label><select multiple type="select" id="exampleCustomMutlipleSelectDisabled" name="customSelect" disabled class="custom-select">
-                                                        <option value>Select</option>
-                                                        <option>Value 1</option>
-                                                        <option>Value 2</option>
-                                                        <option>Value 3</option>
-                                                        <option>Value 4</option>
-                                                        <option>Value 5</option>
-                                                    </select></div>
-                                            </div>
+                                        <h6 class="card-title">Departments Score(%) Card </h6>
+                                        <?php
+                                        $f_ty_id = $u_facilityid;
+                                        $fid = $u_fid;
+                                        $assid = $u_ass;
+                                        $tablequery = "CALL depart_dash_dh($f_ty_id, $fid, $assid)";
+                                        $q = mysqli_query($con, $tablequery);
+                                        while ($row = mysqli_fetch_array($q)) {
+                                            $perce = round(($row['Obtained'] / $row['total']) * 100, 2);
+                                            if ($perce > 70) {
+                                        ?>
+                                                <span class="badge bg-primary"><i class="bi bi-check-circle me-1"></i> <?php echo  $row['dept_name']; ?></span>
+                                                <span class="badge bg-success"> <?php echo  $perce; ?>%</span><br>
+
+                                            <?php } elseif ($perce > 65 and $perce < 70) {
+                                            ?>
+                                                <span class="badge bg-primary"><i class="bi bi-check-circle me-1"></i> <?php echo  $row['dept_name']; ?></span>
+                                                <span class="badge bg-warning"> <?php echo  $perce; ?>%</span><br>
+                                            <?php
+                                            } elseif ($perce < 65) {
+
+                                            ?>
+                                                <span class="badge bg-primary"><i class="bi bi-check-circle me-1"></i> <?php echo  $row['dept_name']; ?></span>
+                                                <span class="badge bg-danger"> <?php echo  $perce; ?>%</span><br>
+                                            <?php
+                                            } else {
+                                                $perce = 0;
+                                            ?>
+                                                <span class="badge bg-primary"><i class="bi bi-check-circle me-1"></i> <?php echo  $row['dept_name']; ?></span>
+                                                <span class="badge bg-danger"> <?php echo  $perce; ?>%</span><br>
+                                        <?php }
+                                        }
+
+                                        mysqli_free_result($q);
+                                        $con->next_result();
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-sm-6">
+                                <div class="card">
+
+                                    <div class="card-body">
+                                        <h4 class="card-title">Checkpoint assessed </h4>
+                                        <?php
+
+                                        $f_ty_id = $u_facilityid;
+                                        $fid = $u_fid;
+                                        $assid = $u_ass;
+                                        $tablequery = "CALL depart_dash_indicator_count_dh($f_ty_id, $fid, $assid)";
+                                        $q = mysqli_query($con, $tablequery);
+                                        while ($row = mysqli_fetch_array($q)) {
+                                            $perce = round(($row['Obtained'] / $row['total']) * 100, 2);
+                                            if ($perce > 70) {
+                                        ?>
+                                                <span class="badge bg-primary"><i class="bi bi-check-circle me-1"></i> <?php echo  $row['dept_name']; ?></span>
+                                                <span class="badge bg-success"> <?php echo  $row['Obtained']; ?></span>/<span class="badge bg-secondary rounded-pill"><?php echo  $row['total']; ?></span><br>
+
+                                            <?php } else {
+                                            ?>
+                                                <span class="badge bg-primary"><i class="bi bi-check-circle me-1"></i> <?php echo  $row['dept_name']; ?></span>
+                                                <span class="badge bg-danger"> <?php echo  $row['Obtained']; ?></span>/<span class="badge bg-secondary rounded-pill"><?php echo  $row['total']; ?></span><br>
+                                        <?php }
+                                        }
+
+                                        mysqli_free_result($q);
+                                        $con->next_result();
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <!------------------------------------->
+                        </div>
+
+                        <div class=row>
+                            <div class="col-lg-6">
+                                <div class="card">
+
+                                    <div class="card-body">
+                                        <h5 class="card-title">Areas of Concern wise Facility Score(%) Card </h5>
+                                        <?php
+                                        $f_ty_id = $u_facilityid;
+                                        $fid = $u_fid;
+                                        $assid = $u_ass;
+                                        $tablequery = "CALL admin_dash($f_ty_id, $fid, $assid)";
+                                        $q = mysqli_query($con, $tablequery);
+                                        while ($row = mysqli_fetch_array($q)) {
+                                            $conc = $row['concern_name'];
+                                            $perce = round(($row['Obtained'] / $row['total']) * 100, 2);
+
+                                            if ($perce > 70) {
+                                        ?>
+                                                <!-- Progress Bars with labels-->
+                                                <label><?php echo  $conc; ?></label>
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: <?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%" aria-valuenow="<?php echo $row['Obtained']; ?>" aria-valuemin="0" aria-valuemax="<?php echo $row['total']; ?>"><?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%</div>
+                                                </div>
+                                            <?php } elseif ($perce > 65 and $perce < 70) {
+
+                                            ?>
+                                                <label><?php echo  $conc; ?></label>
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar" style="width: <?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%" aria-valuenow="<?php echo $row['Obtained']; ?>" aria-valuemin="0" aria-valuemax="<?php echo $row['total']; ?>"><?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%</div>
+                                                </div>
+                                            <?php
+                                            } elseif ($perce < 65) {
+                                            ?>
+                                                <label><?php echo $conc; ?></label>
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: <?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%" aria-valuenow="<?php echo $row['Obtained']; ?>" aria-valuemin="0" aria-valuemax="<?php echo $row['total']; ?>"><?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%</div>
+                                                </div>
+                                            <?php
+                                            } else {
+                                                $perce = 0;
+                                            ?>
+                                                <label><?php echo  $conc; ?></label>
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: <?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%" aria-valuenow="<?php echo $row['Obtained']; ?>" aria-valuemin="0" aria-valuemax="<?php echo $row['total']; ?>"><?php echo round(($row['Obtained'] / $row['total']) * 100, 2) ?>%</div>
+                                                </div>
+                                        <?php }
+                                        }
+                                        mysqli_free_result($q);
+                                        $con->next_result();
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Department Wise Compliance Status</h5>
+
+                                        <!-- Column Chart -->
+                                        <div id="columnChart">
+                                            <?php
+
+                                            $fid = $u_fid;
+                                            $assid = $u_ass;
+                                            $query = "CALL facility_dept_caht($fid,$assid)";
+                                            $result = $con->query($query);
+                                            if ($result->num_rows > 0) {
+                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                    $values[] = $row['dept_name'];
+                                                    $values1[] = "'" . $row['o'] . "'";
+                                                    $values0[] = "'" . $row['z'] . "'";
+                                                    $values2[] = "'" . $row['t'] . "'";
+                                                }
+                                                $h = "'" . implode("','", $values) . "'";
+                                                $h0 = implode(",", $values0);
+                                                $h1 = implode(",", $values1);
+                                                $h2 = implode(",", $values2);
+                                            ?>
+                                                <script>
+                                                    document.addEventListener("DOMContentLoaded", () => {
+                                                        new ApexCharts(document.querySelector("#columnChart"), {
+                                                            series: [{
+                                                                name: 'Non compliance',
+                                                                data: [<?php echo $h0; ?>]
+                                                            }, {
+                                                                name: 'Partially  Compliance',
+                                                                data: [<?php echo $h1; ?>]
+                                                            }, {
+                                                                name: 'Fully compliance',
+                                                                data: [<?php echo $h2; ?>]
+                                                            }],
+                                                            chart: {
+                                                                type: 'bar',
+                                                                height: 350
+                                                            },
+                                                            plotOptions: {
+                                                                bar: {
+                                                                    horizontal: false,
+                                                                    columnWidth: '25%',
+                                                                    endingShape: 'rounded'
+                                                                },
+                                                            },
+                                                            dataLabels: {
+                                                                enabled: false
+                                                            },
+                                                            stroke: {
+                                                                show: true,
+                                                                width: 2,
+                                                                colors: ['transparent']
+                                                            },
+                                                            xaxis: {
+                                                                categories: [<?php echo $h; ?>],
+                                                            },
+                                                            yaxis: {
+                                                                title: {
+                                                                    text: 'No of Indicators'
+                                                                }
+                                                            },
+                                                            fill: {
+                                                                opacity: 1
+                                                            },
+                                                            tooltip: {
+                                                                y: {
+                                                                    formatter: function(val) {
+                                                                        return val + " " + "indicators"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }).render();
+                                                    });
+                                                </script>
+                                        <?php }
+                                        } ?>
+                                        <!-- End} Column Chart -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                        <!--------------------------------->
                 </div>
             </div>
         </div>
+        <!--------------tab2 end tab3 start------------------->
+        <div class="tab-pane" id="tab-content-2">
+
+
+        </div>
+
+        <!--------------tab3 end ------------------->
     </div>
+
     <script>
         $(document).ready(function() {
             $("#Block").on('change', function() {
