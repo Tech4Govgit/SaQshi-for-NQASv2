@@ -112,7 +112,7 @@
                 </a>
                 <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="ffreports.php">
+                        <a href="#">
                             <i class="bi bi-circle"></i><span>Score Card</span>
                         </a>
                     </li>

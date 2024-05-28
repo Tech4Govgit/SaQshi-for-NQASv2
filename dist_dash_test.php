@@ -136,7 +136,7 @@ include('h2.php');
                                     <thead>
                                         <tr class="table-info">
                                             <th colspan="4">Facility</th>
-                                            <th colspan="5">Compliance Status</th>
+                                            <th colspan="6">Check List Status</th>
                                             <th colspan="3">Score Card</th>
 
 
@@ -150,10 +150,11 @@ include('h2.php');
                                         <th scope="col">Non</th>
                                         <th scope="col">Partially</th>
                                         <th scope="col">Fully</th>
-                                        <th scope="col">Indicators</th>
+                                        <th scope="col">Completed</th>
+                                        <th scope="col">Total</th>
                                         <th scope="col">%</th>
                                         <th scope="col">Obtained</th>
-                                        <th scope="col">Total</th>
+                                        <th scope="col">Max. Score</th>
                                         <th scope="col">%</th>
                                     </tr>
                                     <?php
@@ -184,6 +185,7 @@ include('h2.php');
                                                         <td class="table-success"><?php echo  $row['zero']; ?></td>
                                                         <td class="table-success"><?php echo  $row['one']; ?></td>
                                                         <td class="table-success"><?php echo  $row['two']; ?></td>
+                                                        <td class="table-success"><?php echo  $row['obt']; ?></td>
                                                         <td class="table-success"><?php echo  $row['tot']; ?></td>
                                                         <td class="table-success"><?php echo  $row['p']; ?>%</td>
                                                         <?php
@@ -223,6 +225,7 @@ include('h2.php');
                                                         <td class="table-warning"><?php echo  $row['zero']; ?></td>
                                                         <td class="table-warning"><?php echo  $row['one']; ?></td>
                                                         <td class="table-warning"><?php echo  $row['two']; ?></td>
+                                                        <td class="table-warning"><?php echo  $row['obt']; ?></td>
                                                         <td class="table-warning"><?php echo  $row['tot']; ?></td>
                                                         <td class="table-warning"><?php echo  $row['p']; ?>%</td>
                                                         <?php
@@ -261,6 +264,7 @@ include('h2.php');
                                                         <td class="table-danger"><?php echo  $row['zero']; ?></td>
                                                         <td class="table-danger"><?php echo  $row['one']; ?></td>
                                                         <td class="table-danger"><?php echo  $row['two']; ?></td>
+                                                        <td class="table-danger"><?php echo  $row['obt']; ?></td>
                                                         <td class="table-danger"><?php echo  $row['tot']; ?></td>
                                                         <td class="table-danger"><?php echo  $row['p']; ?>%</td>
                                                         <?php
@@ -301,6 +305,7 @@ include('h2.php');
                                                     <td class="table-danger"><?php echo  $row['zero']; ?></td>
                                                     <td class="table-danger"><?php echo  $row['one']; ?></td>
                                                     <td class="table-danger"><?php echo  $row['two']; ?></td>
+                                                    <td class="table-danger"><?php echo  $row['obt']; ?></td>
                                                     <td class="table-danger"><?php echo  $row['tot']; ?></td>
                                                     <td class="table-danger"><?php echo  $row['p']; ?>%</td>
                                                     <?php
@@ -355,9 +360,10 @@ include('h2.php');
                                 </br>
                                 <label>Block</label>
                                 <select class="form-control-sm form-control" id="District" name="District">
+                                <option value="0">--Select--</option>
                                     <?php
                                     $dist_id = $_SESSION['dist'];
-                                    $call_q1 = "SELECT distinct(block_id) ,Block_Name FROM sarbsoft_nqa.facilities where dist_id=$dist_id";
+                                    $call_q1 = "SELECT distinct(block_id),Block_Name FROM sarbsoft_nqa.facilities where dist_id=$dist_id";
                                     $q22 = mysqli_query($con, $call_q1);
                                     while ($row = mysqli_fetch_array($q22)) {
                                     ?>
@@ -373,6 +379,7 @@ include('h2.php');
                                 </br>
                                 <label>Ins. Type</label>
                                 <select class="form-control-sm form-control" id="Block" name="Block">
+                                <option value="0">--Select--</option>
                                     <?php
                                     $dist_id = $_SESSION['dist'];
                                     $call_q1 = "SELECT fac_type_id,facilities_type FROM sarbsoft_nqa.facilities_type";
@@ -390,14 +397,14 @@ include('h2.php');
                                 </br>
                                 <label>Institute </label>
                                 <select class="form-control-sm form-control" id="Village" name="Village">
-                                    <option value=" ">Institute</option>
+                                    <option value="0">--Select--</option>
                                 </select>
                             </div>
                             <div class="col-sm-3">
                                 </br>
-                                <label>Ass. Period </label>
+                                <label>Assessment </label>
                                 <select class="form-control-sm form-control" id="Period" name="Period">
-                                    <option value=" ">Period</option>
+                                    <option value="0">--Select--</option>
                                 </select>
                             </div>
                             <div class="col-sm-1">
@@ -422,6 +429,7 @@ include('h2.php');
                         $u_facilityid = $_POST['Block'];
                         $u_ass = $_POST['Period'];
                         $u_fid = $_POST['Village'];
+                        
                     ?>
                         <!------------------------------------->
                         <div class="row">
@@ -817,6 +825,8 @@ include('h2.php');
         <!--------------tab3 end ------------------->
     </div>
 
+   
+    <script type="text/javascript" src="assets/scripts/main.js"></script>
     <script>
         $(document).ready(function() {
             $("#Block").on('change', function() {
@@ -861,7 +871,6 @@ include('h2.php');
 
         });
     </script>
-    <script type="text/javascript" src="assets/scripts/main.js"></script>
 </main><!-- End #main -->
 <!-- ----working area end ----->
 <!-- ======= Footer ======= -->
