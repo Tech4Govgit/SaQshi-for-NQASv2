@@ -100,7 +100,7 @@ session_start();
                     $myusername = mysqli_real_escape_string($con, $_POST['myusername']);
                     $mypassword = mysqli_real_escape_string($con, $_POST['mypassword']);
                     $_SESSION['lang'] = $_POST['lang'];
-                    $sql = " select  u_id,role_id_fk,u_name,dist_id FROM s_user WHERE (u_name='$myusername' AND  u_password='$mypassword' and is_active=1)";
+                    $sql = " select * FROM s_user WHERE (u_name='$myusername' AND  u_password='$mypassword' and is_active=1)";
                     $result = mysqli_query($con, $sql);
                     $count = mysqli_num_rows($result);
                     if ($count == 1) {
@@ -179,6 +179,13 @@ session_start();
                         //$_SESSION['u_facilityid']=$userfacility;
                         // Welcome message   
                         header("location:index.php");
+                      }elseif ($userrole == 8) {
+                        $_SESSION['urole'] = $userrole;
+                        $_SESSION['userid'] = $userid;
+                        $_SESSION['u_name'] = $myusername;
+                        $_SESSION['dist'] = $district_id;                       
+                        $_SESSION['block_id'] =  $row['block_id'];
+                        header("location:block_dash_test.php");
                       }
                     } else {
                       $error = "Enter Valide credential";
