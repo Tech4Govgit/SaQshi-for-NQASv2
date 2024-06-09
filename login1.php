@@ -186,8 +186,15 @@ session_start();
                         $_SESSION['dist'] = $district_id;                       
                         $_SESSION['block_id'] =  $row['block_id'];
                         header("location:block_dash_test.php");
+                      }elseif ($userrole == 9) {
+                        $_SESSION['urole'] = $userrole;
+                        $_SESSION['userid'] = $userid;
+                        $_SESSION['u_name'] = $myusername;
+                       // $_SESSION['dist'] = $district_id;                       
+                        //$_SESSION['block_id'] =  $row['block_id'];
+                        header("location:s_dash_test.php");
                       }
-                    } else {
+                    }else {
                       $error = "Enter Valide credential";
                       // echo "<script type='text/javascript'>alert('Enter valide credential')</script>";
                       echo  '<div class="alert alert-danger">

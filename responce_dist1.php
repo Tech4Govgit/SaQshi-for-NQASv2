@@ -9,7 +9,7 @@ if (!empty($_POST['cid'])) {
     $result1 = mysqli_query($con, $query1);
     if ($result1->num_rows > 0) {
            while ($row = mysqli_fetch_assoc($result1)) {
-            echo '<option value="' . $row['id'] . '">' . $row['ass_name'] . '</option>';
+                       echo '<option value="' . $row['id'] . '">' . $row['ass_name'] . '</option>';
         }
     }else{
         echo '<option value="0">Assessment not mapped</option>';

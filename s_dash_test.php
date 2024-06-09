@@ -19,7 +19,7 @@ include('h4.php');
                 <span>DrillDown*</span>
             </a>
         </li>
-        
+
     </ul>
     <div class="tab-content">
         <div class="tab-pane" id="tab-content-0">
@@ -27,13 +27,13 @@ include('h4.php');
                 <div class="card-body">
                     <div class="row">
                         <?php
-                        $b_id =  $_SESSION['block_id'];
-                        $call_q1 = "call block_dash_count($b_id)";
+                        // $b_id =  $_SESSION['block_id'];
+                        $call_q1 = "call state_dash_count";
                         $q22 = mysqli_query($con, $call_q1);
                         while ($row = mysqli_fetch_array($q22)) {
                             $CHC = $row['CHC'];
                             $PHC = $row['PHC'];
-                           // $DH = $row['DH'];
+                            $DH = $row['DH'];
                             $HWC = $row['HWC'];
                             $UPHC = $row['UPHC'];
                             $CHCcomp = $row['CHCcomp'];
@@ -43,6 +43,22 @@ include('h4.php');
                             $UPHCcomp = $row['UPHCcomp'];
                             //====
                         ?>
+                            <div class="col">
+
+
+                                <div class="d-flex no-block align-items-center">
+                                    <div>
+                                        <i class="mdi mdi-image font-20  text-muted"></i>
+                                        <p class="font-16 m-b-5">DH</p>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <h1 class="font-light text-right"><?php echo $DHcomp; ?>/<?php echo $DH; ?></h1>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
                             <div class="col">
 
                                 <div class="d-flex no-block align-items-center">
@@ -69,7 +85,7 @@ include('h4.php');
                                 </div>
 
                             </div>
-                           
+
                             <div class="col">
 
 
@@ -107,7 +123,7 @@ include('h4.php');
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col">
                     <div class="card">
@@ -143,9 +159,9 @@ include('h4.php');
                                         <th scope="col">%</th>
                                     </tr>
                                     <?php
-                                    $b_id =  $_SESSION['block_id'];
+                                    // $b_id =  $_SESSION['block_id'];
                                     $userid = $_SESSION['userid'];
-                                    $call_count = "call DQA_block_count_zero_o_t_dash($b_id,$userid)";
+                                    $call_count = "call DQA_state_count_zero_o_t_dash($userid)";
                                     $count = mysqli_query($con, $call_count);
                                     while ($row = mysqli_fetch_array($count)) {
                                         $obtained = $row['p'];
@@ -294,26 +310,26 @@ include('h4.php');
                                                     <td class="table-danger"><?php echo  $row['tot']; ?></td>
                                                     <td class="table-danger"><?php echo  $row['p']; ?>%</td>
                                                     <?php
-                                                        if ($p1 > 70) {
-                                                        ?>
-                                                            <td class="table-success"><?php echo  $row['marks']; ?></td>
-                                                            <td class="table-success"><?php echo  $row['f']; ?></td>
-                                                            <td class="table-success"><?php echo  $p1; ?>%</td>
-                                                        <?php } elseif ($p1 > 65 and $p1 < 70) {
-                                                        ?>
-                                                            <td class="table-warning"><?php echo  $row['marks']; ?></td>
-                                                            <td class="table-warning"><?php echo  $row['f']; ?></td>
-                                                            <td class="table-warning"><?php echo  $p1; ?>%</td>
-                                                        <?php } elseif ($p1 < 65) {
-                                                        ?>
-                                                            <td class="table-danger"><?php echo  $row['marks']; ?></td>
-                                                            <td class="table-danger"><?php echo  $row['f']; ?></td>
-                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
-                                                        <?php } else { ?>
-                                                            <td class="table-danger"><?php echo  $row['marks']; ?></td>
-                                                            <td class="table-danger"><?php echo  $row['f']; ?></td>
-                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
-                                                        <?php } ?>
+                                                    if ($p1 > 70) {
+                                                    ?>
+                                                        <td class="table-success"><?php echo  $row['marks']; ?></td>
+                                                        <td class="table-success"><?php echo  $row['f']; ?></td>
+                                                        <td class="table-success"><?php echo  $p1; ?>%</td>
+                                                    <?php } elseif ($p1 > 65 and $p1 < 70) {
+                                                    ?>
+                                                        <td class="table-warning"><?php echo  $row['marks']; ?></td>
+                                                        <td class="table-warning"><?php echo  $row['f']; ?></td>
+                                                        <td class="table-warning"><?php echo  $p1; ?>%</td>
+                                                    <?php } elseif ($p1 < 65) {
+                                                    ?>
+                                                        <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                        <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                        <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                    <?php } else { ?>
+                                                        <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                        <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                        <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                    <?php } ?>
                                                 </tr>
                                             </tbody>
                                     <?php
@@ -340,33 +356,39 @@ include('h4.php');
                 <div class="card-body">
                     <form enctype="multipart/form-data" method="post" action="#">
                         <div class="form-group row">
+                            <div class="col-sm-3">
+                                </br>
+                                <label>District</label>
+                                <select class="form-control-sm form-control" id="District1" name="District1">
+                                    <option value="0">--Select--</option>
+                                    <?php
+                                    $call_q111 = "SELECT distinct(dist_id),Dist_Name FROM sarbsoft_nqa.facilities";
+                                    $q221 = mysqli_query($con, $call_q111);
+                                    while ($row = mysqli_fetch_array($q221)) {
+                                    ?>
+                                        <option value="<?php $_SESSION['did'] = $row['dist_id'];
+                                                        echo $row['dist_id']; ?>"><?php echo $row['Dist_Name']; ?></option>
+                                    <?php }
+                                    mysqli_free_result($q221);
+                                    $con->next_result();
+                                    ?>
+                                </select>
+                            </div>
 
                             <div class="col-sm-3">
                                 </br>
                                 <label>Block</label>
                                 <select class="form-control-sm form-control" id="District" name="District">
-                                <option value="0">--Select--</option>
-                                    <?php
-                                    $b_id =  $_SESSION['block_id'];
-                                    $call_q1 = "SELECT distinct(block_id),Block_Name FROM sarbsoft_nqa.facilities where block_id=$b_id";
-                                    $q22 = mysqli_query($con, $call_q1);
-                                    while ($row = mysqli_fetch_array($q22)) {
-                                    ?>
-                                        <option value="<?php $_SESSION['bid'] = $row['block_id'];
-                                                        echo $row['block_id']; ?>"><?php echo $row['Block_Name']; ?></option>
-                                    <?php }
-                                    mysqli_free_result($q22);
-                                    $con->next_result();
-                                    ?>
+                                    <option value="">--Select--</option>
                                 </select>
                             </div>
                             <div class="col-sm-2">
                                 </br>
                                 <label>Ins. Type</label>
                                 <select class="form-control-sm form-control" id="Block" name="Block">
-                                <option value="0">--Select--</option>
+                                    <option value="0">--Select--</option>
                                     <?php
-                                    $dist_id = $_SESSION['dist'];
+                                    //  $dist_id = $_SESSION['dist'];
                                     $call_q1 = "SELECT fac_type_id,facilities_type FROM sarbsoft_nqa.facilities_type";
                                     $q22 = mysqli_query($con, $call_q1);
                                     while ($row = mysqli_fetch_array($q22)) {
@@ -414,7 +436,7 @@ include('h4.php');
                         $u_facilityid = $_POST['Block'];
                         $u_ass = $_POST['Period'];
                         $u_fid = $_POST['Village'];
-                        
+
                     ?>
                         <!------------------------------------->
                         <div class="row">
@@ -810,20 +832,43 @@ include('h4.php');
         <!--------------tab3 end ------------------->
     </div>
 
-   
+
     <script type="text/javascript" src="assets/scripts/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#District1").on('change', function() {
+                var Blockid2 = $(this).val();              
+                $.ajax({
+                    method: "POST",
+                    url: "responce_dist2.php",
+                    data: {
+                        cid: Blockid2,                     
+                    },
+                    datatype: "html",
+                    success: function(data) {
+                        $("#District").html(data);
+
+                    }
+                });
+            });
+
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $("#Block").on('change', function() {
                 var Blockid = $(this).val();
-                var Districtid1 = document.getElementById("District");
+                var Districtid = document.getElementById("District");
                 var selectedValue1 = District.value;
+                //var Districtid1 = document.getElementById("District1");
+                //var selectedValue2 = District1.value;
                 $.ajax({
                     method: "POST",
-                    url: "responce_dist.php",
+                    url: "responce_dist3.php",
                     data: {
                         cid: selectedValue1,
                         bid: Blockid,
+                      //  did: selectedValue2,
 
                     },
                     datatype: "html",
