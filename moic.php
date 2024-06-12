@@ -4,6 +4,7 @@ include_once("db.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <?php
 include('h.php');
 ?>
@@ -152,22 +153,24 @@ include('h.php');
 
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th data-column-id="MOIC_Review">Res.Nodal</th>
-                                        <td><input type="text" id="res1" name="res"> </td>
-                                    </tr>
-                                    <tr>
-                                        <th data-column-id="MOIC_Review">Time Period</th>
-                                        <td>
-                                            <input type="date" id="todate" name="todate">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th data-column-id="MOIC_Review">Action Plan</th>
-                                        <td>
-                                            <textarea class="form-control" rows="3" id="comment" name="comment">Action Plan</textarea>
-                                        </td>
-                                    </tr>
+                                   
+                                        <tr class="2">
+                                            <th data-column-id="MOIC_Review">Res.Nodal</th>
+                                            <td><input type="text" id="res1" name="res"> </td>
+                                        </tr>
+                                        <tr class="2">
+                                            <th data-column-id="MOIC_Review">Time Period</th>
+                                            <td>
+                                                <input type="date" id="todate" name="todate">
+                                            </td>
+                                        </tr>
+                                        <tr class="2">
+                                            <th data-column-id="MOIC_Review">Action Plan</th>
+                                            <td>
+                                                <textarea class="form-control" rows="3" id="comment" name="comment">Action Plan</textarea>
+                                            </td>
+                                        </tr>
+                                  
                                     <tr>
                                         <th data-column-id="MOIC_Review">Action</th>
                                         <td>
@@ -301,7 +304,8 @@ include('h.php');
                                 <form enctype="multipart/form-data" method="post" action="#">
                                     <tr>
                                         <th data-column-id="MOIC_Review">Dept.Review</th>
-                                        <td> <select class="custom-select" id="f1" name="f">
+                                        <td>
+                                            <select id="f1" name="f">
                                                 <option value="0">--Select---</option>
                                                 <option value="1">Achievable</option>
                                                 <option value="2">Non achievable</option>
@@ -309,22 +313,24 @@ include('h.php');
                                             <input type="hidden" id="csqa_id1" name="csqa_id1" value="<?php echo  $_SESSION['q1']; ?>">
                                             <input type="hidden" id="csqa_id" name="csqa_id" value="<?php echo $row['ass_id']; ?>">
                                     </tr>
-                                    <tr>
-                                        <th data-column-id="MOIC_Review">Res.Nodal</th>
-                                        <td><input type="text" id="res1" name="res"> </td>
-                                    </tr>
-                                    <tr>
-                                        <th data-column-id="MOIC_Review">Time Period</th>
-                                        <td>
-                                            <input type="date" id="todate" name="todate">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th data-column-id="MOIC_Review">Action Plan</th>
-                                        <td>
-                                            <textarea class="form-control" rows="3" id="comment" name="comment">Action Plan</textarea>
-                                        </td>
-                                    </tr>
+                                    
+                                        <tr class="2">
+                                            <th data-column-id="MOIC_Review">Res.Nodal</th>
+                                            <td><input type="text" id="res1" name="res"> </td>
+                                        </tr>
+                                        <tr class="2">
+                                            <th data-column-id="MOIC_Review">Time Period</th>
+                                            <td>
+                                                <input type="date" id="todate" name="todate">
+                                            </td>
+                                        </tr>
+                                        <tr class="2">
+                                            <th data-column-id="MOIC_Review">Action Plan</th>
+                                            <td>
+                                                <textarea class="form-control" rows="3" id="comment" name="comment">Action Plan</textarea>
+                                            </td>
+                                        </tr>
+                                   
                                     <tr>
                                         <th data-column-id="MOIC_Review">Action</th>
                                         <td>
@@ -480,6 +486,21 @@ include('h.php');
 <!-- ----working area end ----->
 
 <script>
+    $(document).ready(function(){
+        $('#f1').change(function(){
+            var selectedValue = $(this).val();
+            if(selectedValue === '2') {
+               // Hide rows with class option1 if Option 2 is selected
+                $('.2').hide(); // Show rows with class option2 if Option 2 is selected
+            } else {
+                $('.2').show(); // Show rows with class option1 for other selections
+               // Hide rows with class option2 for other selections
+            }
+        });
+    });
+</script>
+
+<script>
     $(document).ready(function() {
         $("#Period1").on('change', function() {
             var Concernid = $('#Period1').val();
@@ -505,8 +526,8 @@ include('h.php');
 include('f.php');
 ?>
 <script>
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
     }
 </script>
 </body>

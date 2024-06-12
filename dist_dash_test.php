@@ -825,7 +825,7 @@ include('h2.php');
         <!--------------tab3 end ------------------->
     </div>
 
-   
+    
     <script type="text/javascript" src="assets/scripts/main.js"></script>
     <script>
         $(document).ready(function() {
@@ -844,6 +844,7 @@ include('h2.php');
                     datatype: "html",
                     success: function(data) {
                         $("#Village").html(data);
+                       
 
                     }
                 });

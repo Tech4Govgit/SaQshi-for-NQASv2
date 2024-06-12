@@ -3,9 +3,9 @@ include_once("db.php");
 if (!empty($_POST['cid'])) {
     
    
-    $sid1 = $_POST['cid'];
+    $sid12 = $_POST['cid'];
   
-    $query1 = "SELECT ass_name,id FROM sarbsoft_nqa.assessment_desc where fac_id_fk=$sid1";
+    $query1 = "SELECT ass_name,id FROM sarbsoft_nqa.assessment_desc where fac_id_fk=$sid12";
     $result1 = mysqli_query($con, $query1);
     if ($result1->num_rows > 0) {
            while ($row = mysqli_fetch_assoc($result1)) {
