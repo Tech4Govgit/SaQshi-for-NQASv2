@@ -96,7 +96,7 @@ include('h.php');
                         <table class="table table-fit w-auto small table-striped table-bordered table-hover table-condensed">
 
                             <thead>
-                                <tr>
+                                <tr class="table-warning">
                                     <th colspan="2">
                                         <center>Assessments Compliance Update based on action plan feedbacks</center>
                                     </th>
@@ -105,37 +105,46 @@ include('h.php');
 
                             <tbody>
                                 <tr>
-                                    <th data-column-id="concern_subtype_chklist.c_subtype_Reference_No">Standard</th>
-                                    <td><?php echo $row['c_subtype_Reference_No_fk']; ?></td>
+                                    <th data-column-id="concern_subtype_chklist.c_subtype_Reference_No"  class="table-info">Standard</th>
+                                    <td class="table-primary"><?php echo $row['c_subtype_Reference_No_fk']; ?></td>
                                 </tr>
                                 <tr>
-                                    <th data-column-id="concern_subtype_chklist.Measurable_Element">MeasurableElement</th>
-                                    <td><?php echo $row['Measurable_Element']; ?></td>
+                                    <th data-column-id="concern_subtype_chklist.Measurable_Element"  class="table-info">MeasurableElement</th>
+                                    <td class="table-primary"><?php echo $row['Measurable_Element']; ?></td>
                                 </tr>
                                 <tr>
-                                    <th data-column-id="concern_subtype_chklist.Checkpoint">Checkpoint </th>
-                                    <td><?php echo $row['Checkpoint']; ?></td>
+                                    <th data-column-id="concern_subtype_chklist.Checkpoint"  class="table-info">Checkpoint </th>
+                                    <td class="table-primary"><?php echo $row['Checkpoint']; ?></td>
                                 </tr>
                                 <tr>
-                                    <th data-column-id="chk_list_assessment.ass_compliance">Comp. </th>
-                                    <td><?php echo $row['ass_compliance']; ?></td>
+                                    <th data-column-id="chk_list_assessment.ass_compliance"  class="table-info">Comp. </th>
+                                    <td class="table-primary"><?php echo $row['ass_compliance']; ?></td>
                                 </tr>
                                 <tr>
-                                    <th data-column-id="chk_list_assessment.moic_remarcks">Dept.rmk* </th>
-                                    <td><?php echo $row['moic_remarcks']; ?></td>
+                                    <th data-column-id="chk_list_assessment.moic_remarcks"  class="table-info">Dept.rmk* </th>
+                                    <td class="table-primary"><?php echo $row['moic_remarcks']; ?></td>
                                 </tr>
                                 <tr>
-                                    <th data-column-id="chk_list_assessment.moic_remarcks">Priority* </th>
-                                    <td><?php echo $row['Priority1']; ?></td>
-                                </tr>
-                                <tr>
-                                    <th data-column-id="chk_list_assessment.moic_remarcks">Dept.actPlan. </th>
-                                    <td><?php echo $row['dept_action_plan']; ?></td>
-                                </tr>
-                                <tr>
-                                    <th data-column-id="UpdComp">Upd Comp.</th>
+                                            <th data-column-id="chk_list_assessment.moic_remarcks"  class="table-info">Priority* </th>
+                                    <?php $level=$row['Priority1'];
+                                    if ($level=='High'){
+                                    ?>
 
-                                    <td>
+                                    <td class="table-danger"><?php echo $level; ?></td>
+                                    <?php } elseif($level=='Medium'){ ?>
+                                        <td class="table-warning"><?php echo $level; ?></td>
+                                        <?php } elseif($level=='Low'){?>
+                                            <td class="table-success"><?php echo $level; ?></td>
+                                            <?php } ?>
+                                            </tr>
+                                <tr>
+                                    <th data-column-id="chk_list_assessment.moic_remarcks"  class="table-info">Dept.actPlan. </th>
+                                    <td class="table-primary"><?php echo $row['dept_action_plan']; ?></td>
+                                </tr>
+                                <tr>
+                                    <th data-column-id="UpdComp"  class="table-info">Upd Comp.</th>
+
+                                    <td class="table-primary">
 
                                         <form enctype="multipart/form-data" method="post" action="#">
 
@@ -151,9 +160,9 @@ include('h.php');
                                             <input type="hidden" id="csqa_id" name="csqa_id" value="<?php echo $row['ass_id']; ?>">
                                 </tr>
                                 <tr>
-                                    <th data-column-id="MOIC_Review">Action</th>
+                                    <th data-column-id="MOIC_Review"  class="table-info">Action</th>
 
-                                    <td> <button type="submit" name="postsubmit2" class="btn btn-primary btn-sm">Save & Next</button></td>
+                                    <td class="table-primary"> <button type="submit" name="postsubmit2" class="btn btn-primary btn-sm">Save & Next</button></td>
                                 </tr>
                                 </form>
                                 </td>
@@ -219,7 +228,7 @@ include('h.php');
 
                                         <tbody>
                                             <tr class="table-primary">
-                                                <th scope="col">Standard</th>
+                                                <th data-column-id="concern_subtype_chklist.c_subtype_Reference_No">Standard</th>
                                                 <td><?php echo $row['c_subtype_Reference_No_fk']; ?></td>
                                             </tr>
                                             <tr>
@@ -239,8 +248,17 @@ include('h.php');
                                                 <td><?php echo $row['moic_remarcks']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th data-column-id="chk_list_assessment.moic_remarcks">Priority* </th>
-                                                <td><?php echo $row['Priority1']; ?></td>
+                                            <th data-column-id="chk_list_assessment.moic_remarcks"  class="table-info">Priority* </th>
+                                    <?php $level=$row['Priority1'];
+                                    if ($level=='High'){
+                                    ?>
+
+                                    <td class="table-danger"><?php echo $level; ?></td>
+                                    <?php } elseif($level=='Medium'){ ?>
+                                        <td class="table-warning"><?php echo $level; ?></td>
+                                        <?php } elseif($level=='Low'){?>
+                                            <td class="table-success"><?php echo $level; ?></td>
+                                            <?php } ?>
                                             </tr>
                                             <tr>
                                                 <th data-column-id="chk_list_assessment.moic_remarcks">Dept.actPlan. </th>

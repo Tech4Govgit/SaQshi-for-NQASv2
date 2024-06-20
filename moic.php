@@ -92,7 +92,7 @@ include('h.php');
                     </script>
                     <br>
 
-                    <table class="table w-auto small table-striped table-bordered table-hover table-condensed" id="tbl_exporttable_to_xls">
+                    <table class="table w-fixed small table-striped table-bordered table-condensed" id="tbl_exporttable_to_xls">
 
                         <thead>
                             <tr>
@@ -227,7 +227,7 @@ include('h.php');
                 <table class="table w-auto small table-striped table-bordered table-hover table-condensed">
 
                     <thead>
-                        <tr>
+                        <tr class="table-warning">
                             <th colspan="2">
                                 <center>Check List details of Compliance status for Action Plans</center>
                             </th>
