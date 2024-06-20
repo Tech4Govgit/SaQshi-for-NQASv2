@@ -128,19 +128,18 @@ include('h4.php');
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <a href="export_dist_score_card.php">
+                            <a href="export_state_score_card.php">
                                 <h4 class="card-title">Compliance Summary <i class="bi bi-arrow-down-circle-fill"></i></h4>
                             </a>
                             </br>
                             <div class="table-responsive">
-                                <table class="table  small  table-bordered  table-condensed" id="tbl_exporttable_to_xls">
+                                <table class="table  small  table-bordered " id="tbl_exporttable_to_xls">
                                     <thead>
                                         <tr class="table-info">
                                             <th colspan="4">Facility</th>
                                             <th colspan="6">Check List Status</th>
-                                            <th colspan="3">Score Card</th>
-
-
+                                            <th colspan="4">Score Card</th>
+                                           
                                         </tr>
                                     </thead>
                                     <tr class="table-primary">
@@ -151,12 +150,13 @@ include('h4.php');
                                         <th scope="col">Non</th>
                                         <th scope="col">Partially</th>
                                         <th scope="col">Fully</th>
-                                        <th scope="col">Completed</th>
+                                        <th scope="col">Comp.</th>
                                         <th scope="col">Total</th>
                                         <th scope="col">%</th>
-                                        <th scope="col">Obtained</th>
-                                        <th scope="col">Max. Score</th>
+                                        <th scope="col">Obt.</th>
+                                        <th scope="col">Max.Score</th>
                                         <th scope="col">%</th>
+                                        <th scope="col"><i class="bi bi-arrow-down-circle-fill"></i></th>
                                     </tr>
                                     <?php
                                     // $b_id =  $_SESSION['block_id'];
@@ -210,6 +210,7 @@ include('h4.php');
                                                             <td class="table-danger"><?php echo  $row['f']; ?></td>
                                                             <td class="table-danger"><?php echo  $p1; ?>%</td>
                                                         <?php } ?>
+                                                        <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
                                                     </tr>
                                                 </tbody>
 
@@ -250,6 +251,7 @@ include('h4.php');
                                                             <td class="table-danger"><?php echo  $row['f']; ?></td>
                                                             <td class="table-danger"><?php echo  $p1; ?>%</td>
                                                         <?php } ?>
+                                                        <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
                                                     </tr>
                                                 </tbody>
                                             <?php
@@ -289,6 +291,7 @@ include('h4.php');
                                                             <td class="table-danger"><?php echo  $row['f']; ?></td>
                                                             <td class="table-danger"><?php echo  $p1; ?>%</td>
                                                         <?php } ?>
+                                                        <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
                                                     </tr>
                                                 </tbody>
                                             <?php
@@ -330,6 +333,7 @@ include('h4.php');
                                                         <td class="table-danger"><?php echo  $row['f']; ?></td>
                                                         <td class="table-danger"><?php echo  $p1; ?>%</td>
                                                     <?php } ?>
+                                                    <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
                                                 </tr>
                                             </tbody>
                                     <?php

@@ -125,6 +125,10 @@ include('h.php');
                                     <td><?php echo $row['moic_remarcks']; ?></td>
                                 </tr>
                                 <tr>
+                                    <th data-column-id="chk_list_assessment.moic_remarcks">Priority* </th>
+                                    <td><?php echo $row['Priority1']; ?></td>
+                                </tr>
+                                <tr>
                                     <th data-column-id="chk_list_assessment.moic_remarcks">Dept.actPlan. </th>
                                     <td><?php echo $row['dept_action_plan']; ?></td>
                                 </tr>
@@ -203,72 +207,78 @@ include('h.php');
                             while ($row = mysqli_fetch_array($query)) {
                             ?>
                                 <br>
-                                <table class="table table-fit w-auto small table-striped table-bordered table-hover table-condensed">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2">
-                                                <center>Assessments Compliance Update based on action plan feedbacks</center>
-                                            </th>
-                                        </tr>
-                                    </thead>
+                                <div class="table-responsive">
+                                    <table class="table  small  table-bordered  table-condensed">
+                                        <thead>
+                                            <tr class="table-info">
+                                                <th colspan="2">
+                                                    <center>Assessments Compliance Update based on action plan feedbacks</center>
+                                                </th>
+                                            </tr>
+                                        </thead>
 
-                                    <tbody>
-                                        <tr>
-                                            <th data-column-id="concern_subtype_chklist.c_subtype_Reference_No">Standard</th>
-                                            <td><?php echo $row['c_subtype_Reference_No_fk']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th data-column-id="concern_subtype_chklist.Measurable_Element">MeasurableElement</th>
-                                            <td><?php echo $row['Measurable_Element']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th data-column-id="concern_subtype_chklist.Checkpoint">Checkpoint </th>
-                                            <td><?php echo $row['Checkpoint']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th data-column-id="chk_list_assessment.ass_compliance">Comp. </th>
-                                            <td><?php echo $row['ass_compliance']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th data-column-id="chk_list_assessment.moic_remarcks">Dept.rmk* </th>
-                                            <td><?php echo $row['moic_remarcks']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th data-column-id="chk_list_assessment.moic_remarcks">Dept.actPlan. </th>
-                                            <td><?php echo $row['dept_action_plan']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th data-column-id="UpdComp">Upd Comp.</th>
+                                        <tbody>
+                                            <tr class="table-primary">
+                                                <th scope="col">Standard</th>
+                                                <td><?php echo $row['c_subtype_Reference_No_fk']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th data-column-id="concern_subtype_chklist.Measurable_Element">MeasurableElement</th>
+                                                <td><?php echo $row['Measurable_Element']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th data-column-id="concern_subtype_chklist.Checkpoint">Checkpoint </th>
+                                                <td><?php echo $row['Checkpoint']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th data-column-id="chk_list_assessment.ass_compliance">Comp. </th>
+                                                <td><?php echo $row['ass_compliance']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th data-column-id="chk_list_assessment.moic_remarcks">Dept.rmk* </th>
+                                                <td><?php echo $row['moic_remarcks']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th data-column-id="chk_list_assessment.moic_remarcks">Priority* </th>
+                                                <td><?php echo $row['Priority1']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th data-column-id="chk_list_assessment.moic_remarcks">Dept.actPlan. </th>
+                                                <td><?php echo $row['dept_action_plan']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th data-column-id="UpdComp">Upd Comp.</th>
 
-                                            <td>
+                                                <td>
 
-                                                <form enctype="multipart/form-data" method="post" action="#">
+                                                    <form enctype="multipart/form-data" method="post" action="#">
 
-                                                    <select class="form-select form-select-sm" id="f" name="f">
-                                                        <option value="3">Select</option>
-                                                        <option value="0">0</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
+                                                        <select class="form-select form-select-sm" id="f" name="f">
+                                                            <option value="3">Select</option>
+                                                            <option value="0">0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
 
-                                                    </select>
+                                                        </select>
 
-                                                    <input type="hidden" id="csqa_id1" name="csqa_id1" value="<?php echo  $_SESSION['q1']; ?>">
-                                                    <input type="hidden" id="csqa_id" name="csqa_id" value="<?php echo $row['ass_id']; ?>">
-                                        </tr>
-                                        <tr>
-                                            <th data-column-id="MOIC_Review">Action</th>
+                                                        <input type="hidden" id="csqa_id1" name="csqa_id1" value="<?php echo  $_SESSION['q1']; ?>">
+                                                        <input type="hidden" id="csqa_id" name="csqa_id" value="<?php echo $row['ass_id']; ?>">
+                                            </tr>
+                                            <tr>
+                                                <th data-column-id="MOIC_Review">Action</th>
 
-                                            <td> <button type="submit" name="postsubmit2" class="btn btn-primary btn-sm">Save & Next</button></td>
-                                        </tr>
-                                        </form>
-                                        </td>
-                                        </tr>
-                                <?php
+                                                <td> <button type="submit" name="postsubmit2" class="btn btn-primary btn-sm">Save & Next</button></td>
+                                            </tr>
+                                            </form>
+                                            </td>
+                                            </tr>
+                                    <?php
+                                }
                             }
-                        }
-                                ?>
-                                    </tbody>
-                                </table>
+                                    ?>
+                                        </tbody>
+                                    </table>
+                                </div>
 
 
             </div>
@@ -304,8 +314,8 @@ include('f.php');
 ?>
 
 <script>
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
     }
 </script>
 </body>

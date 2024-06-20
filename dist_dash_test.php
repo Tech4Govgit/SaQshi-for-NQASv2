@@ -19,7 +19,7 @@ include('h2.php');
                 <span>DrillDown*</span>
             </a>
         </li>
-        
+
     </ul>
     <div class="tab-content">
         <div class="tab-pane" id="tab-content-0">
@@ -122,7 +122,7 @@ include('h2.php');
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col">
                     <div class="card">
@@ -138,6 +138,8 @@ include('h2.php');
                                             <th colspan="4">Facility</th>
                                             <th colspan="6">Check List Status</th>
                                             <th colspan="3">Score Card</th>
+                                            <th colspan="1"><i class="bi bi-arrow-down-circle-fill"></i></th>
+
 
 
                                         </tr>
@@ -156,6 +158,7 @@ include('h2.php');
                                         <th scope="col">Obtained</th>
                                         <th scope="col">Max. Score</th>
                                         <th scope="col">%</th>
+                                        <th scope="col"><i class="bi bi-arrow-down-circle-fill"></i></th>
                                     </tr>
                                     <?php
                                     $dist_id = $_SESSION['dist'];
@@ -164,6 +167,7 @@ include('h2.php');
                                     $count = mysqli_query($con, $call_count);
                                     while ($row = mysqli_fetch_array($count)) {
                                         $obtained = $row['p'];
+                                       
                                         if ($obtained != null) {
                                             $percentage = $row['p'];
                                             $m = $row['marks'];
@@ -173,6 +177,7 @@ include('h2.php');
 
                                             <?php
                                             $p1 = round((($m / $f) * 100), 2);
+
                                             if ($percentage > 70) {
                                             ?>
                                                 <tbody>
@@ -194,21 +199,28 @@ include('h2.php');
                                                             <td class="table-success"><?php echo  $row['marks']; ?></td>
                                                             <td class="table-success"><?php echo  $row['f']; ?></td>
                                                             <td class="table-success"><?php echo  $p1; ?>%</td>
+                                                            
+                                                               
+                                                            
                                                         <?php } elseif ($p1 > 65 and $p1 < 70) {
                                                         ?>
                                                             <td class="table-warning"><?php echo  $row['marks']; ?></td>
                                                             <td class="table-warning"><?php echo  $row['f']; ?></td>
                                                             <td class="table-warning"><?php echo  $p1; ?>%</td>
+                                                            
                                                         <?php } elseif ($p1 < 65) {
                                                         ?>
                                                             <td class="table-danger"><?php echo  $row['marks']; ?></td>
                                                             <td class="table-danger"><?php echo  $row['f']; ?></td>
                                                             <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                         
                                                         <?php } else { ?>
                                                             <td class="table-danger"><?php echo  $row['marks']; ?></td>
                                                             <td class="table-danger"><?php echo  $row['f']; ?></td>
-                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                            <td class="table-danger"><?php echo  $p1; ?>%</td> 
+                                                           
                                                         <?php } ?>
+                                                        <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
                                                     </tr>
                                                 </tbody>
 
@@ -234,21 +246,26 @@ include('h2.php');
                                                             <td class="table-success"><?php echo  $row['marks']; ?></td>
                                                             <td class="table-success"><?php echo  $row['f']; ?></td>
                                                             <td class="table-success"><?php echo  $p1; ?>%</td>
+                                                           
                                                         <?php } elseif ($p1 > 65 and $p1 < 70) {
                                                         ?>
                                                             <td class="table-warning"><?php echo  $row['marks']; ?></td>
                                                             <td class="table-warning"><?php echo  $row['f']; ?></td>
                                                             <td class="table-warning"><?php echo  $p1; ?>%</td>
+                                                           
                                                         <?php } elseif ($p1 < 65) {
                                                         ?>
                                                             <td class="table-danger"><?php echo  $row['marks']; ?></td>
                                                             <td class="table-danger"><?php echo  $row['f']; ?></td>
                                                             <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                          
                                                         <?php } else { ?>
                                                             <td class="table-danger"><?php echo  $row['marks']; ?></td>
                                                             <td class="table-danger"><?php echo  $row['f']; ?></td>
                                                             <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                           
                                                         <?php } ?>
+                                                       <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
                                                     </tr>
                                                 </tbody>
                                             <?php
@@ -273,21 +290,26 @@ include('h2.php');
                                                             <td class="table-success"><?php echo  $row['marks']; ?></td>
                                                             <td class="table-success"><?php echo  $row['f']; ?></td>
                                                             <td class="table-success"><?php echo  $p1; ?>%</td>
+                                                          
                                                         <?php } elseif ($p1 > 65 and $p1 < 70) {
                                                         ?>
                                                             <td class="table-warning"><?php echo  $row['marks']; ?></td>
                                                             <td class="table-warning"><?php echo  $row['f']; ?></td>
                                                             <td class="table-warning"><?php echo  $p1; ?>%</td>
+                                                           
                                                         <?php } elseif ($p1 < 65) {
                                                         ?>
                                                             <td class="table-danger"><?php echo  $row['marks']; ?></td>
                                                             <td class="table-danger"><?php echo  $row['f']; ?></td>
                                                             <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                           
                                                         <?php } else { ?>
                                                             <td class="table-danger"><?php echo  $row['marks']; ?></td>
                                                             <td class="table-danger"><?php echo  $row['f']; ?></td>
                                                             <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                            
                                                         <?php } ?>
+                                                       <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
                                                     </tr>
                                                 </tbody>
                                             <?php
@@ -309,26 +331,31 @@ include('h2.php');
                                                     <td class="table-danger"><?php echo  $row['tot']; ?></td>
                                                     <td class="table-danger"><?php echo  $row['p']; ?>%</td>
                                                     <?php
-                                                        if ($p1 > 70) {
-                                                        ?>
-                                                            <td class="table-success"><?php echo  $row['marks']; ?></td>
-                                                            <td class="table-success"><?php echo  $row['f']; ?></td>
-                                                            <td class="table-success"><?php echo  $p1; ?>%</td>
-                                                        <?php } elseif ($p1 > 65 and $p1 < 70) {
-                                                        ?>
-                                                            <td class="table-warning"><?php echo  $row['marks']; ?></td>
-                                                            <td class="table-warning"><?php echo  $row['f']; ?></td>
-                                                            <td class="table-warning"><?php echo  $p1; ?>%</td>
-                                                        <?php } elseif ($p1 < 65) {
-                                                        ?>
-                                                            <td class="table-danger"><?php echo  $row['marks']; ?></td>
-                                                            <td class="table-danger"><?php echo  $row['f']; ?></td>
-                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
-                                                        <?php } else { ?>
-                                                            <td class="table-danger"><?php echo  $row['marks']; ?></td>
-                                                            <td class="table-danger"><?php echo  $row['f']; ?></td>
-                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
-                                                        <?php } ?>
+                                                    if ($p1 > 70) {
+                                                    ?>
+                                                        <td class="table-success"><?php echo  $row['marks']; ?></td>
+                                                        <td class="table-success"><?php echo  $row['f']; ?></td>
+                                                        <td class="table-success"><?php echo  $p1; ?>%</td>
+                                                      
+                                                    <?php } elseif ($p1 > 65 and $p1 < 70) {
+                                                    ?>
+                                                        <td class="table-warning"><?php echo  $row['marks']; ?></td>
+                                                        <td class="table-warning"><?php echo  $row['f']; ?></td>
+                                                        <td class="table-warning"><?php echo  $p1; ?>%</td>
+                                                      
+                                                    <?php } elseif ($p1 < 65) {
+                                                    ?>
+                                                        <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                        <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                        <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                      
+                                                    <?php } else { ?>
+                                                        <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                        <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                        <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                      
+                                                    <?php } ?>
+                                                   <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
                                                 </tr>
                                             </tbody>
                                     <?php
@@ -360,7 +387,7 @@ include('h2.php');
                                 </br>
                                 <label>Block</label>
                                 <select class="form-control-sm form-control" id="District" name="District">
-                                <option value="0">--Select--</option>
+                                    <option value="0">--Select--</option>
                                     <?php
                                     $dist_id = $_SESSION['dist'];
                                     $call_q1 = "SELECT distinct(block_id),Block_Name FROM sarbsoft_nqa.facilities where dist_id=$dist_id";
@@ -379,7 +406,7 @@ include('h2.php');
                                 </br>
                                 <label>Ins. Type</label>
                                 <select class="form-control-sm form-control" id="Block" name="Block">
-                                <option value="0">--Select--</option>
+                                    <option value="0">--Select--</option>
                                     <?php
                                     $dist_id = $_SESSION['dist'];
                                     $call_q1 = "SELECT fac_type_id,facilities_type FROM sarbsoft_nqa.facilities_type";
@@ -429,7 +456,7 @@ include('h2.php');
                         $u_facilityid = $_POST['Block'];
                         $u_ass = $_POST['Period'];
                         $u_fid = $_POST['Village'];
-                        
+
                     ?>
                         <!------------------------------------->
                         <div class="row">
@@ -825,7 +852,7 @@ include('h2.php');
         <!--------------tab3 end ------------------->
     </div>
 
-    
+
     <script type="text/javascript" src="assets/scripts/main.js"></script>
     <script>
         $(document).ready(function() {
@@ -844,7 +871,7 @@ include('h2.php');
                     datatype: "html",
                     success: function(data) {
                         $("#Village").html(data);
-                       
+
 
                     }
                 });

@@ -123,7 +123,7 @@ include('h3.php');
                                             <th colspan="4">Facility</th>
                                             <th colspan="6">Check List Status</th>
                                             <th colspan="3">Score Card</th>
-
+                                            <th colspan="1"><i class="bi bi-arrow-down-circle-fill"></i></th>
 
                                         </tr>
                                     </thead>
@@ -141,6 +141,7 @@ include('h3.php');
                                         <th scope="col">Obtained</th>
                                         <th scope="col">Max. Score</th>
                                         <th scope="col">%</th>
+                                        <th scope="col"><i class="bi bi-arrow-down-circle-fill"></i></th>
                                     </tr>
                                     <?php
                                     $b_id =  $_SESSION['block_id'];
@@ -194,6 +195,7 @@ include('h3.php');
                                                             <td class="table-danger"><?php echo  $row['f']; ?></td>
                                                             <td class="table-danger"><?php echo  $p1; ?>%</td>
                                                         <?php } ?>
+                                                        <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
                                                     </tr>
                                                 </tbody>
 
@@ -234,6 +236,7 @@ include('h3.php');
                                                             <td class="table-danger"><?php echo  $row['f']; ?></td>
                                                             <td class="table-danger"><?php echo  $p1; ?>%</td>
                                                         <?php } ?>
+                                                        <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
                                                     </tr>
                                                 </tbody>
                                             <?php
@@ -273,6 +276,7 @@ include('h3.php');
                                                             <td class="table-danger"><?php echo  $row['f']; ?></td>
                                                             <td class="table-danger"><?php echo  $p1; ?>%</td>
                                                         <?php } ?>
+                                                        <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
                                                     </tr>
                                                 </tbody>
                                             <?php
@@ -314,6 +318,7 @@ include('h3.php');
                                                             <td class="table-danger"><?php echo  $row['f']; ?></td>
                                                             <td class="table-danger"><?php echo  $p1; ?>%</td>
                                                         <?php } ?>
+                                                        <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
                                                 </tr>
                                             </tbody>
                                     <?php

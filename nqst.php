@@ -117,7 +117,33 @@ include('h.php');
 
         <?php
         if (isset($_POST['postsubmit'])) {
+         
           if (isset($_POST['Concern'])) {
+            ?>
+            <script>
+$(document).ready(function() {
+    var selectedConcern = "<?php echo isset($_POST['Concern']) ? $_POST['Concern'] : ''; ?>";
+    $("#Concern").val(selectedConcern); // Set the value of the select element
+
+    // Optional: If you want to highlight the selected option visually
+    
+});
+$(document).ready(function() {
+    var selectedcategory = "<?php echo isset($_POST['category']) ? $_POST['category'] : ''; ?>";
+    $("#category").val(selectedcategory); // Set the value of the select element
+
+    // Optional: If you want to highlight the selected option visually
+    
+});
+$(document).ready(function() {
+    var selectedAssessment_Method = "<?php echo isset($_POST['Assessment_Method']) ? $_POST['Assessment_Method'] : ''; ?>";
+    $("#Assessment_Method").val(selectedAssessment_Method); // Set the value of the select element
+
+    // Optional: If you want to highlight the selected option visually
+    
+});
+</script>
+              <?php
             $M = $_SESSION['M'];
             $C = $_SESSION['C'];
             $Means = $_SESSION['Means'];

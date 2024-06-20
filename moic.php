@@ -76,7 +76,8 @@ include('h.php');
                     $p = $_SESSION['period'];
 
                     if ($p == 0 or $C == 0 or $C == '') {
-                        echo "Kindly select assessment period...!!!!";
+                        echo '<button type="button" class="btn btn-danger">Kindly select assessment period...!!!!</button>';
+                       
                         header("Refresh:3; url=moic.php");
                         exit;
                     }
@@ -138,7 +139,19 @@ include('h.php');
                                     <td><?php echo $row['ass_compliance']; ?></td>
                                 </tr>
                                 <form enctype="multipart/form-data" method="post" action="#">
-                                    <tr>
+                                <tr>
+                                <th data-column-id="MOIC_Priority_Review">Priority</th>
+                                    <td> <select class="custom-select" id="Priority" name="Priority">
+                                                <option value="0">Low</option>
+                                                <option value="1">Medium</option>
+                                                <option value="2">High</option>
+
+                                            </select>
+                            </td>
+                                </tr>    
+                                <tr>
+                                   
+
                                         <th data-column-id="MOIC_Review">Dept.Review</th>
                                         <td> <select class="custom-select" id="f1" name="f">
                                                 <option value="0">--Select---</option>
@@ -226,14 +239,16 @@ include('h.php');
                                         $q = $_POST['csqa_id1'];
                                         $id = $_POST['csqa_id'];
                                         $p = $_SESSION['period'];
+                                        $pri=$_POST['Priority'];
                                         $moic_compliance = $_POST['f'];
                                         if ($moic_compliance == '2') {
                                             $ass_id = $id;
                                             $facid = $_SESSION['u_facilityid'];
-                                            $insertfeedback = "call moic_nonach(2,$ass_id,$facid,$p)";
+                                            $insertfeedback = "call moic_nonach(2,$ass_id,$facid,$p,$pri)";
                                             $queryinsert = $con->query($insertfeedback);
                                             if ($queryinsert) {
-                                                echo "Compliance status updated!";
+                                                echo '<button type="button" class="btn btn-success">Compliance status updated!</button>';
+                                               
                         ?>
 
                             <?php
@@ -257,11 +272,12 @@ include('h.php');
                                             $p = $_SESSION['period'];
                                             $ass_id = $_POST['csqa_id'];
                                             $facid = $_SESSION['u_facilityid'];
-                                            $insertfeedback1 = "call moic_achiv(1,$ass_id, $facid,$p,'$dres','$date','$com')";
+                                            $insertfeedback1 = "call moic_achiv(1,$ass_id, $facid,$p,'$dres','$date','$com',$pri)";
                                             $queryinsert1 = $con->query($insertfeedback1);
                                             // $queryinsert1 = mysqli_query($con, $insertfeedback1);
                                             if ($queryinsert1) {
-                                                echo "Values added";
+                                                echo '<button type="button" class="btn btn-success">Compliance status updated!</button>';
+                                               
                             ?>
 
                             <?php }
@@ -302,7 +318,17 @@ include('h.php');
                                     <td><?php echo $row['ass_compliance']; ?></td>
                                 </tr>
                                 <form enctype="multipart/form-data" method="post" action="#">
-                                    <tr>
+                                <tr>
+                                <th data-column-id="MOIC_Priority_Review">Priority</th>
+                                    <td> <select class="custom-select" id="Priority" name="Priority">
+                                                <option value="0">Low</option>
+                                                <option value="1">Medium</option>
+                                                <option value="2">High</option>
+
+                                            </select>
+                            </td>
+                                </tr>       
+                                <tr>
                                         <th data-column-id="MOIC_Review">Dept.Review</th>
                                         <td>
                                             <select id="f1" name="f">
