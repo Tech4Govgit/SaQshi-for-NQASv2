@@ -148,6 +148,12 @@ include('h.php');
             <br>
             <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
               <tbody>
+              <tr>
+                  <th colspan="2">
+                    <center>Check List details for Compliance </center>
+                  </th>
+
+                </tr>
                 <tr>
                   <th colspan="2">
                     <center>Check List details for Compliance </center>

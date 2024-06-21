@@ -15,6 +15,7 @@ if (!empty($_POST["cid"])) {
    $result = mysqli_query($con, $query);   
    if ($result->num_rows > 0) {
        // echo '<option value="">   </option>';
+       
         while ($row = mysqli_fetch_assoc($result)) {
             echo '<option value="' . $row['c_subtype_id'] . '">' . $row['area_of_con_subtypedeatils'] . '</option>';
         }
@@ -30,3 +31,4 @@ if (!empty($_POST["cid"])) {
 }  
    
 ?>
+

@@ -83,7 +83,9 @@ include('h.php');
                   $con->next_result();
                 }
                 ?>
+                <input type="hidden" name="selectedName" id="selectedName" value="">
               </select>
+              
             </div>
 
 
@@ -91,6 +93,7 @@ include('h.php');
               <label for="ibank">Select Standard</label>
               <select class="form-control-sm form-control" id="category" name="category">
                 <option value="0">-Select-</option>
+               
               </select>
             </div>
             <div class="col-auto">
@@ -107,6 +110,15 @@ include('h.php');
             <div class="col-auto">
               </br>
               <button type="submit" value="Submit" name="postsubmit" class="mb-2 mr-2 btn btn-primary">Show Checklist</button>
+              <script>
+        document.querySelector('form').addEventListener('submit', function() {
+            var select = document.getElementById('Concern');
+            var selectedOption = select.options[select.selectedIndex];
+            var selectedName = selectedOption.text;
+            document.getElementById('selectedName').value = selectedName;
+        });
+    </script>
+   
             </div>
           </div>
         </form>
@@ -119,36 +131,13 @@ include('h.php');
         if (isset($_POST['postsubmit'])) {
          
           if (isset($_POST['Concern'])) {
-            ?>
-            <script>
-$(document).ready(function() {
-    var selectedConcern = "<?php echo isset($_POST['Concern']) ? $_POST['Concern'] : ''; ?>";
-    $("#Concern").val(selectedConcern); // Set the value of the select element
-
-    // Optional: If you want to highlight the selected option visually
-    
-});
-$(document).ready(function() {
-    var selectedcategory = "<?php echo isset($_POST['category']) ? $_POST['category'] : ''; ?>";
-    $("#category").val(selectedcategory); // Set the value of the select element
-
-    // Optional: If you want to highlight the selected option visually
-    
-});
-$(document).ready(function() {
-    var selectedAssessment_Method = "<?php echo isset($_POST['Assessment_Method']) ? $_POST['Assessment_Method'] : ''; ?>";
-    $("#Assessment_Method").val(selectedAssessment_Method); // Set the value of the select element
-
-    // Optional: If you want to highlight the selected option visually
-    
-});
-</script>
-              <?php
             $M = $_SESSION['M'];
             $C = $_SESSION['C'];
             $Means = $_SESSION['Means'];
             $_SESSION['Cn'] = $_POST["Concern"];
             $_SESSION['cy'] = $_POST["category"];
+            $_SESSION['xx']=$_POST['selectedName'];
+            $selectedName = $_POST['selectedName'];
             $p = $_SESSION['assperiod'];
             $F = $_SESSION['dept_id1'];
             $Fa = $_SESSION['facilty_type'];
@@ -175,6 +164,12 @@ $(document).ready(function() {
               <br>
               <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
                 <tbody>
+                <tr>
+                    <th colspan="2">
+                      <center>Current accessing area of Concern "<?php echo  $selectedName; ?>"  </center>
+                    </th>
+
+                  </tr>
                   <tr>
                     <th colspan="2">
                       <center>Check List details for Compliance </center>
@@ -267,6 +262,9 @@ $(document).ready(function() {
                       $con->next_result();
                     }
                   } elseif (isset($_POST['postsubmit1'])) {
+                    ?>
+                     
+                    <?php
                     $ass_compliance = $_POST['f'];
                     if ($ass_compliance == 0 or  $ass_compliance == 1 or  $ass_compliance == 2) {
 
@@ -312,6 +310,9 @@ $(document).ready(function() {
             ?>
               <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
                 <tbody>
+                <th colspan="2">
+                      <center>Current accessing area of Concern "<?php echo $_SESSION['xx']; ?>"  </center>
+                    </th>
                   <tr>
                     <th colspan="2">
                       <center>Check List details for Compliance </center>
@@ -417,11 +418,14 @@ $(document).ready(function() {
                     $csqid = $_POST['edit'];
                     $editQ = "SELECT * FROM sarbsoft_nqa.concern_subtype_chklist where csqa_id=$csqid";
                     $editQ1 = $con->query($editQ);
-                    echo $csqid;
+                   // echo $csqid;
                     while ($row = mysqli_fetch_array($editQ1)) {
           ?>
             <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
               <tbody>
+              <th colspan="2">
+                      <center>Current accessing area of Concern "<?php echo $_SESSION['xx']; ?>"  </center>
+                    </th>
                 <tr>
                   <th colspan="2">
                     <center>Check List details for Compliance </center>
@@ -544,6 +548,9 @@ $(document).ready(function() {
           ?>
             <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
               <tbody>
+              <th colspan="2">
+                      <center>Current accessing area of Concern "<?php echo $_SESSION['xx']; ?>"  </center>
+                    </th>
                 <tr>
                   <th colspan="2">
                     <center>Check List details for Compliance </center>
@@ -652,6 +659,7 @@ $(document).ready(function() {
 
 <script type="text/JavaScript">
   $(document).ready(function() {
+    
                 $("#Concern").on('change', function() {
                     var Concernid = $(this).val();
                     $.ajax({
@@ -664,9 +672,7 @@ $(document).ready(function() {
                         datatype: "html",
                         success: function(data) {
                             $("#category").html(data);
-
-
-                        }
+                             }
                     });
                 });
 
