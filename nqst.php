@@ -166,7 +166,7 @@ include('h.php');
                 <tbody>
                 <tr>
                     <th colspan="2">
-                      <center>Current accessing area of Concern "<?php echo  $selectedName; ?>"  </center>
+                      <center>Currently accessing area of Concern "<?php echo  $selectedName; ?>"  </center>
                     </th>
 
                   </tr>
@@ -311,7 +311,7 @@ include('h.php');
               <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
                 <tbody>
                 <th colspan="2">
-                      <center>Current accessing area of Concern "<?php echo $_SESSION['xx']; ?>"  </center>
+                      <center>Currently accessing area of Concern "<?php echo $_SESSION['xx']; ?>"  </center>
                     </th>
                   <tr>
                     <th colspan="2">
@@ -424,7 +424,7 @@ include('h.php');
             <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
               <tbody>
               <th colspan="2">
-                      <center>Current accessing area of Concern "<?php echo $_SESSION['xx']; ?>"  </center>
+                      <center>Currently accessing area of Concern "<?php echo $_SESSION['xx']; ?>"  </center>
                     </th>
                 <tr>
                   <th colspan="2">
@@ -549,7 +549,7 @@ include('h.php');
             <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
               <tbody>
               <th colspan="2">
-                      <center>Current accessing area of Concern "<?php echo $_SESSION['xx']; ?>"  </center>
+                      <center>Currently accessing area of Concern "<?php echo $_SESSION['xx']; ?>"  </center>
                     </th>
                 <tr>
                   <th colspan="2">
