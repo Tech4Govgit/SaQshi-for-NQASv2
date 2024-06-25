@@ -93,7 +93,7 @@ include('h.php');
               <label for="ibank">Select Standard</label>
               <select class="form-control-sm form-control" id="category" name="category">
                 <option value="0">-Select-</option>
-               
+                <input type="hidden" name="selectedName1" id="selectedName1" value="">
               </select>
             </div>
             <div class="col-auto">
@@ -131,12 +131,47 @@ include('h.php');
         if (isset($_POST['postsubmit'])) {
          
           if (isset($_POST['Concern'])) {
+            ?>
+            <script>
+                        $("#Concern option").each(function(index) {
+                            var item = $(this).val();
+                            if (item == "<?php echo $_POST['Concern'] ?>") {
+                                $(this).prop('selected', true);
+                            }
+                        });
+
+                        var Concernid = $("#Concern").val();
+                        alert(Concernid);
+                        $.ajax({
+                        method: "POST",
+                        url: "response.php",
+                        data: {
+                            cid: Concernid,
+
+                        },
+                        datatype: "html",
+                        success: function(data) {
+                            $("#category").html(data);
+                             }
+                    });
+
+
+                    </script>
+                     <script>
+                        $("#Assessment_Method option").each(function(index) {
+                            var item = $(this).val();
+                            if (item == "<?php echo $_POST['Assessment_Method'] ?>") {
+                                $(this).prop('selected', true);
+                            }
+                        });
+                    </script>
+            <?php
             $M = $_SESSION['M'];
             $C = $_SESSION['C'];
             $Means = $_SESSION['Means'];
             $_SESSION['Cn'] = $_POST["Concern"];
             $_SESSION['cy'] = $_POST["category"];
-            $_SESSION['xx']=$_POST['selectedName'];
+            $_SESSION['xx']=$_POST['selectedName'];          
             $selectedName = $_POST['selectedName'];
             $p = $_SESSION['assperiod'];
             $F = $_SESSION['dept_id1'];
@@ -166,7 +201,7 @@ include('h.php');
                 <tbody>
                 <tr>
                     <th colspan="2">
-                      <center>Currently accessing area of Concern "<?php echo  $selectedName; ?>"  </center>
+                      <center>Currently accessing area of Concern "<?php echo  $selectedName; //echo   $_SESSION['xx1'];?>"  </center>
                     </th>
 
                   </tr>
