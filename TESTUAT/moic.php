@@ -40,7 +40,7 @@ include('h.php');
                                     $con->next_result();
                                 }
                                 ?>
-                                <input type="hidden" name="selectedName" id="selectedName" value="">
+
                             </select>
                         </div>
                         <div class="col-auto">
@@ -53,14 +53,7 @@ include('h.php');
                             </br>
                             <button type="submit" value="Submit" name="submit1" class="btn btn-primary btn-sm">Action Plan</button>
                         </div>
-                        <script>
-                            document.querySelector('form').addEventListener('submit', function() {
-                                var select = document.getElementById('Concern1');
-                                var selectedOption = select.options[select.selectedIndex];
-                                var selectedName = selectedOption.text;
-                                document.getElementById('selectedName').value = selectedName;
-                            });
-                        </script>
+
                         <div class="col-auto">
                             </br>
                             <button type="submit" value="Submit" name="submit3" class="btn btn-success btn-sm">View Compliance for Action Plan</button>
@@ -71,7 +64,29 @@ include('h.php');
 
                 <!---- data load-------------------->
                 <?php
-                if (isset($_POST['submit1'])) {
+                if (isset($_POST['submit1'])) { ?>
+                    <script>
+                        $("#Period1 option").each(function(index) {
+                            var item = $(this).val();
+                            if (item == "<?php $_SESSION['xxp2'] = $_POST['Period'];                                            echo $_SESSION['xxp2'] ?>") {                                $(this).prop('selected', true);
+                            }
+                        });
+                        var Concernid = $('#Period1').val();
+                        $.ajax({
+                            method: "POST",
+                            cache: false,
+                            url: "response_m.php",
+                            data: {
+                                cid: Concernid,
+                            },
+                            datatype: "html",
+                            success: function(data) {
+                                $("#Concern1").html(data);
+                            },
+                            error: function(data) {}
+                        });
+                    </script>
+                    <?php
                     $_SESSION['FDepartment'] = $_SESSION['dept_id1'];
                     $_SESSION['concern'] = $_POST['Concern'];
                     $_SESSION['period'] = $_POST['Period'];
@@ -82,14 +97,13 @@ include('h.php');
                     $F = $_SESSION['FDepartment'];
                     $Fa = $_SESSION['u_facilityid'];
                     $p = $_SESSION['period'];
-                    $_SESSION['xx'] = $_POST['selectedName'];
                     if ($p == 0) {
                         echo '<button type="button" class="btn btn-danger">Kindly select assessment period...!!!!</button>';
 
                         header("Refresh:3; url=moic.php");
                         exit;
                     }
-                ?>
+                    ?>
                     <script>
                         $("#Period1 option").each(function(index) {
                             var item = $(this).val();
@@ -120,10 +134,7 @@ include('h.php');
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th>Area of Con.</th>
-                                        <td><?php echo   $_SESSION['xx']; ?></td>
-                                    </tr>
+
                                     <tr>
                                         <th data-column-id="concern_subtype_chklist.c_subtype_Reference_No">Standard</th>
                                         <td><?php echo $row['c_subtype_Reference_No_fk']; ?></td>
@@ -313,10 +324,7 @@ include('h.php');
                                         if ($queryd->num_rows > 0) {
                                             while ($row = mysqli_fetch_array($queryd)) {
                                     ?>
-                                        <tr>
-                                            <th>Area of Con.</th>
-                                            <td><?php echo   $_SESSION['xx']; ?></td>
-                                        </tr>
+
                                         <tr>
                                             <th data-column-id="concern_subtype_chklist.c_subtype_Reference_No">Standard</th>
                                             <td><?php echo $row['c_subtype_Reference_No_fk']; ?></td>
