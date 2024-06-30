@@ -21,10 +21,6 @@ include('h.php');
                     <div class="form-group row">
                         <div class="col-auto">
                             <br>
-                            <label class="sr-only" for="inlineFormInput">Assessment Period:</label>
-                        </div>
-                        <div class="col-auto">
-                            <br>
                             <select class="custom-select" id="Period" name="Period">
                                 <option value="0">Select Assessment Period</option>
                                 <?php
@@ -54,6 +50,15 @@ include('h.php');
                         </div>
                         <div class="col-auto">
                             <br>
+                            <select class="form-control-sm custom-select" id="Priority" name="Priority">
+                                <option value="2">-Priority-</option>
+                                <option value="0">Low</option>
+                                <option value="1">Medium</option>
+                                <option value="2">High</option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <br>
                             <button type="submit" value="Submit" name="submit1" class="btn btn-primary btn-sm">Show Assessments</button>
                         </div>
                     </div>
@@ -67,12 +72,19 @@ include('h.php');
                     <script>
                         $("#Period option").each(function(index) {
                             var item = $(this).val();
-                            if (item == "<?php echo $_POST['Period'] ?>") {
+                            if (item == "<?php $_SESSION['xxp']= $_POST['Period']; echo $_SESSION['xxp'] ?>") {
                                 $(this).prop('selected', true);
                             }
                         });
                     </script>
-
+                    <script>
+                        $("#Priority option").each(function(index) {
+                            var item = $(this).val();
+                            if (item == "<?php $_SESSION['xxp1']= $_POST['Priority']; echo $_SESSION['xxp1'] ?>") {
+                                $(this).prop('selected', true);
+                            }
+                        });
+                    </script>
 
                     <?php
                     $_SESSION['FDepartment'] = $_SESSION['dept_id1'];
@@ -80,112 +92,130 @@ include('h.php');
                     $F = $_SESSION['FDepartment'];
                     $Fa = $_SESSION['u_facilityid'];
                     $p = $_SESSION['period'];
+                    $_SESSION['Priority']=$_POST['Priority'];
+                    $p1=$_SESSION['Priority'];
                     if ($p == 0) {
                     ?>
                         <button type="button" class="btn btn-warning"><?php echo "Kindly select assessment period...!!!!";
                                                                         header("Refresh:3; url=umoic.php");
                                                                         exit; ?><i class="bi bi-exclamation-triangle"></i></button>
 
-                    <?php
+                        <?php
                     }
                     // $ca= $_SESSION['cy'];
-                    $_SESSION['q1'] = "CALL updt_dept_action_plan($Fa,$p,$F)";
-                    $_SESSION['q'] = "CALL updt_dept_action_plan($Fa,$p,$F)";
+                    $_SESSION['q1'] = "CALL updt_dept_action_plan($p1,$Fa,$p,$F)";
+                    $_SESSION['q'] = "CALL updt_dept_action_plan($p1,$Fa,$p,$F)";
                     $query = $con->query($_SESSION['q']);
-                    if($query->num_rows > 0) {
-                    while ($row = mysqli_fetch_array($query)) {
-                    ?>
-                        <br>
-                        <table class="table table-fit w-auto small table-striped table-bordered table-hover table-condensed">
+                    if ($query->num_rows > 0) {
+                        while ($row = mysqli_fetch_array($query)) {
+                        ?>
+                            <br>
+                            <table class="table table-fit w-auto small table-striped table-bordered table-hover table-condensed">
 
-                            <thead>
-                                <tr class="table-warning">
-                                    <th colspan="2">
-                                        <center>Assessment Compliance Update Based on Action Plan Feedback</center>
-                                    </th>
-                                </tr>
-                            </thead>
+                                <thead>
+                                    <tr class="table-warning">
+                                        <th colspan="2">
+                                            <center>Assessment Compliance Update Based on Action Plan Feedback</center>
+                                        </th>
+                                    </tr>
+                                </thead>
 
-                            <tbody>
-                                <tr>
-                                    <th data-column-id="concern_subtype_chklist.c_subtype_Reference_No" class="table-info">Standard</th>
-                                    <td><?php echo $row['c_subtype_Reference_No_fk']; ?></td>
-                                </tr>
-                                <tr>
-                                    <th data-column-id="concern_subtype_chklist.Measurable_Element" class="table-info">MeasurableElement</th>
-                                    <td><?php echo $row['Measurable_Element']; ?></td>
-                                </tr>
-                                <tr>
-                                    <th data-column-id="concern_subtype_chklist.Checkpoint" class="table-info">Checkpoint </th>
-                                    <td ><?php echo $row['Checkpoint']; ?></td>
-                                </tr>
-                                <tr>
-                                    <th data-column-id="chk_list_assessment.ass_compliance" class="table-info">Comp. </th>
-                                    <td><?php echo $row['ass_compliance']; ?></td>
-                                </tr>
-                                <tr>
-                                    <th data-column-id="chk_list_assessment.moic_remarcks" class="table-info">Dept.rmk* </th>
-                                    <td ><?php echo $row['moic_remarcks']; ?></td>
-                                </tr>
-                                <tr>
-                                    <th data-column-id="chk_list_assessment.moic_remarcks" class="table-info">Priority* </th>
-                                    <?php $level = $row['Priority1'];
-                                    if ($level == 'High') {
-                                    ?>
+                                <tbody>
+                                    <tr>
+                                        <th data-column-id="concern_subtype_chklist.c_subtype_Reference_No" class="table-info">Standard</th>
+                                        <td><?php echo $row['c_subtype_Reference_No_fk']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th data-column-id="concern_subtype_chklist.Measurable_Element" class="table-info">MeasurableElement</th>
+                                        <td><?php echo $row['Measurable_Element']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th data-column-id="concern_subtype_chklist.Checkpoint" class="table-info">Checkpoint </th>
+                                        <td><?php echo $row['Checkpoint']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th data-column-id="chk_list_assessment.ass_compliance" class="table-info">Comp. </th>
+                                        <td><?php echo $row['ass_compliance']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th data-column-id="chk_list_assessment.moic_remarcks" class="table-info">Dept.rmk* </th>
+                                        <td><?php echo $row['moic_remarcks']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th data-column-id="chk_list_assessment.moic_remarcks" class="table-info">Priority* </th>
+                                        <?php $level = $row['Priority1'];
+                                        if ($level == 'High') {
+                                        ?>
 
-                                        <td class="table-danger"><?php echo $level; ?></td>
-                                    <?php } elseif ($level == 'Medium') { ?>
-                                        <td class="table-warning"><?php echo $level; ?></td>
-                                    <?php } elseif ($level == 'Low') { ?>
-                                        <td class="table-success"><?php echo $level; ?></td>
-                                    <?php } ?>
-                                </tr>
-                                <tr>
-                                    <th data-column-id="chk_list_assessment.moic_remarcks" class="table-info">Dept.actPlan. </th>
-                                    <td ><?php echo $row['dept_action_plan']; ?></td>
-                                </tr>
-                                <tr>
-                                    <th data-column-id="UpdComp" class="table-info">Upd Comp.</th>
+                                            <td class="table-danger"><?php echo $level; ?></td>
+                                        <?php } elseif ($level == 'Medium') { ?>
+                                            <td class="table-warning"><?php echo $level; ?></td>
+                                        <?php } elseif ($level == 'Low') { ?>
+                                            <td class="table-success"><?php echo $level; ?></td>
+                                        <?php } ?>
+                                    </tr>
+                                    <tr>
+                                        <th data-column-id="chk_list_assessment.moic_remarcks" class="table-info">Dept.actPlan. </th>
+                                        <td><?php echo $row['dept_action_plan']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th data-column-id="UpdComp" class="table-info">Upd Comp.</th>
 
-                                    <td>
+                                        <td>
 
-                                        <form enctype="multipart/form-data" method="post" action="#">
+                                            <form enctype="multipart/form-data" method="post" action="#">
 
-                                            <select class="form-select form-select-sm" id="f" name="f">
-                                                <option value="3">Select</option>
-                                                <option value="0">0</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
+                                                <select class="form-select form-select-sm" id="f" name="f">
+                                                    <option value="3">Select</option>
+                                                    <option value="0">0</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
 
-                                            </select>
+                                                </select>
 
-                                            <input type="hidden" id="csqa_id1" name="csqa_id1" value="<?php echo  $_SESSION['q1']; ?>">
-                                            <input type="hidden" id="csqa_id" name="csqa_id" value="<?php echo $row['ass_id']; ?>">
-                                </tr>
-                                <tr>
-                                    <th data-column-id="MOIC_Review" class="table-info">Action</th>
+                                                <input type="hidden" id="csqa_id1" name="csqa_id1" value="<?php echo  $_SESSION['q1']; ?>">
+                                                <input type="hidden" id="csqa_id" name="csqa_id" value="<?php echo $row['ass_id']; ?>">
+                                    </tr>
+                                    <tr>
+                                        <th data-column-id="MOIC_Review" class="table-info">Action</th>
 
-                                    <td> <button type="submit" name="postsubmit2" class="btn btn-primary btn-sm">Save & Next</button></td>
-                                </tr>
-                                </form>
-                                </td>
-                                </tr>
-                            <?php
-                            //mysqli_free_result($query);
-                            // $con->next_result();
-                        }}else{
-                            ?>
-                            <p>
-              <button addEventListener="function()" type="button" class="btn btn-warning"><?php echo "No compliance updates pending..!"; ?><i class="bi bi-check-circle"></i></button>
-            </p>
-                            
-                           
-                      <?php  }
+                                        <td> <button type="submit" name="postsubmit2" class="btn btn-primary btn-sm">Save & Next</button></td>
+                                    </tr>
+                                    </form>
+                                    </td>
+                                    </tr>
+                                <?php
+                                //mysqli_free_result($query);
+                                // $con->next_result();
+                            }
+                        } else {
+                                ?>
+                                <p>
+                                    <button addEventListener="function()" type="button" class="btn btn-warning"><?php echo "No compliance updates pending..!"; ?><i class="bi bi-check-circle"></i></button>
+                                </p>
+
+
+                            <?php  }
                         mysqli_free_result($query);
                         $con->next_result();
                     } elseif (isset($_POST['postsubmit2'])) {
                             ?>
-
+<script>
+                        $("#Period option").each(function(index) {
+                            var item = $(this).val();
+                            if (item == "<?php  echo $_SESSION['xxp'] ?>") {
+                                $(this).prop('selected', true);
+                            }
+                        });
+                    </script>
+                    <script>
+                        $("#Priority option").each(function(index) {
+                            var item = $(this).val();
+                            if (item == "<?php  echo $_SESSION['xxp1'] ?>") {
+                                $(this).prop('selected', true);
+                            }
+                        });
+                    </script>
                             <?php
 
                             include('conn.php');
@@ -217,9 +247,9 @@ include('h.php');
 
                             ?>
 
-<p>
-              <button addEventListener="function()" type="button" class="btn btn-success"><?php echo "Compliance Updated ..!"; ?><i class="bi bi-check-circle"></i></button>
-            </p>
+                                <p>
+                                    <button addEventListener="function()" type="button" class="btn btn-success"><?php echo "Compliance Updated ..!"; ?><i class="bi bi-check-circle"></i></button>
+                                </p>
                             <?php
                                 //  mysqli_free_result($up1);
                                 //  $con->next_result();    
@@ -229,9 +259,9 @@ include('h.php');
                             ?>
                                 <br>
                                 <div class="table-responsive">
-                                <table class="table table-fit w-auto small table-striped table-bordered table-hover table-condensed">
+                                    <table class="table table-fit w-auto small table-striped table-bordered table-hover table-condensed">
                                         <thead>
-                                            <tr  class="table-warning">
+                                            <tr class="table-warning">
                                                 <th colspan="2">
                                                     <center>Assessment Compliance Update Based on Action Plan Feedback</center>
                                                 </th>
@@ -349,7 +379,7 @@ include('f.php');
     }
 </script>
 <script type="text/JavaScript">
-  $(document).ready(function(){   
+    $(document).ready(function(){   
     $("p").show().delay(3000).fadeOut();
      });
 </script>

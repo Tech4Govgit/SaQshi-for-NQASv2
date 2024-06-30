@@ -85,7 +85,7 @@ include('h.php');
                 ?>
                 <input type="hidden" name="selectedName" id="selectedName" value="">
               </select>
-              
+
             </div>
 
 
@@ -98,81 +98,90 @@ include('h.php');
             </div>
             <div class="col-auto">
               <label for="dep">Select Assessment Method</label>
+
               <select class="form-control-sm form-control" id="Assessment_Method" name="Assessment_Method">
-                <option value="">-Select-</option>
-                <option value="SI">SI</option>
-                <option value="OB">OB</option>
-                <option value="PI">PI</option>
-                <option value="RR">RR</option>
-                <option value="RR">CI</option>
+                <?php if ($_SESSION['facilty_type'] == 4) {
+                ?>
+                  <option value="">-Select-</option>
+                  <option value="SI">SI</option>
+                  <option value="OB">OB</option>
+                  <option value="PI">PI</option>
+                  <option value="RR">RR</option>
+                  <option value="CI">CI</option>
               </select>
+            <?php } else { ?>
+              <option value="">-Select-</option>
+              <option value="SI">SI</option>
+              <option value="OB">OB</option>
+              <option value="PI">PI</option>
+              <option value="RR">RR</option>
+
+
+
+            <?php } ?>
+            </select>
             </div>
             <div class="col-auto">
               </br>
               <button type="submit" value="Submit" name="postsubmit" class="mb-2 mr-2 btn btn-primary">Show Checklist</button>
-              <script>
-        document.querySelector('form').addEventListener('submit', function() {
-            var select = document.getElementById('Concern');
-            var selectedOption = select.options[select.selectedIndex];
-            var selectedName = selectedOption.text;
-            document.getElementById('selectedName').value = selectedName;
-        });
-    </script>
-   
             </div>
           </div>
+         
         </form>
 
-        <!---- data load-------------------->
+      </div>
+    </div>
+  </section>
+  <section>
 
+    <!---- data load-------------------->
 
+    <div class="card">
+      <div class="card-body">
 
         <?php
         if (isset($_POST['postsubmit'])) {
-         
+
           if (isset($_POST['Concern'])) {
-            ?>
+        ?>
             <script>
-                        $("#Concern option").each(function(index) {
-                            var item = $(this).val();
-                            if (item == "<?php echo $_POST['Concern'] ?>") {
-                                $(this).prop('selected', true);
-                            }
-                        });
-
-                        var Concernid = $("#Concern").val();
-                        alert(Concernid);
-                        $.ajax({
-                        method: "POST",
-                        url: "response.php",
-                        data: {
-                            cid: Concernid,
-
-                        },
-                        datatype: "html",
-                        success: function(data) {
-                            $("#category").html(data);
-                             }
-                    });
-
-
-                    </script>
-                     <script>
-                        $("#Assessment_Method option").each(function(index) {
-                            var item = $(this).val();
-                            if (item == "<?php echo $_POST['Assessment_Method'] ?>") {
-                                $(this).prop('selected', true);
-                            }
-                        });
-                    </script>
+              $("#Concern option").each(function(index) {
+                var item = $(this).val();
+                if (item == "<?php  $_SESSION['xx']= $_POST['Concern']; echo $_SESSION['xx']  ?>") {
+                  $(this).prop('selected', true);
+                }
+              });
+              var Concernid = $("#Concern").val();
+              //alert(Concernid);
+              $.ajax({
+                method: "POST",
+                url: "response.php",
+                data: {
+                  cid: Concernid,
+                },
+                datatype: "html",
+                success: function(data) {
+                  $("#category").html(data);
+                }
+              });
+            </script>
+            <script>
+              $("#Assessment_Method option").each(function(index) {
+                var item = $(this).val();
+                if (item == "<?php $_SESSION['xxx']= $_POST['Assessment_Method'];echo $_SESSION['xxx'] ?>") {
+                  $(this).prop('selected', true);
+                }
+              });
+            </script>
             <?php
             $M = $_SESSION['M'];
             $C = $_SESSION['C'];
             $Means = $_SESSION['Means'];
             $_SESSION['Cn'] = $_POST["Concern"];
             $_SESSION['cy'] = $_POST["category"];
-            $_SESSION['xx']=$_POST['selectedName'];          
-            $selectedName = $_POST['selectedName'];
+           //  $_SESSION['xx'] = $_POST['selectedName'];
+            // $_SESSION['xxx'] = $_POST['selectedName1'];
+
             $p = $_SESSION['assperiod'];
             $F = $_SESSION['dept_id1'];
             $Fa = $_SESSION['facilty_type'];
@@ -182,7 +191,7 @@ include('h.php');
             $_SESSION['Assessment_Method'] = $_POST['Assessment_Method'];
             $ASSm = $_SESSION['Assessment_Method'];
             if ($Co == 0 or $ca == "") {
-        ?>
+            ?>
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 Kindly Select Area of Concern/Standard from drop down.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -199,12 +208,6 @@ include('h.php');
               <br>
               <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
                 <tbody>
-                <tr>
-                    <th colspan="2">
-                      <center>Currently accessing area of Concern "<?php echo  $selectedName; //echo   $_SESSION['xx1'];?>"  </center>
-                    </th>
-
-                  </tr>
                   <tr>
                     <th colspan="2">
                       <center>Check List details for Compliance </center>
@@ -256,6 +259,7 @@ include('h.php');
                         <button type="submit" id="postsubmit1" name="postsubmit1" class="btn btn-primary btn-sm">Save & Next</button>
                       </td>
                     </tr>
+
                   </form>
 
 
@@ -292,65 +296,91 @@ include('h.php');
                 </tr>
                 </tbody>
               </table>
-            <?php }
+        <?php }
                       mysqli_free_result($queryb);
                       $con->next_result();
                     }
-                  } elseif (isset($_POST['postsubmit1'])) {
-                    ?>
-                     
-                    <?php
-                    $ass_compliance = $_POST['f'];
-                    if ($ass_compliance == 0 or  $ass_compliance == 1 or  $ass_compliance == 2) {
+                  } ?>
 
-                      $fd = $_SESSION['dept_id1'];
-                      $q = $_POST['csqa_id1'];
-                      $_SESSION['$subtye'] = $_POST['csqa_id2'];
-                      $id = $_POST['csqa_id'];
-                      $query1 = "select area_of_con_id_fk,c_subtype_id_fk from concern_subtype_chklist where csqa_id=$id";
-                      $queryn = mysqli_query($con, $query1);
-                      while ($row = mysqli_fetch_array($queryn)) {
-                        $areofconcern = $row['area_of_con_id_fk'];
-                        $subtype = $row['c_subtype_id_fk'];
-                      }
-                      //$obj=$_POST['observation'];
-                      //echo $q;
-                      $facid = $_SESSION['u_facilityid'];
-                      $uid = $_SESSION['userid'];
+        <?php if (isset($_POST['postsubmit1'])) { ?>
+          <script>
+              $("#Concern option").each(function(index) {
+                var item = $(this).val();
+                if (item == "<?php echo $_SESSION['xx']  ?>") {
+                  $(this).prop('selected', true);
+                }
+              });
+              var Concernid = $("#Concern").val();
+              //alert(Concernid);
+              $.ajax({
+                method: "POST",
+                url: "response.php",
+                data: {
+                  cid: Concernid,
+                },
+                datatype: "html",
+                success: function(data) {
+                  $("#category").html(data);
+                }
+              });
+            </script>
+            <script>
+              $("#Assessment_Method option").each(function(index) {
+                var item = $(this).val();
+                if (item == "<?php echo $_SESSION['xxx'] ?>") {
+                  $(this).prop('selected', true);
+                }
+              });
+            </script>
+          <?php
+          $ass_compliance = $_POST['f'];
+          if ($ass_compliance == 0 or  $ass_compliance == 1 or  $ass_compliance == 2) {
 
-                      $conc = $_SESSION['Cn'];
-                      // echo  $conc;
-                      $concsub = $_SESSION['$subtye'];
-                      $assperiod = $_SESSION['assperiod'];
-                      //mysqli_query($conn,"insert into chk_list_assessment (fac_id_fk,fac_dept_id_fk,c_subtype_id_fk,area_of_con_id_fk,csqa_id_fk,ass_compliance,ass_period_id,user_id)values($facid,$fd,$concsub,$conc,$id,$ass_compliance,1,$uid)");
-                      $insertq = "CALL in_assessment($facid,$fd,$subtype, $areofconcern,$id,$ass_compliance,$assperiod,$uid)";
-                      $insertresult = $con->query($insertq);
+            $fd = $_SESSION['dept_id1'];
+            $q = $_POST['csqa_id1'];
+            $_SESSION['$subtye'] = $_POST['csqa_id2'];
+            $id = $_POST['csqa_id'];
+            $query1 = "select area_of_con_id_fk,c_subtype_id_fk from concern_subtype_chklist where csqa_id=$id";
+            $queryn = mysqli_query($con, $query1);
+            while ($row = mysqli_fetch_array($queryn)) {
+              $areofconcern = $row['area_of_con_id_fk'];
+              $subtype = $row['c_subtype_id_fk'];
+            }
+            //$obj=$_POST['observation'];
+            //echo $q;
+            $facid = $_SESSION['u_facilityid'];
+            $uid = $_SESSION['userid'];
 
-                      if ($insertresult) {
+            $conc = $_SESSION['Cn'];
+            // echo  $conc;
+            $concsub = $_SESSION['$subtye'];
+            $assperiod = $_SESSION['assperiod'];
+            //mysqli_query($conn,"insert into chk_list_assessment (fac_id_fk,fac_dept_id_fk,c_subtype_id_fk,area_of_con_id_fk,csqa_id_fk,ass_compliance,ass_period_id,user_id)values($facid,$fd,$concsub,$conc,$id,$ass_compliance,1,$uid)");
+            $insertq = "CALL in_assessment($facid,$fd,$subtype, $areofconcern,$id,$ass_compliance,$assperiod,$uid)";
+            $insertresult = $con->query($insertq);
 
-            ?>
+            if ($insertresult) {
+
+          ?>
               </br>
               <p>
                 <button addEventListener="function()" type="button" class="btn btn-success"><?php echo "Compliance Added ..!"; ?><i class="bi bi-check-circle"></i></button>
               </p>
             <?php
-                        //mysqli_free_result($insertresult);
-                        //$con->next_result();
+              //mysqli_free_result($insertresult);
+              //$con->next_result();
 
-                      } else {
-                        echo "sorry";
-                      }
-                      $query1 = $con->query($q);
-                      while ($row = mysqli_fetch_array($query1)) {
+            } else {
+              echo "sorry";
+            }
+            $query1 = $con->query($q);
+            while ($row = mysqli_fetch_array($query1)) {
             ?>
               <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
                 <tbody>
-                <th colspan="2">
-                      <center>Currently accessing area of Concern "<?php echo $_SESSION['xx']; ?>"  </center>
-                    </th>
                   <tr>
                     <th colspan="2">
-                      <center>Check List details for Compliance </center>
+                      <center>Check List details for Compliance <?php echo $_SESSION['xx'] ?> </center>
                     </th>
 
                   </tr>
@@ -409,8 +439,8 @@ include('h.php');
                   </form>
 
                 <?php }
-                      mysqli_free_result($query1);
-                      $con->next_result();
+              mysqli_free_result($query1);
+              $con->next_result();
                 ?>
 
 
@@ -450,17 +480,46 @@ include('h.php');
             </div>
           <?php }
                   } elseif (isset($_POST['edit'])) {
+                    ?>
+ <script>
+              $("#Concern option").each(function(index) {
+                var item = $(this).val();
+                if (item == "<?php echo $_SESSION['xx']  ?>") {
+                  $(this).prop('selected', true);
+                }
+              });
+              var Concernid = $("#Concern").val();
+              //alert(Concernid);
+              $.ajax({
+                method: "POST",
+                url: "response.php",
+                data: {
+                  cid: Concernid,
+                },
+                datatype: "html",
+                success: function(data) {
+                  $("#category").html(data);
+                }
+              });
+            </script>
+            <script>
+              $("#Assessment_Method option").each(function(index) {
+                var item = $(this).val();
+                if (item == "<?php echo $_SESSION['xxx'] ?>") {
+                  $(this).prop('selected', true);
+                }
+              });
+            </script>
+                    <?php
                     $csqid = $_POST['edit'];
                     $editQ = "SELECT * FROM sarbsoft_nqa.concern_subtype_chklist where csqa_id=$csqid";
                     $editQ1 = $con->query($editQ);
-                   // echo $csqid;
+                    // echo $csqid;
                     while ($row = mysqli_fetch_array($editQ1)) {
           ?>
             <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
               <tbody>
-              <th colspan="2">
-                      <center>Currently accessing area of Concern "<?php echo $_SESSION['xx']; ?>"  </center>
-                    </th>
+
                 <tr>
                   <th colspan="2">
                     <center>Check List details for Compliance </center>
@@ -553,7 +612,37 @@ include('h.php');
             </table>
           <?php
                     }
-                  } elseif (isset($_POST['update'])) {
+                  } elseif (isset($_POST['update'])) { ?>
+                   <script>
+              $("#Concern option").each(function(index) {
+                var item = $(this).val();
+                if (item == "<?php echo $_SESSION['xx']  ?>") {
+                  $(this).prop('selected', true);
+                }
+              });
+              var Concernid = $("#Concern").val();
+              //alert(Concernid);
+              $.ajax({
+                method: "POST",
+                url: "response.php",
+                data: {
+                  cid: Concernid,
+                },
+                datatype: "html",
+                success: function(data) {
+                  $("#category").html(data);
+                }
+              });
+            </script>
+            <script>
+              $("#Assessment_Method option").each(function(index) {
+                var item = $(this).val();
+                if (item == "<?php echo $_SESSION['xxx'] ?>") {
+                  $(this).prop('selected', true);
+                }
+              });
+            </script>
+            <?php
                     $showdata = $_POST['csqa_id1'];
                     // echo  $showdata;
                     $facid = $_SESSION['u_facilityid'];
@@ -583,9 +672,7 @@ include('h.php');
           ?>
             <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
               <tbody>
-              <th colspan="2">
-                      <center>Currently accessing area of Concern "<?php echo $_SESSION['xx']; ?>"  </center>
-                    </th>
+
                 <tr>
                   <th colspan="2">
                     <center>Check List details for Compliance </center>
