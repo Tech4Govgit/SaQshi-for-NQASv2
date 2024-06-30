@@ -316,7 +316,7 @@ include('h.php');
                             $fty = $_SESSION['f_type_id'];
                             $query = "CALL dept_dash_preriod_g($fid,$did,$fty)";
                             $result = $con->query($query);
-                            if ($result->num_rows <= 1) {
+                            if ($result->num_rows <2 and  $result->num_rows>0 ) {
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     $values[] = $row['total'];
                                     $values1[] = "'" . $row['period'] . "'";
@@ -325,7 +325,7 @@ include('h.php');
                                 $h1 = implode(", ", $values1);
 
                             ?>
-                               <script>
+                                <script>
                                     document.addEventListener("DOMContentLoaded", () => {
                                         new ApexCharts(document.querySelector("#radialBarChart"), {
                                             series: [{
@@ -350,15 +350,15 @@ include('h.php');
                                         }).render();
                                     });
                                 </script>
-                            <?php }else{
+                            <?php } elseif($result->num_rows >1) {
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     $values[] = $row['total'];
                                     $values1[] = "'" . $row['period'] . "'";
                                 }
                                 $h = implode(", ", $values);
                                 $h1 = implode(", ", $values1);
-                                 ?>
-                               <script>
+                            ?>
+                                <script>
                                     document.addEventListener("DOMContentLoaded", () => {
                                         new ApexCharts(document.querySelector("#radialBarChart"), {
                                             series: [<?php echo  $h; ?>],
@@ -383,7 +383,7 @@ include('h.php');
                                                             label: '',
                                                             formatter: function(w) {
                                                                 // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-                                                               
+
                                                             }
                                                         }
                                                     }
@@ -393,7 +393,10 @@ include('h.php');
                                         }).render();
                                     });
                                 </script>
-                            <?php    } ?>
+                            <?php    }else{
+
+                                echo "Sorry No data..!"
+;                            } ?>
                             <!-- End Radial Bar Chart -->
 
                         </div>

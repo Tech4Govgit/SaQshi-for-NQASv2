@@ -18,12 +18,7 @@ include('h2.php');
             <a role="tab" class="nav-link " data-toggle="tab" href="#tab-content-1">
                 <span>DrillDown*</span>
             </a>
-        </li>
-        <li class="nav-item">
-            <a role="tab" class="nav-link " data-toggle="tab" href="#tab-content-2">
-                <span>ToDo*</span>
-            </a>
-        </li>
+        </li>     
 
     </ul>
     <div class="tab-content">
@@ -380,89 +375,7 @@ include('h2.php');
 
         </div>
         <!---------------tab3--------------------->
-        <div class="tab-pane fade" id="tab-content-2">
-            <div class="card">
-                <div class="card-body">
-                    <form enctype="multipart/form-data" method="post" action="#">
-                        <div class="form-group row">
-                            <div class="col-sm-3">
-                                <label>Select Facility</label>
-                                <select class="form-control-sm form-control" id="Facilityid1" name="Facilityid1">
-                                    <option value="0">Select Facility </option>
-                                    <?php
-                                    include("db.php");
-                                    $dist = $_SESSION['dist'];
-                                    $query = "SELECT fac_id, fac_name FROM facilities where dist_id=$dist ";
-                                    // $result = mysqli_query($con, $query);
-                                    $result = $con->query($query);
-                                    //mysqli_close($con);  
-                                    if ($result->num_rows > 0) {
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            // $_SESSION['u_facilityid']=$row['fac_id'];
-                                    ?>
-                                            <option value="<?php echo $row['fac_id']; ?>"><?php echo $row['fac_name']; ?></option>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="col-sm-3">
-                                <label>Select Department/Ward</label>
-                                <select class="form-control-sm form-control" id="Facility_Department1" name="Facility_Department1">
-                                    <option value="0">Select Department</option>
-                                    <?php
-                                    // $fsid=$_SESSION['u_facilityid'];
-                                    $query = "SELECT  fac_dept_id, dept_name FROM fac_department";
-                                    // $query = mysqli_query($con, $qr);
-                                    $result = $con->query($query);
-                                    if ($result->num_rows > 0) {
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                    ?>
-                                            <option value="<?php echo $row['fac_dept_id']; ?>"><?php echo $row['dept_name']; ?></option>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="col-sm-3">
-                                <label>Select Assessment Period</label>
-                                <select class="form-control-sm form-control" id="Period1" name="Period1">
-                                    <option value="0">Select Assessment Period</option>
-
-                                </select>
-                            </div>
-                            <div class="col-sm-2">
-                                </br>
-                                <button type="submit" value="Submit" name="Noachiv" class="btn btn-primary">View</button>
-                            </div>
-                        </div>
-
-                    </form>
-
-
-                    <?php
-                    if (isset($_POST['Noachiv'])) {
-                        $_SESSION['FDepartment'] = $_POST["Facility_Department1"];
-                        $_SESSION['period'] = $_POST['Period1'];
-                        $_SESSION['fid'] = $_POST["Facilityid1"];
-                        $F = $_SESSION['FDepartment'];
-                        $Fa = $_SESSION['fid'];
-                        $p = $_SESSION['period'];
-                        if ($F == 0 or $Fa == 0 or $p == 0) {
-                    ?>
-                            <p>
-                                <button addEventListener="function()" type="button" class="btn btn-warning"><?php echo "Kindly select Drop down values..!"; ?><i class="bi bi-check-circle"></i></button>
-                            </p>
-                    <?php
-                        }
-                    }
-
-                    ?>
-                </div>
-            </div>
-        </div>
+       
         <!---------------tab2--------------------->
 
         <div class="tab-pane show active" id="tab-content-1">
@@ -478,7 +391,7 @@ include('h2.php');
                                     <option value="0">--Select--</option>
                                     <?php
                                     $dist_id = $_SESSION['dist'];
-                                    $call_q1 = "SELECT distinct(block_id),Block_Name FROM sarbsoft_nqa.facilities where dist_id=$dist_id";
+                                    $call_q1 = "SELECT distinct(block_id),Block_Name FROM sarbsoft_nqa_test.facilities where dist_id=$dist_id";
                                     $q22 = mysqli_query($con, $call_q1);
                                     while ($row = mysqli_fetch_array($q22)) {
                                     ?>
@@ -497,7 +410,7 @@ include('h2.php');
                                     <option value="0">--Select--</option>
                                     <?php
                                     $dist_id = $_SESSION['dist'];
-                                    $call_q1 = "SELECT fac_type_id,facilities_type FROM sarbsoft_nqa.facilities_type";
+                                    $call_q1 = "SELECT fac_type_id,facilities_type FROM sarbsoft_nqa_test.facilities_type";
                                     $q22 = mysqli_query($con, $call_q1);
                                     while ($row = mysqli_fetch_array($q22)) {
                                     ?>
@@ -560,7 +473,7 @@ include('h2.php');
                                         $fid = $u_fid;
 
 
-                                        $call_q1 = "SELECT count(fac_dept_id) FROM sarbsoft_nqa.fac_dept_map where fac_id=$fid";
+                                        $call_q1 = "SELECT count(fac_dept_id) FROM sarbsoft_nqa_test.fac_dept_map where fac_id=$fid";
                                         $q22 = mysqli_query($con, $call_q1);
                                         while ($row = mysqli_fetch_array($q22)) {
                                             $obtained = $row['count(fac_dept_id)'];
@@ -983,30 +896,7 @@ include('h2.php');
             });
 
         });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $("#Facilityid1").on('change', function() {
-                var fid = $(this).val();
-
-                $.ajax({
-                    method: "POST",
-                    url: "responce_dist1.php",
-                    data: {
-                        cid: fid
-
-                    },
-                    datatype: "html",
-                    success: function(data) {
-                        $("#Period1").html(data);
-
-
-                    }
-                });
-            });
-
-        });
-    </script>
+    </script>        
     <script type="text/JavaScript">
         $(document).ready(function(){   
     $("p").show().delay(3000).fadeOut();
