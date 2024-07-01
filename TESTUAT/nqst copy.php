@@ -85,7 +85,7 @@ include('h.php');
                 ?>
                 <input type="hidden" name="selectedName" id="selectedName" value="">
               </select>
-
+              
             </div>
 
 
@@ -93,50 +93,32 @@ include('h.php');
               <label for="ibank">Select Standard</label>
               <select class="form-control-sm form-control" id="category" name="category">
                 <option value="0">-Select-</option>
-                <input type="hidden" name="selectedName1" id="selectedName1" value="">
+               
               </select>
             </div>
             <div class="col-auto">
               <label for="dep">Select Assessment Method</label>
-
               <select class="form-control-sm form-control" id="Assessment_Method" name="Assessment_Method">
-                <?php if ($_SESSION['facilty_type'] == 4) {
-                ?>
-                  <option value="">-Select-</option>
-                  <option value="SI">SI</option>
-                  <option value="OB">OB</option>
-                  <option value="PI">PI</option>
-                  <option value="RR">RR</option>
-                  <option value="CI">CI</option>
+                <option value="">-Select-</option>
+                <option value="SI">SI</option>
+                <option value="OB">OB</option>
+                <option value="PI">PI</option>
+                <option value="RR">RR</option>
+                <option value="RR">CI</option>
               </select>
-            <?php } else { ?>
-              <option value="">-Select-</option>
-              <option value="SI">SI</option>
-              <option value="OB">OB</option>
-              <option value="PI">PI</option>
-              <option value="RR">RR</option>
-
-
-
-            <?php } ?>
-            </select>
             </div>
             <div class="col-auto">
               </br>
               <button type="submit" value="Submit" name="postsubmit" class="mb-2 mr-2 btn btn-primary">Show Checklist</button>
               <script>
-                document.querySelector('form').addEventListener('submit', function() {
-                  var select = document.getElementById('Concern');
-                  var selectedOption = select.options[select.selectedIndex];
-                  var selectedName = selectedOption.text;
-                  document.getElementById('selectedName').value = selectedName;
-                  var select = document.getElementById('category');
-                  var selectedOption1 = select.options[select.selectedIndex];
-                  var selectedName1 = selectedOption1.text;
-                  document.getElementById('selectedName1').value = selectedName1;
-                });
-              </script>
-
+        document.querySelector('form').addEventListener('submit', function() {
+            var select = document.getElementById('Concern');
+            var selectedOption = select.options[select.selectedIndex];
+            var selectedName = selectedOption.text;
+            document.getElementById('selectedName').value = selectedName;
+        });
+    </script>
+   
             </div>
           </div>
         </form>
@@ -147,47 +129,15 @@ include('h.php');
 
         <?php
         if (isset($_POST['postsubmit'])) {
-
+         
           if (isset($_POST['Concern'])) {
-        ?>
-            <script>
-              $("#Concern option").each(function(index) {
-                var item = $(this).val();
-                if (item == "<?php echo $_POST['Concern'] ?>") {
-                  $(this).prop('selected', true);
-                }
-              });
-              var Concernid = $("#Concern").val();
-              //alert(Concernid);
-              $.ajax({
-                method: "POST",
-                url: "response.php",
-                data: {
-                  cid: Concernid,
-                },
-                datatype: "html",
-                success: function(data) {
-                  $("#category").html(data);
-                }
-              });
-            </script>
-            <script>
-              $("#Assessment_Method option").each(function(index) {
-                var item = $(this).val();
-                if (item == "<?php echo $_POST['Assessment_Method'] ?>") {
-                  $(this).prop('selected', true);
-                }
-              });
-            </script>
-            <?php
             $M = $_SESSION['M'];
             $C = $_SESSION['C'];
             $Means = $_SESSION['Means'];
             $_SESSION['Cn'] = $_POST["Concern"];
             $_SESSION['cy'] = $_POST["category"];
-             $_SESSION['xx']=$_POST['selectedName'];          
-            // $selectedName = $_POST['selectedName'];
-
+            $_SESSION['xx']=$_POST['selectedName'];
+            $selectedName = $_POST['selectedName'];
             $p = $_SESSION['assperiod'];
             $F = $_SESSION['dept_id1'];
             $Fa = $_SESSION['facilty_type'];
@@ -197,7 +147,7 @@ include('h.php');
             $_SESSION['Assessment_Method'] = $_POST['Assessment_Method'];
             $ASSm = $_SESSION['Assessment_Method'];
             if ($Co == 0 or $ca == "") {
-            ?>
+        ?>
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 Kindly Select Area of Concern/Standard from drop down.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -214,6 +164,12 @@ include('h.php');
               <br>
               <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
                 <tbody>
+                <tr>
+                    <th colspan="2">
+                      <center>Currently accessing area of Concern "<?php echo  $selectedName; ?>"  </center>
+                    </th>
+
+                  </tr>
                   <tr>
                     <th colspan="2">
                       <center>Check List details for Compliance </center>
@@ -265,18 +221,6 @@ include('h.php');
                         <button type="submit" id="postsubmit1" name="postsubmit1" class="btn btn-primary btn-sm">Save & Next</button>
                       </td>
                     </tr>
-                    <script>
-                document.querySelector('form').addEventListener('postsubmit1', function() {
-                  var select = document.getElementById('Concern');
-                  var selectedOption = select.options[select.selectedIndex];
-                  var selectedName = selectedOption.text;
-                  document.getElementById('selectedName').value = selectedName;
-                  var select = document.getElementById('category');
-                  var selectedOption1 = select.options[select.selectedIndex];
-                  var selectedName1 = selectedOption1.text;
-                  document.getElementById('selectedName1').value = selectedName1;
-                });
-              </script>
                   </form>
 
 
@@ -313,14 +257,14 @@ include('h.php');
                 </tr>
                 </tbody>
               </table>
-          <?php }
+            <?php }
                       mysqli_free_result($queryb);
                       $con->next_result();
                     }
                   } elseif (isset($_POST['postsubmit1'])) {
-          ?>
-
-          <?php
+                    ?>
+                     
+                    <?php
                     $ass_compliance = $_POST['f'];
                     if ($ass_compliance == 0 or  $ass_compliance == 1 or  $ass_compliance == 2) {
 
@@ -349,7 +293,7 @@ include('h.php');
 
                       if ($insertresult) {
 
-          ?>
+            ?>
               </br>
               <p>
                 <button addEventListener="function()" type="button" class="btn btn-success"><?php echo "Compliance Added ..!"; ?><i class="bi bi-check-circle"></i></button>
@@ -366,6 +310,9 @@ include('h.php');
             ?>
               <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
                 <tbody>
+                <th colspan="2">
+                      <center>Currently accessing area of Concern "<?php echo $_SESSION['xx']; ?>"  </center>
+                    </th>
                   <tr>
                     <th colspan="2">
                       <center>Check List details for Compliance </center>
@@ -471,14 +418,14 @@ include('h.php');
                     $csqid = $_POST['edit'];
                     $editQ = "SELECT * FROM sarbsoft_nqa.concern_subtype_chklist where csqa_id=$csqid";
                     $editQ1 = $con->query($editQ);
-                    // echo $csqid;
+                   // echo $csqid;
                     while ($row = mysqli_fetch_array($editQ1)) {
           ?>
             <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
               <tbody>
-                <th colspan="2">
-                  <center>Currently accessing area of Concern "<?php echo $_SESSION['xx']; ?>" </center>
-                </th>
+              <th colspan="2">
+                      <center>Currently accessing area of Concern "<?php echo $_SESSION['xx']; ?>"  </center>
+                    </th>
                 <tr>
                   <th colspan="2">
                     <center>Check List details for Compliance </center>
@@ -601,9 +548,9 @@ include('h.php');
           ?>
             <table class="table table-fit w-auto small table-striped  table-bordered table-hover table-condensed">
               <tbody>
-                <th colspan="2">
-                  <center>Currently accessing area of Concern "<?php echo $_SESSION['xx']; ?>" </center>
-                </th>
+              <th colspan="2">
+                      <center>Currently accessing area of Concern "<?php echo $_SESSION['xx']; ?>"  </center>
+                    </th>
                 <tr>
                   <th colspan="2">
                     <center>Check List details for Compliance </center>

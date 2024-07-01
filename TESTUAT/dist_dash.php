@@ -140,7 +140,7 @@ include('h2.php');
               <select class="form-select" id="District" name="District">
                 <?php
                 $dist_id = $_SESSION['dist'];
-                $call_q1 = "SELECT distinct(block_id) ,Block_Name FROM sarbsoft_nqa_test.facilities where dist_id=$dist_id";
+                $call_q1 = "SELECT distinct(block_id) ,Block_Name FROM sarbsoft_nqa.facilities where dist_id=$dist_id";
                 $q22 = mysqli_query($con, $call_q1);
                 while ($row = mysqli_fetch_array($q22)) {
                 ?>
@@ -157,7 +157,7 @@ include('h2.php');
               <select class="form-select" id="Block" name="Block">
                 <?php
                 $dist_id = $_SESSION['dist'];
-                $call_q1 = "SELECT fac_type_id,facilities_type FROM sarbsoft_nqa_test.facilities_type";
+                $call_q1 = "SELECT fac_type_id,facilities_type FROM sarbsoft_nqa.facilities_type";
                 $q22 = mysqli_query($con, $call_q1);
                 while ($row = mysqli_fetch_array($q22)) {
                 ?>
@@ -213,7 +213,7 @@ include('h2.php');
                     $fid = $u_fid;
 
 
-                    $call_q1 = "SELECT count(fac_dept_id) FROM sarbsoft_nqa_test.fac_dept_map where fac_id=$fid";
+                    $call_q1 = "SELECT count(fac_dept_id) FROM sarbsoft_nqa.fac_dept_map where fac_id=$fid";
                     $q22 = mysqli_query($con, $call_q1);
                     while ($row = mysqli_fetch_array($q22)) {
                       $obtained = $row['count(fac_dept_id)'];

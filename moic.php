@@ -56,7 +56,7 @@ include('h.php');
 
                         <div class="col-auto">
                             </br>
-                            <button type="submit" value="Submit" name="submit3" class="btn btn-success btn-sm">View Compliance for Action Plan</button>
+                        <!---    <button type="submit" value="Submit" name="submit3" class="btn btn-success btn-sm" >View Compliance for Action Plan</button> -->
                         </div>
 
                     </div>

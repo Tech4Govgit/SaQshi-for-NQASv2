@@ -7,7 +7,7 @@ if (!empty($_POST['cid'])) {
     $sid1 = $_POST['cid'];
    // $dist_id1 = $_SESSION['dist'];
     $query1 = "SELECT fac_name , fac_id  FROM
-     sarbsoft_nqa_test.facilities where block_id=$sid1 and Health_facilty_type=$sid";
+     sarbsoft_nqa.facilities where block_id=$sid1 and Health_facilty_type=$sid";
     $result1 = mysqli_query($con, $query1);
     if ($result1->num_rows > 0) {
         echo '<option value="">Select Institute</option>';

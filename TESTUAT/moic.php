@@ -56,7 +56,7 @@ include('h.php');
 
                         <div class="col-auto">
                             </br>
-                            <button type="submit" value="Submit" name="submit3" class="btn btn-success btn-sm">View Compliance for Action Plan</button>
+                        <!---    <button type="submit" value="Submit" name="submit3" class="btn btn-success btn-sm" >View Compliance for Action Plan</button> -->
                         </div>
 
                     </div>
@@ -194,7 +194,7 @@ include('h.php');
 
                                         <tr class="2">
                                             <th data-column-id="MOIC_Review">Res.Nodal</th>
-                                            <td><input type="text" id="res1" name="res"> </td>
+                                            <td><input type="text" id="res1" name="res" pattern="[a-zA-Z]{1,}" required> </td>
                                         </tr>
                                         <tr class="2">
                                             <th data-column-id="MOIC_Review">Time Period</th>

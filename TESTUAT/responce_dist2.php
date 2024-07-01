@@ -6,7 +6,7 @@ if (!empty($_POST['cid'])) {
     $sid1 = $_POST['cid'];
     
     $query1 = "SELECT distinct Block_Name , block_id  FROM
-     sarbsoft_nqa_test.facilities where dist_id=$sid1";
+     sarbsoft_nqa.facilities where dist_id=$sid1";
     $result1 = mysqli_query($con, $query1);
     if ($result1->num_rows > 0) {
        

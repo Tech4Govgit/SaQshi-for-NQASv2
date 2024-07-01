@@ -21,7 +21,7 @@ include('h.php');
                     <div class="form-group row">
                         <div class="col-auto">
                             <br>
-                            <select class="custom-select" id="Period" name="Period">
+                            <select class="form-control-sm form-control" id="Period" name="Period">
                                 <option value="0">Select Assessment Period</option>
                                 <?php
                                 $fsid = $_SESSION['u_facilityid'];
@@ -49,8 +49,15 @@ include('h.php');
 
                         </div>
                         <div class="col-auto">
+                        </br>    
+                            <select class="form-control-sm form-control" id="Concern" name="Concern">
+                           
+                            <option value="0">-Select Area of concern-</option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
                             <br>
-                            <select class="form-control-sm custom-select" id="Priority" name="Priority">
+                            <select class="form-control-sm form-control" id="Priority" name="Priority">
                                 <option value="2">-Priority-</option>
                                 <option value="0">Low</option>
                                 <option value="1">Medium</option>
@@ -59,7 +66,7 @@ include('h.php');
                         </div>
                         <div class="col-auto">
                             <br>
-                            <button type="submit" value="Submit" name="submit1" class="btn btn-primary btn-sm">Show Assessments</button>
+                            <button type="submit" value="Submit" name="submit1" class="btn btn-primary btn-sm">Show Assessment</button>
                         </div>
                     </div>
 
@@ -68,15 +75,27 @@ include('h.php');
 
                 <?php
                 if (isset($_POST['submit1'])) {
-                ?>
-                    <script>
-                        $("#Period option").each(function(index) {
-                            var item = $(this).val();
-                            if (item == "<?php $_SESSION['xxp']= $_POST['Period']; echo $_SESSION['xxp'] ?>") {
-                                $(this).prop('selected', true);
-                            }
-                        });
-                    </script>
+                ?><script>
+                $("#Period option").each(function(index) {
+                    var item = $(this).val();
+                    if (item == "<?php $_SESSION['xxp2'] = $_POST['Period'];                                            echo $_SESSION['xxp2'] ?>") {                                $(this).prop('selected', true);
+                    }
+                });
+                var Concernid = $('#Period').val();
+                $.ajax({
+                    method: "POST",
+                    cache: false,
+                    url: "response_m1.php",
+                    data: {
+                        cid: Concernid,
+                    },
+                    datatype: "html",
+                    success: function(data) {
+                        $("#Concern").html(data);
+                    },
+                    error: function(data) {}
+                });
+            </script>                    
                     <script>
                         $("#Priority option").each(function(index) {
                             var item = $(this).val();
@@ -88,6 +107,8 @@ include('h.php');
 
                     <?php
                     $_SESSION['FDepartment'] = $_SESSION['dept_id1'];
+                    $_SESSION['concern'] = $_POST['Concern'];
+                    $C = $_SESSION['concern'];
                     $_SESSION['period'] = $_POST['Period'];
                     $F = $_SESSION['FDepartment'];
                     $Fa = $_SESSION['u_facilityid'];
@@ -103,8 +124,8 @@ include('h.php');
                         <?php
                     }
                     // $ca= $_SESSION['cy'];
-                    $_SESSION['q1'] = "CALL updt_dept_action_plan($p1,$Fa,$p,$F)";
-                    $_SESSION['q'] = "CALL updt_dept_action_plan($p1,$Fa,$p,$F)";
+                    $_SESSION['q1'] = "CALL updt_dept_action_plan($p1,$Fa,$p,$F,$C)";
+                    $_SESSION['q'] = "CALL updt_dept_action_plan($p1,$Fa,$p,$F,$C)";
                     $query = $con->query($_SESSION['q']);
                     if ($query->num_rows > 0) {
                         while ($row = mysqli_fetch_array($query)) {
@@ -201,13 +222,26 @@ include('h.php');
                     } elseif (isset($_POST['postsubmit2'])) {
                             ?>
 <script>
-                        $("#Period option").each(function(index) {
-                            var item = $(this).val();
-                            if (item == "<?php  echo $_SESSION['xxp'] ?>") {
-                                $(this).prop('selected', true);
-                            }
-                        });
-                    </script>
+                $("#Period option").each(function(index) {
+                    var item = $(this).val();
+                    if (item == "<?php echo $_SESSION['xxp2'] ?>") {                                $(this).prop('selected', true);
+                    }
+                });
+                var Concernid = $('#Period').val();
+                $.ajax({
+                    method: "POST",
+                    cache: false,
+                    url: "response_m1.php",
+                    data: {
+                        cid: Concernid,
+                    },
+                    datatype: "html",
+                    success: function(data) {
+                        $("#Concern").html(data);
+                    },
+                    error: function(data) {}
+                });
+            </script>
                     <script>
                         $("#Priority option").each(function(index) {
                             var item = $(this).val();
@@ -350,18 +384,18 @@ include('h.php');
 
 <script>
     $(document).ready(function() {
-        $("#Period1").on('change', function() {
-            var Concernid = $('#Period1').val();
+        $("#Period").on('change', function() {
+            var Concernid = $('#Period').val();
             $.ajax({
                 method: "POST",
                 cache: false,
-                url: "response_m.php",
+                url: "response_m1.php",
                 data: {
                     cid: Concernid,
                 },
                 datatype: "html",
                 success: function(data) {
-                    $("#Concern1").html(data);
+                    $("#Concern").html(data);
                 },
                 error: function(data) {}
             });

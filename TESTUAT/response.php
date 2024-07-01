@@ -27,7 +27,7 @@ if (!empty($_POST["cid"])) {
         
     }
 } else {
-    print_r("sorry");
+    print_r($mysqli -> error_list);
 }  
    
 ?>

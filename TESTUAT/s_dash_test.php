@@ -366,7 +366,7 @@ include('h4.php');
                                 <select class="form-control-sm form-control" id="District1" name="District1">
                                     <option value="0">--Select--</option>
                                     <?php
-                                    $call_q111 = "SELECT distinct(dist_id),Dist_Name FROM sarbsoft_nqa_test.facilities";
+                                    $call_q111 = "SELECT distinct(dist_id),Dist_Name FROM sarbsoft_nqa.facilities";
                                     $q221 = mysqli_query($con, $call_q111);
                                     while ($row = mysqli_fetch_array($q221)) {
                                     ?>
@@ -393,7 +393,7 @@ include('h4.php');
                                     <option value="0">--Select--</option>
                                     <?php
                                     //  $dist_id = $_SESSION['dist'];
-                                    $call_q1 = "SELECT fac_type_id,facilities_type FROM sarbsoft_nqa_test.facilities_type";
+                                    $call_q1 = "SELECT fac_type_id,facilities_type FROM sarbsoft_nqa.facilities_type";
                                     $q22 = mysqli_query($con, $call_q1);
                                     while ($row = mysqli_fetch_array($q22)) {
                                     ?>
@@ -456,7 +456,7 @@ include('h4.php');
                                         $fid = $u_fid;
 
 
-                                        $call_q1 = "SELECT count(fac_dept_id) FROM sarbsoft_nqa_test.fac_dept_map where fac_id=$fid";
+                                        $call_q1 = "SELECT count(fac_dept_id) FROM sarbsoft_nqa.fac_dept_map where fac_id=$fid";
                                         $q22 = mysqli_query($con, $call_q1);
                                         while ($row = mysqli_fetch_array($q22)) {
                                             $obtained = $row['count(fac_dept_id)'];

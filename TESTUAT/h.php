@@ -68,7 +68,7 @@
                         </li>
                        <li class="dropdown-header">
                         <?php  $p1 =  $_SESSION['assperiod'];                        
-                        $tablequery1 = "SELECT ass_name FROM sarbsoft_nqa.assessment_desc where id=$p1;";
+                        $tablequery1 = "SELECT ass_name FROM assessment_desc where id=$p1;";
                         $q5 = mysqli_query($con, $tablequery1);
                         while ($row = mysqli_fetch_array($q5)) {
                         ?>

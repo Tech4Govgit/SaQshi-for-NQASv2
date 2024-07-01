@@ -120,6 +120,7 @@ include('h.php');
                         <div class="widget-content-left">
                             <div class="widget-heading">Non</div>
                             <div class="widget-subheading">Compliance</div>
+                            <div class="widget-subheading"><i class="bi bi-arrow-down-circle-fill"></i> <a href="export_deprt_indicators_non.php">Download Data</a></div>
                         </div>
                         <div class="widget-content-right">
                             <div class="widget-numbers text-danger"><span> <?php echo  $row['z']; ?></span></div>
@@ -133,6 +134,7 @@ include('h.php');
                         <div class="widget-content-left">
                             <div class="widget-heading">Partially</div>
                             <div class="widget-subheading">Compliance</div>
+                            <div class="widget-subheading"><i class="bi bi-arrow-down-circle-fill"></i> <a href="export_deprt_indicators_partially.php">Download Data</a></div>
                         </div>
                         <div class="widget-content-right">
                             <div class="widget-numbers text-warning"><span><?php echo  $row['o']; ?></span></div>
@@ -146,6 +148,7 @@ include('h.php');
                         <div class="widget-content-left">
                             <div class="widget-heading">Fully</div>
                             <div class="widget-subheading">Compliance</div>
+                            <div class="widget-subheading"><i class="bi bi-arrow-down-circle-fill"></i> <a href="export_deprt_indicators_full_comp.php">Download Data</a></div>
                         </div>
                         <div class="widget-content-right">
                             <div class="widget-numbers text-success"><span><?php echo  $row['t']; ?></span></div>
