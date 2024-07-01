@@ -449,27 +449,7 @@ include('h.php');
                                         } elseif (isset($_POST['submit3'])) {
 
                     ?>
-                    <script>
-                        $("#Period1 option").each(function(index) {
-                            var item = $(this).val();
-                            if (item == "<?php   echo $_SESSION['xxp2'] ?>") {                                $(this).prop('selected', true);
-                            }
-                        });
-                        var Concernid = $('#Period1').val();
-                        $.ajax({
-                            method: "POST",
-                            cache: false,
-                            url: "response_m.php",
-                            data: {
-                                cid: Concernid,
-                            },
-                            datatype: "html",
-                            success: function(data) {
-                                $("#Concern1").html(data);
-                            },
-                            error: function(data) {}
-                        });
-                    </script>
+                   
                     <br>
 
                     <?php

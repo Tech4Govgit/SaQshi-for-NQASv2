@@ -48,7 +48,7 @@ include('h2.php');
                                 <div class="d-flex no-block align-items-center">
                                     <div>
                                         <i class="mdi mdi-image font-20  text-muted"></i>
-                                        <p class="font-16 m-b-5">CHC</p>
+                                        CHC
                                     </div>
                                     <div class="ml-auto">
                                         <h1 class="font-light text-right"><?php echo $CHCcomp; ?>/<?php echo $CHC; ?></h1>
@@ -61,7 +61,7 @@ include('h2.php');
                                 <div class="d-flex no-block align-items-center">
                                     <div>
                                         <i class="mdi mdi-image font-20  text-muted"></i>
-                                        <p class="font-16 m-b-5">PHC</p>
+                                        PHC
                                     </div>
                                     <div class="ml-auto">
                                         <h1 class="font-light text-right"><?php echo $PHCcomp; ?>/<?php echo $PHC; ?></h1>
@@ -75,7 +75,7 @@ include('h2.php');
                                 <div class="d-flex no-block align-items-center">
                                     <div>
                                         <i class="mdi mdi-image font-20  text-muted"></i>
-                                        <p class="font-16 m-b-5">DH</p>
+                                        DH
                                     </div>
                                     <div class="ml-auto">
                                         <h1 class="font-light text-right"><?php echo $DHcomp; ?>/<?php echo $DH; ?></h1>
@@ -92,7 +92,7 @@ include('h2.php');
                                 <div class="d-flex no-block align-items-center">
                                     <div>
                                         <i class="mdi mdi-image font-20  text-muted"></i>
-                                        <p class="font-16 m-b-5">HWC</p>
+                                        HWC
                                     </div>
                                     <div class="ml-auto">
                                         <h1 class="font-light text-right"><?php echo $HWCcomp; ?>/<?php echo $HWC; ?></h1>
@@ -108,7 +108,7 @@ include('h2.php');
                                 <div class="d-flex no-block align-items-center">
                                     <div>
                                         <i class="mdi mdi-image font-20  text-muted"></i>
-                                        <p class="font-16 m-b-5">UPHC</p>
+                                        UPHC
                                     </div>
                                     <div class="ml-auto">
                                         <h1 class="font-light text-right"><?php echo $UPHCcomp; ?>/<?php echo $UPHC; ?></h1>

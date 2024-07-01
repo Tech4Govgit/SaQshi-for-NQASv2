@@ -68,7 +68,7 @@
                         </li>
                        <li class="dropdown-header">
                         <?php  $p1 =  $_SESSION['assperiod'];                        
-                        $tablequery1 = "SELECT ass_name FROM sarbsoft_nqa_test.assessment_desc where id=$p1;";
+                        $tablequery1 = "SELECT ass_name FROM sarbsoft_nqa.assessment_desc where id=$p1;";
                         $q5 = mysqli_query($con, $tablequery1);
                         while ($row = mysqli_fetch_array($q5)) {
                         ?>
@@ -139,11 +139,26 @@
                     <li>
                         <a href="moic.php">
                             <i class="bi bi-circle"></i><span>Generate Action Plan</span>
+                            <span> </span>
+                    <i class="bi bi-bell"></i>
+                    <span class="badge bg-warning badge-number">
+                   
+                    <div id="dynamic-content">
+      
+                    </div>
+                    </span>
                         </a>
                     </li>
                     <li>
                         <a href="umoic.php">
                             <i class="bi bi-circle"></i><span>Update Action Plan</span>
+                            <span> </span>
+                    <i class="bi bi-bell"></i>
+                    <span class="badge bg-warning badge-number">
+                   
+                    <div id="dynamic-content1">
+      
+                    </div>
                         </a>
                     </li>
 
@@ -179,3 +194,55 @@
             </li><!-- End Contact Page Nav -->
         </ul>
     </aside><!-- End Sidebar-->
+    
+    <script>
+        $(document).ready(function() {
+            // Function to fetch and update content
+            function updateContent() {
+                $.ajax({
+                    url: 'update1.php', // PHP script that generates new content
+                    type: 'GET',
+                    dataType: 'json', // Expect JSON response
+                    success: function(response) {
+                        // Update the content of a specific element
+                        $('#dynamic-content').text(response.data);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching data:', error);
+                    }
+                });
+            }
+
+            // Initial call to update content
+            updateContent();
+
+            // Set interval to refresh content every 5 seconds
+            setInterval(updateContent, 1000); // 5000 milliseconds = 5 seconds
+        });
+    </script>
+     <script>
+        $(document).ready(function() {
+            // Function to fetch and update content
+            function updateContent1() {
+                $.ajax({
+                    url: 'update2.php', // PHP script that generates new content
+                    type: 'GET',
+                    dataType: 'json', // Expect JSON response
+                    success: function(response) {
+                        // Update the content of a specific element
+                        $('#dynamic-content1').text(response.data);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching data:', error);
+                    }
+                });
+            }
+
+            // Initial call to update content
+            updateContent1();
+
+            // Set interval to refresh content every 5 seconds
+            setInterval(updateContent1, 1000); // 5000 milliseconds = 5 seconds
+        });
+    </script>
+    
