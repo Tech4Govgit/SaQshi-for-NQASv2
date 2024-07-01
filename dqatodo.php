@@ -360,9 +360,7 @@ include('h2.php');
             </div>
         </div>
     </section>
-    <?php
-    include('f.php');
-    ?>
+    
     <script>
         $(document).ready(function() {
             $('#f').change(function() {
@@ -429,6 +427,9 @@ include('h2.php');
             window.history.replaceState(null, null, window.location.href);
         }
     </script>
+    <?php
+    include('f.php');
+    ?>
     <!-- Template Main JS File -->
     </body>
 
