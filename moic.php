@@ -194,7 +194,7 @@ include('h.php');
 
                                         <tr class="2">
                                             <th data-column-id="MOIC_Review">Res.Nodal</th>
-                                            <td><input type="text" id="res1" name="res"> </td>
+                                            <td><input type="text" id="res1" name="res" pattern="[a-zA-Z]{1,}" required> </td>
                                         </tr>
                                         <tr class="2">
                                             <th data-column-id="MOIC_Review">Time Period</th>
