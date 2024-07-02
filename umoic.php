@@ -49,10 +49,10 @@ include('h.php');
 
                         </div>
                         <div class="col-auto">
-                        </br>    
+                            </br>
                             <select class="form-control-sm form-control" id="Concern" name="Concern">
-                           
-                            <option value="0">-Select Area of concern-</option>
+
+                                <option value="0">-Select Area of concern-</option>
                             </select>
                         </div>
                         <div class="col-auto">
@@ -64,6 +64,7 @@ include('h.php');
                                 <option value="2">High</option>
                             </select>
                         </div>
+
                         <div class="col-auto">
                             <br>
                             <button type="submit" value="Submit" name="submit1" class="btn btn-primary btn-sm">Show Assessment</button>
@@ -76,30 +77,31 @@ include('h.php');
                 <?php
                 if (isset($_POST['submit1'])) {
                 ?><script>
-                $("#Period option").each(function(index) {
-                    var item = $(this).val();
-                    if (item == "<?php $_SESSION['xxp2'] = $_POST['Period'];                                            echo $_SESSION['xxp2'] ?>") {                                $(this).prop('selected', true);
-                    }
-                });
-                var Concernid = $('#Period').val();
-                $.ajax({
-                    method: "POST",
-                    cache: false,
-                    url: "response_m1.php",
-                    data: {
-                        cid: Concernid,
-                    },
-                    datatype: "html",
-                    success: function(data) {
-                        $("#Concern").html(data);
-                    },
-                    error: function(data) {}
-                });
-            </script>                    
+                        $("#Period option").each(function(index) {
+                            var item = $(this).val();
+                            if (item == "<?php $_SESSION['xxp2'] = $_POST['Period'];                                            echo $_SESSION['xxp2'] ?>") {
+                                $(this).prop('selected', true);
+                            }
+                        });
+                        var Concernid = $('#Period').val();
+                        $.ajax({
+                            method: "POST",
+                            cache: false,
+                            url: "response_m1.php",
+                            data: {
+                                cid: Concernid,
+                            },
+                            datatype: "html",
+                            success: function(data) {
+                                $("#Concern").html(data);
+                            },
+                            error: function(data) {}
+                        });
+                    </script>
                     <script>
                         $("#Priority option").each(function(index) {
                             var item = $(this).val();
-                            if (item == "<?php $_SESSION['xxp1']= $_POST['Priority']; echo $_SESSION['xxp1'] ?>") {
+                            if (item == "<?php $_SESSION['xxp1'] = $_POST['Priority'];                                            echo $_SESSION['xxp1'] ?>") {
                                 $(this).prop('selected', true);
                             }
                         });
@@ -113,8 +115,8 @@ include('h.php');
                     $F = $_SESSION['FDepartment'];
                     $Fa = $_SESSION['u_facilityid'];
                     $p = $_SESSION['period'];
-                    $_SESSION['Priority']=$_POST['Priority'];
-                    $p1=$_SESSION['Priority'];
+                    $_SESSION['Priority'] = $_POST['Priority'];
+                    $p1 = $_SESSION['Priority'];
                     if ($p == 0) {
                     ?>
                         <button type="button" class="btn btn-warning"><?php echo "Kindly select assessment period...!!!!";
@@ -179,12 +181,19 @@ include('h.php');
                                         <th data-column-id="chk_list_assessment.moic_remarcks" class="table-info">Dept.actPlan. </th>
                                         <td><?php echo $row['dept_action_plan']; ?></td>
                                     </tr>
+                                    <form enctype="multipart/form-data" method="post" action="#">
+                                    <tr>
+                                                <th class="table-info">Action Taken</th>
+                                                <td>
+                                                    <textarea class="form-control" rows="3" id="Action_Taken" name="Action_Taken">Action Taken</textarea>
+                                                </td>
+                                            </tr>
                                     <tr>
                                         <th data-column-id="UpdComp" class="table-info">Upd Comp.</th>
 
                                         <td>
 
-                                            <form enctype="multipart/form-data" method="post" action="#">
+                                           
 
                                                 <select class="form-select form-select-sm" id="f" name="f">
                                                     <option value="3">Select</option>
@@ -196,6 +205,7 @@ include('h.php');
 
                                                 <input type="hidden" id="csqa_id1" name="csqa_id1" value="<?php echo  $_SESSION['q1']; ?>">
                                                 <input type="hidden" id="csqa_id" name="csqa_id" value="<?php echo $row['ass_id']; ?>">
+                                    </td>
                                     </tr>
                                     <tr>
                                         <th data-column-id="MOIC_Review" class="table-info">Action</th>
@@ -203,8 +213,7 @@ include('h.php');
                                         <td> <button type="submit" name="postsubmit2" class="btn btn-primary btn-sm">Save & Next</button></td>
                                     </tr>
                                     </form>
-                                    </td>
-                                    </tr>
+                                    
                                 <?php
                                 //mysqli_free_result($query);
                                 // $con->next_result();
@@ -221,35 +230,36 @@ include('h.php');
                         $con->next_result();
                     } elseif (isset($_POST['postsubmit2'])) {
                             ?>
-<script>
-                $("#Period option").each(function(index) {
-                    var item = $(this).val();
-                    if (item == "<?php echo $_SESSION['xxp2'] ?>") {                                $(this).prop('selected', true);
-                    }
-                });
-                var Concernid = $('#Period').val();
-                $.ajax({
-                    method: "POST",
-                    cache: false,
-                    url: "response_m1.php",
-                    data: {
-                        cid: Concernid,
-                    },
-                    datatype: "html",
-                    success: function(data) {
-                        $("#Concern").html(data);
-                    },
-                    error: function(data) {}
-                });
-            </script>
-                    <script>
-                        $("#Priority option").each(function(index) {
-                            var item = $(this).val();
-                            if (item == "<?php  echo $_SESSION['xxp1'] ?>") {
-                                $(this).prop('selected', true);
-                            }
-                        });
-                    </script>
+                            <script>
+                                $("#Period option").each(function(index) {
+                                    var item = $(this).val();
+                                    if (item == "<?php echo $_SESSION['xxp2'] ?>") {
+                                        $(this).prop('selected', true);
+                                    }
+                                });
+                                var Concernid = $('#Period').val();
+                                $.ajax({
+                                    method: "POST",
+                                    cache: false,
+                                    url: "response_m1.php",
+                                    data: {
+                                        cid: Concernid,
+                                    },
+                                    datatype: "html",
+                                    success: function(data) {
+                                        $("#Concern").html(data);
+                                    },
+                                    error: function(data) {}
+                                });
+                            </script>
+                            <script>
+                                $("#Priority option").each(function(index) {
+                                    var item = $(this).val();
+                                    if (item == "<?php echo $_SESSION['xxp1'] ?>") {
+                                        $(this).prop('selected', true);
+                                    }
+                                });
+                            </script>
                             <?php
 
                             include('conn.php');
@@ -257,6 +267,7 @@ include('h.php');
                             //$id=$_GET['csqa_id'];	
                             $q = $_POST['csqa_id1'];
                             $id = $_POST['csqa_id'];
+                            $ActionTaken = $_POST['Action_Taken'];
                             // echo $id ;
                             $moic_compliance = $_POST['f'];
                             if ($moic_compliance == 3) {
@@ -275,7 +286,7 @@ include('h.php');
                             // $uid=$_SESSION['userid'];
                             // mysqli_query($conn,"update chk_list_assessment set ass_compliance=$moic_compliance where ass_id=$id");
                             // $insertfeedback= "update chk_list_assessment_feedback set update_comp=$moic_compliance where ass_id=$id";           
-                            $up = "CALL updt_insert_dept_action_plan($moic_compliance,$id)";
+                            $up = "CALL updt_insert_dept_action_plan($moic_compliance,$id,'$ActionTaken')";
                             $up1 = $con->query($up);
                             if ($up1 >= 0) {
 
@@ -340,13 +351,16 @@ include('h.php');
                                                 <th data-column-id="chk_list_assessment.moic_remarcks" class="table-info">Dept.actPlan. </th>
                                                 <td><?php echo $row['dept_action_plan']; ?></td>
                                             </tr>
+                                            <form enctype="multipart/form-data" method="post" action="#">
+                                            <tr>
+                                                <th class="table-info">Action Taken</th>
+                                                <td>
+                                                    <textarea class="form-control" rows="3" id="Action_Taken" name="Action_Taken">Action Taken</textarea>
+                                                </td>
+                                            </tr>
                                             <tr>
                                                 <th data-column-id="UpdComp" class="table-info">Upd Comp.</th>
-
-                                                <td>
-
-                                                    <form enctype="multipart/form-data" method="post" action="#">
-
+                                                <td> 
                                                         <select class="form-select form-select-sm" id="f" name="f">
                                                             <option value="3">Select</option>
                                                             <option value="0">0</option>
@@ -357,15 +371,17 @@ include('h.php');
 
                                                         <input type="hidden" id="csqa_id1" name="csqa_id1" value="<?php echo  $_SESSION['q1']; ?>">
                                                         <input type="hidden" id="csqa_id" name="csqa_id" value="<?php echo $row['ass_id']; ?>">
-                                            </tr>
-                                            <tr>
+                                                        </td>
+                                                    </tr>
+                                              <tr>
                                                 <th data-column-id="MOIC_Review" class="table-info">Action</th>
 
                                                 <td> <button type="submit" name="postsubmit2" class="btn btn-primary btn-sm">Save & Next</button></td>
-                                            </tr>
-                                            </form>
-                                            </td>
-                                            </tr>
+                                                </tr>
+                                                
+                                             </form>
+                                            
+                                            
                                     <?php
                                 }
                             }
