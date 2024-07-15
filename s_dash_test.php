@@ -132,17 +132,210 @@ include('h4.php');
                                 <h4 class="card-title">Compliance Summary <i class="bi bi-arrow-down-circle-fill"></i></h4>
                             </a>
                             </br>
-                            <div class="table-responsive">                                
-                        <table class="table  small  table-bordered " id="tbl_exporttable_to_xls" data-toggle="bootgrid">
+                            <div class="table-responsive">
+                              
+                            <table class="table  datatable small  table-bordered " id="tbl_exporttable_to_xls">
+                            
                                     <thead>
                                     <tr class="table-primary">
-                                        <th scope="Dist_Name">District</th>
-                                        <th scope="Block_Name">Block</th>
-                                        <th scope="facilities_type">Type</th>
-                                        <th scope="fac_name">Name</th>                                                                               
+                                        <th scope="col">District</th>
+                                        <th scope="col">Block</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Non</th>
+                                        <th scope="col">Partially</th>
+                                        <th scope="col">Fully</th>
+                                        <th scope="col">Comp.</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">%</th>
+                                        <th scope="col">Obt.</th>
+                                        <th scope="col">Max.Score</th>
+                                        <th scope="col">%</th>
+                                        <th scope="col"><i class="bi bi-arrow-down-circle-fill"></i></th>
                                     </tr>
-                                    </thead>
-                                   
+                        </thead>
+                        <tbody>
+                                    <?php
+                                    // $b_id =  $_SESSION['block_id'];
+                                    $userid = $_SESSION['userid'];
+                                    $call_count = "SELECT  * FROM state_dash_view";
+                                    $count = mysqli_query($con, $call_count);
+                                    while ($row = mysqli_fetch_array($count)) {
+                                        $obtained = $row['p'];
+                                        if ($obtained != null) {
+                                            $percentage = $row['p'];
+                                            $m = $row['marks'];
+                                            $f = $row['f'];
+                                            $p1 = round((($m / $f) * 100), 2);
+                                            if ($percentage > 70) {
+                                            ?>
+                                                
+                                                    <tr>
+
+                                                        <td class="table-primary"><?php echo  $row['Dist_Name']; ?></td>
+                                                        <td class="table-primary"><?php echo  $row['Block_Name']; ?></td>
+                                                        <td class="table-primary"><?php echo  $row['facilities_type']; ?></td>
+                                                        <td class="table-primary"><?php echo  $row['fac_name']; ?></td>
+                                                        <td class="table-success"><?php echo  $row['zero']; ?></td>
+                                                        <td class="table-success"><?php echo  $row['one']; ?></td>
+                                                        <td class="table-success"><?php echo  $row['two']; ?></td>
+                                                        <td class="table-success"><?php echo  $row['obt']; ?></td>
+                                                        <td class="table-success"><?php echo  $row['tot']; ?></td>
+                                                        <td class="table-success"><?php echo  $row['p']; ?>%</td>
+                                                        <?php
+                                                        if ($p1 > 70) {
+                                                        ?>
+                                                            <td class="table-success"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-success"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-success"><?php echo  $p1; ?>%</td>
+                                                        <?php } elseif ($p1 > 65 and $p1 < 70) {
+                                                        ?>
+                                                            <td class="table-warning"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-warning"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-warning"><?php echo  $p1; ?>%</td>
+                                                        <?php } elseif ($p1 < 65) {
+                                                        ?>
+                                                            <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                        <?php } else { ?>
+                                                            <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                        <?php } ?>
+                                                        <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
+                                                    </tr>
+                                               
+
+                                            <?php } elseif ($percentage > 65 and $percentage < 70) {
+
+                                            ?>
+                                                
+                                                    <tr>
+
+                                                        <td class="table-primary"><?php echo  $row['Dist_Name']; ?></td>
+                                                        <td class="table-primary"><?php echo  $row['Block_Name']; ?></td>
+                                                        <td class="table-primary"><?php echo  $row['facilities_type']; ?></td>
+                                                        <td class="table-primary"><?php echo  $row['fac_name']; ?></td>
+                                                        <td class="table-warning"><?php echo  $row['zero']; ?></td>
+                                                        <td class="table-warning"><?php echo  $row['one']; ?></td>
+                                                        <td class="table-warning"><?php echo  $row['two']; ?></td>
+                                                        <td class="table-warning"><?php echo  $row['obt']; ?></td>
+                                                        <td class="table-warning"><?php echo  $row['tot']; ?></td>
+                                                        <td class="table-warning"><?php echo  $row['p']; ?>%</td>
+                                                        <?php
+                                                        if ($p1 > 70) {
+                                                        ?>
+                                                            <td class="table-success"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-success"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-success"><?php echo  $p1; ?>%</td>
+                                                        <?php } elseif ($p1 > 65 and $p1 < 70) {
+                                                        ?>
+                                                            <td class="table-warning"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-warning"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-warning"><?php echo  $p1; ?>%</td>
+                                                        <?php } elseif ($p1 < 65) {
+                                                        ?>
+                                                            <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                        <?php } else { ?>
+                                                            <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                        <?php } ?>
+                                                        <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
+                                                    </tr>
+                                              
+                                            <?php
+                                            } elseif ($percentage < 65) {
+                                            ?>
+                                                
+                                                    <tr>
+
+                                                        <td class="table-primary"><?php echo  $row['Dist_Name']; ?></td>
+                                                        <td class="table-primary"><?php echo  $row['Block_Name']; ?></td>
+                                                        <td class="table-primary"><?php echo  $row['facilities_type']; ?></td>
+                                                        <td class="table-primary"><?php echo  $row['fac_name']; ?></td>
+                                                        <td class="table-danger"><?php echo  $row['zero']; ?></td>
+                                                        <td class="table-danger"><?php echo  $row['one']; ?></td>
+                                                        <td class="table-danger"><?php echo  $row['two']; ?></td>
+                                                        <td class="table-danger"><?php echo  $row['obt']; ?></td>
+                                                        <td class="table-danger"><?php echo  $row['tot']; ?></td>
+                                                        <td class="table-danger"><?php echo  $row['p']; ?>%</td>
+                                                        <?php
+                                                        if ($p1 > 70) {
+                                                        ?>
+                                                            <td class="table-success"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-success"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-success"><?php echo  $p1; ?>%</td>
+                                                        <?php } elseif ($p1 > 65 and $p1 < 70) {
+                                                        ?>
+                                                            <td class="table-warning"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-warning"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-warning"><?php echo  $p1; ?>%</td>
+                                                        <?php } elseif ($p1 < 65) {
+                                                        ?>
+                                                            <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                        <?php } else { ?>
+                                                            <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                            <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                            <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                        <?php } ?>
+                                                        <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
+                                                    </tr>
+                                                
+                                            <?php
+                                            }
+                                        } else {
+                                            $percentage = 0;
+                                            ?>
+                                            
+                                                <tr>
+
+                                                    <td class="table-primary"><?php echo  $row['Dist_Name']; ?></td>
+                                                    <td class="table-primary"><?php echo  $row['Block_Name']; ?></td>
+                                                    <td class="table-primary"><?php echo  $row['facilities_type']; ?></td>
+                                                    <td class="table-primary"><?php echo  $row['fac_name']; ?></td>
+                                                    <td class="table-danger"><?php echo  $row['zero']; ?></td>
+                                                    <td class="table-danger"><?php echo  $row['one']; ?></td>
+                                                    <td class="table-danger"><?php echo  $row['two']; ?></td>
+                                                    <td class="table-danger"><?php echo  $row['obt']; ?></td>
+                                                    <td class="table-danger"><?php echo  $row['tot']; ?></td>
+                                                    <td class="table-danger"><?php echo  $row['p']; ?>%</td>
+                                                    <?php
+                                                    if ($p1 > 70) {
+                                                    ?>
+                                                        <td class="table-success"><?php echo  $row['marks']; ?></td>
+                                                        <td class="table-success"><?php echo  $row['f']; ?></td>
+                                                        <td class="table-success"><?php echo  $p1; ?>%</td>
+                                                    <?php } elseif ($p1 > 65 and $p1 < 70) {
+                                                    ?>
+                                                        <td class="table-warning"><?php echo  $row['marks']; ?></td>
+                                                        <td class="table-warning"><?php echo  $row['f']; ?></td>
+                                                        <td class="table-warning"><?php echo  $p1; ?>%</td>
+                                                    <?php } elseif ($p1 < 65) {
+                                                    ?>
+                                                        <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                        <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                        <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                    <?php } else { ?>
+                                                        <td class="table-danger"><?php echo  $row['marks']; ?></td>
+                                                        <td class="table-danger"><?php echo  $row['f']; ?></td>
+                                                        <td class="table-danger"><?php echo  $p1; ?>%</td>
+                                                    <?php } ?>
+                                                    <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
+                                                </tr>
+                                            
+                                    <?php
+                                        }
+                                    }
+                                    mysqli_free_result($count);
+                                    $con->next_result();
+                                    ?>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -706,7 +899,6 @@ include('h4.php');
 
         });
     </script>
-    
 </main><!-- End #main -->
 <!-- ----working area end ----->
 <!-- ======= Footer ======= -->
@@ -718,80 +910,3 @@ include('f.php');
 </body>
 
 </html>
-
-<script type="text/javascript">
-$( document ).ready(function() {
-	var grid = $("#tbl_exporttable_to_xls").bootgrid({
-		ajax: true,
-		rowSelect: true,
-		post: function ()
-		{
-			/* To accumulate custom parameter with the request object */
-			return {
-				id: "b0df282a-0d67-40e5-8558-c9e93b7befed"
-			};
-		},
-		
-		url: "gresponse.php",
-		formatters: {
-		        "commands": function(column, row)
-		        {
-		            return "<button type=\"button\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><span class=\"glyphicon glyphicon-edit\"></span></button> ";
-		        }
-		    }
-   }).on("loaded.rs.jquery.bootgrid", function()
-{
-    /* Executes after data is loaded and rendered */
-    grid.find(".command-edit").on("click", function(e)
-    {
-        //alert("You pressed edit on row: " + $(this).data("row-id"));
-			var ele =$(this).parent();
-			var g_id = $(this).parent().siblings(':first').html();
-            var g_name = $(this).parent().siblings(':nth-of-type(2)').html();
-console.log(g_id);
-                    console.log(g_name);
-
-		//console.log(grid.data());//
-		$('#edit_model').modal('show');
-					if($(this).data("row-id") >0) {
-							
-                                // collect the data
-                                $('#edit_id').val(ele.siblings(':first').html()); // in case we're changing the key
-                                $('#edit_Status').val(ele.siblings(':nth-of-type(2)').html());
-					} else {
-					 alert('Now row selected! First select row, then click edit button');
-					}
-    }).end().find(".command-delete").on("click", function(e)
-    {
-	
-		var conf = confirm('Delete ' + $(this).data("row-id") + ' items?');
-					alert(conf);
-                    if(conf){
-                                $.post('gresponse.php', { id: $(this).data("row-id"), action:'delete'}
-                                    , function(){
-                                        // when ajax returns (callback), 
-										$("#tbl_exporttable_to_xls").bootgrid('reload');
-                                }); 
-								//$(this).parent('tr').remove();
-								//$("#tbl_exporttable_to_xls").bootgrid('remove', $(this).data("row-id"))
-                    }
-    });
-});
-
-function ajaxAction(action) {
-				data = $("#frm_"+action).serializeArray();
-				$.ajax({
-				  type: "POST",  
-				  url: "gresponse.php",  
-				  data: data,
-				  dataType: "json",       
-				  success: function(response)  
-				  {
-					$('#'+action+'_model').modal('hide');
-					$("#tbl_exporttable_to_xls").bootgrid('reload');
-				  }   
-				});
-			}			
-			
-});
-</script>
