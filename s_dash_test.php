@@ -791,16 +791,7 @@ function ajaxAction(action) {
 					$("#tbl_exporttable_to_xls").bootgrid('reload');
 				  }   
 				});
-			}
+			}			
 			
-			$( "#command-add" ).click(function() {
-			  $('#add_model').modal('show');
-			});
-			$( "#btn_add" ).click(function() {
-			  ajaxAction('add');
-			});
-			$( "#btn_edit" ).click(function() {
-			  ajaxAction('edit');
-			});
 });
 </script>

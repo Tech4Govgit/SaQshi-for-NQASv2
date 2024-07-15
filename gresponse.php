@@ -3,7 +3,7 @@
 	//include connection file 
 	include_once("db.php");
 	
-	//$db = new dbObj();
+	$db = new db();
 	$connString =  $db->getConnstring();
 
 	$params = $_REQUEST;
@@ -12,10 +12,7 @@
 	$empCls = new Employee($connString);
 
 	switch($action) {
-	 case 'edit':
-	$empCls->updateEmployee($params);
-	 break;
-	 default:
+		 default:
 	 $empCls->getEmployees($params);
 	 return;
 	}
@@ -57,7 +54,8 @@
 			$where .=" ORDER By ".key($params['sort']) .' '.current($params['sort'])." ";
 		}
 	   // getting total number records without any search
-		$sql = "SELECT fac_name FROM state_dash_view;";
+		$sql = "SELECT zero,one,two,tot,obt,fac_name,Block_Name,facilities_type
+		p,marks,f FROM state_dash_view";
 		$sqlTot .= $sql;
 		$sqlRec .= $sql;
 		
@@ -87,14 +85,6 @@
 		
 		return $json_data;
 	}
-	function updateEmployee($params) {
-		$data = array();
-		//print_R($_POST);die;
-		$sql = "Update ass_reg set status = '" . $params["edit_Status"] ."' WHERE id='".$_POST["edit_id"]."'";
-		
-		echo $result = mysqli_query($this->con, $sql)or die("error to update Patient accept/Reject status");
-	}
-	
 	
 }
 ?>
