@@ -127,11 +127,9 @@ include('h4.php');
             <div class="row">
                 <div class="col">
                     <div class="card">
-                        <div class="card-body">
-                            <a href="export_state_score_card.php">
-                                <h4 class="card-title">Compliance Summary <i class="bi bi-arrow-down-circle-fill"></i></h4>
-                            </a>
-                            </br>
+                        <div class="card-body">                            
+                                <h4 class="card-title">Compliance Summary <a href="export_state_score_card.php"><i class="bi bi-arrow-down-circle-fill"></a></i> </h4>
+                                                       
                             <div class="table-responsive">
                               
                             <table class="table  datatable small  table-bordered " id="tbl_exporttable_to_xls">
