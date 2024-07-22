@@ -1,11 +1,5 @@
 <?php
 namespace CodexWorld;
-
-/**
- * Class PhpXlsxGenerator
- * Export data to MS Excel. PHP XLSX generator
- * Author: codexworld.com@gmail.com
- */
 class PhpXlsxGenerator
 {
     public $curSheet;

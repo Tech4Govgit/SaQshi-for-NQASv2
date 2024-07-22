@@ -12,12 +12,13 @@ session_start();
   <title>SAQSHI</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-  <!-- Favicons -->
-  <link href="assets/img/p.png" rel="icon">
-  <link href="assets/img/p.png" rel="apple-touch-icon">
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -26,8 +27,10 @@ session_start();
   <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -114,7 +117,8 @@ session_start();
                       // $ass_period = $row['assessment_id'];
                        $district_id = $row['dist_id'];
                       //  $_SESSION['f_type_id']=$row['Health_facilty_type'];
-                      echo "<script type='text/javascript'>alert('Login Success')</script>";
+                      //echo "<script type='text/javascript'>alert('Login Success')</script>";
+                      echo "Login Success";
                       if ($userrole == 1) {
                         $sql12 = "SELECT a.fac_id_fk,a.assessment_id,a.dist_id,b.Health_facilty_type FROM s_user as a , facilities as b WHERE (a.u_id=$userid and a.is_active=1) and  a.fac_id_fk=b.fac_id";
                         $result12 = mysqli_query($con, $sql12);
@@ -145,6 +149,7 @@ session_start();
                         $_SESSION['assperiod'] = $row['assessment_id'];
                         $_SESSION['f_type_id'] = $row['Health_facilty_type'];
                         // Welcome message   
+                        echo "Login Success";
                         header("location:index.php");
                       } elseif ($userrole == 3) {
                         $_SESSION['urole'] = $userrole;
@@ -195,14 +200,13 @@ session_start();
                         header("location:s_dash_test.php");
                       }
                     }else {
-                      $error = "Enter Valide credential";
+                     
                       // echo "<script type='text/javascript'>alert('Enter valide credential')</script>";
-                      echo  '<div class="alert alert-danger">
-                  <a href="#" class="close" data-dismiss="alert" aria-label="close"> X</a>
-                  <p><strong>Alert!</strong></p>
-                  Email or password wrong! Please try again!.
-                </div>';
-                      // header("location:login1.php");
+                      echo  '<div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+               Email or password wrong! Please try again!.
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>';
+                   // header("location:login1.php");
                     }
                   }
                   ?>

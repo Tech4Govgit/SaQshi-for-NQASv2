@@ -127,23 +127,12 @@ include('h2.php');
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <a href="export_dist_score_card.php">
-                                <h4 class="card-title">Compliance Summary <i class="bi bi-arrow-down-circle-fill"></i></h4>
-                            </a>
-                            </br>
-                            <div class="table-responsive">
-                                <table class="table  small  table-bordered  table-condensed" id="tbl_exporttable_to_xls">
+                           
+                                <h4 class="card-title">Compliance Summary  <a href="export_dist_score_card.php"><i class="bi bi-arrow-down-circle-fill"></i> </a></h4>
+                                <div class="table-responsive">
+                                <table class="table datatable small  table-bordered  table-condensed" id="tbl_exporttable_to_xls">
+                                    
                                     <thead>
-                                        <tr class="table-info">
-                                            <th colspan="4">Facility</th>
-                                            <th colspan="6">Check List Status</th>
-                                            <th colspan="3">Score Card</th>
-                                            <th colspan="1"><i class="bi bi-arrow-down-circle-fill"></i></th>
-
-
-
-                                        </tr>
-                                    </thead>
                                     <tr class="table-primary">
                                         <th scope="col">District</th>
                                         <th scope="col">Block</th>
@@ -160,6 +149,8 @@ include('h2.php');
                                         <th scope="col">%</th>
                                         <th scope="col"><i class="bi bi-arrow-down-circle-fill"></i></th>
                                     </tr>
+                        </thead>
+                        <tbody>
                                     <?php
                                     $dist_id = $_SESSION['dist'];
                                     $userid = $_SESSION['userid'];
@@ -180,7 +171,7 @@ include('h2.php');
 
                                             if ($percentage > 70) {
                                             ?>
-                                                <tbody>
+                                                
                                                     <tr>
 
                                                         <td class="table-primary"><?php echo  $row['Dist_Name']; ?></td>
@@ -222,12 +213,12 @@ include('h2.php');
                                                         <?php } ?>
                                                         <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
                                                     </tr>
-                                                </tbody>
+                                              
 
                                             <?php } elseif ($percentage > 65 and $percentage < 70) {
 
                                             ?>
-                                                <tbody>
+                                               
                                                     <tr>
 
                                                         <td class="table-primary"><?php echo  $row['Dist_Name']; ?></td>
@@ -267,11 +258,11 @@ include('h2.php');
                                                         <?php } ?>
                                                         <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
                                                     </tr>
-                                                </tbody>
+                                                
                                             <?php
                                             } elseif ($percentage < 65) {
                                             ?>
-                                                <tbody>
+                                                
                                                     <tr>
 
                                                         <td class="table-primary"><?php echo  $row['Dist_Name']; ?></td>
@@ -311,13 +302,13 @@ include('h2.php');
                                                         <?php } ?>
                                                         <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
                                                     </tr>
-                                                </tbody>
+                                               
                                             <?php
                                             }
                                         } else {
                                             $percentage = 0;
                                             ?>
-                                            <tbody>
+                                         
                                                 <tr>
 
                                                     <td class="table-primary"><?php echo  $row['Dist_Name']; ?></td>
@@ -357,13 +348,14 @@ include('h2.php');
                                                     <?php } ?>
                                                     <td class="table-success"><a href="export_dist_dash_comp.php?id=<?php echo $row['fac_id'] ?>"><i class="bi bi-arrow-down-circle-fill"></i></a></td>
                                                 </tr>
-                                            </tbody>
+                                            
                                     <?php
                                         }
                                     }
                                     mysqli_free_result($count);
                                     $con->next_result();
                                     ?>
+                                      </tbody>
                                 </table>
                             </div>
                         </div>
