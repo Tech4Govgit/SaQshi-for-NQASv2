@@ -173,7 +173,7 @@ include('h1.php');
         </div>
         <! -------------------------------------------->
           <! -------------------------------------------->
-            
+          <label> <a href="export_facility_all_rpt.php?id=<?php echo $_SESSION['u_facilityid']; ?>">Download compliance for all departments*<i class="bi bi-arrow-down-circle-fill"></a></i> </label>
             <div class="row">
               <div class="col-sm-6">
                 <div class="card">
