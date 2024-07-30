@@ -32,6 +32,7 @@ $q2 = mysqli_query($con, $tablequery);
 while ($row = mysqli_fetch_array($q2, MYSQLI_ASSOC)) {
     $lineData = array(
         $row['dept_name'],
+        $row['concern_name'],
         $row['c_subtype_Reference_No_fk'],
         $row['csqa_reference_id'],
         $row['Measurable_Element'],
