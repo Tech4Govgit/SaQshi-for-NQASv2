@@ -23,10 +23,6 @@ $facilityName = $row['fac_name'];
 // Define Excel file name for download
 $fileName = $facilityName . "_Compliance_Report_" . date('Y-m-d') . ".xlsx";
 
-
-
-
-
 // Define column names for Excel
 $excelData[] = array('Department', 'Area of concern', 'Reference No', 'Sub Reference No', 'Measurable Element', 'Checkpoint', 'Assessment Method', 'Means of Verification', 'Compliance');
 

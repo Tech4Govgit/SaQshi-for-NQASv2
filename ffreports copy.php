@@ -83,7 +83,7 @@ include('h1.php');
 
 
                 </form>
-                <label> <a href="export_dist_dash_comp.php?id=<?php echo $_SESSION['u_facilityid']; ?>">Download compliance for all departments*<i class="bi bi-arrow-down-circle-fill"></a></i> </label>
+                <label> <a href="export_facility_all_rpt.php?id=<?php echo $_SESSION['u_facilityid']; ?>">Download compliance for all departments*<i class="bi bi-arrow-down-circle-fill"></a></i> </label>
             </div>
 
             <?php
